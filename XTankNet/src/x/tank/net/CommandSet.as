@@ -1,15 +1,8 @@
 
-package x.tank.net
+package x.tank.net.core
 {
-    import onlineproto.cs_enter_server;
-    import onlineproto.cs_keep_live;
-    import onlineproto.sc_enter_server;
-    import onlineproto.sc_keep_live;
-    
-    import x.game.log.core.Logger;
-    import x.game.net.core.Command;
-
-;
+    import onlineproto.* ;
+    import x.game.log.core.Logger ;
 
 	/**
 	 * command list

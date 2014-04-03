@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<project name="Commmonlibs Build" default="" basedir="./">
+	<!--
+	////////////////////////////////////////////////////////
+	C-Plan Ant Script
+	Created by fraser on 2013-11-19
+	Copyright TAOMEE 2013. All rights reserved
+	////////////////////////////////////////////////////////
+	description:
+		// 查看所有可执行target
+		ant -p
+		// 编译所有dll:
+		ant dlls
+		// 单个编译dll
+		ant swcs
+		//
+		ant net
+		ant core
+		ant app
+		// 编译壳程序
+		ant client
+		//
+		编译所有modules : ant ms
+		编译单个module : ant -Dpanel=XX m  [注:XX为模块的类名]
+		//
+		编译所有activitys:  ant acts
+		编译单个activity:   ant -Dpanel=XX act  [注:XX为模块的类名]
+		//
+		编译所有maps:     ant maps
+		编译单个map:        ant -Dpanel=XX map  [注:XX为模块的类名]
+		//
+		复制配置文件： design/script  ====> publish/resource/data
+		ant cpfiles
+	////////////////////////////////////////////////////////
+	-->
+
+	<property file="./build.properties"/>
+	<!-- 初始化时间格式,以便使用 -->
+	<tstamp>
+		<format property="TODAY" pattern="yy/MM/dd HH:mm:ss" locale="cn"/>
+	</tstamp>
+
+	<!-- 导入ant支持包 -->
+	<path id="ant.classpath">
+		<fileset dir="${ant.lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${ant.lib.dir}/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+
+	<target name="dlls">
+		<delete includeemptydirs="true">
+			<fileset dir="${tankUtil.swf.out.dir}" includes="${tankUtil.name}.swf"/>
+			<fileset dir="${tankNet.swf.out.dir}" includes="${tankNet.name}.swf"/>
+			<fileset dir="${tankCore.swf.out.dir}" includes="${tankCore.name}.swf"/>
+			<fileset dir="${tankApp.swf.out.dir}" includes="${tankApp.name}.swf"/>
+		</delete>
+
+		<echo message="dlls delete complete"/>
+		<antcall target="XTankUtil"/>
+		<antcall target="XTankNet"/>
+		<antcall target="XTankCore"/>
+		<antcall target="XTankApp"/>
+	</target>
+
+	<target name="XTankUtil">
+		<echo message="[${tankUtil.name}] swf start compile"/>
+		<mxmlc file="${tankUtil.source.dir}/${tankUtil.name}.as" maxmemory="2048m" output="${tankUtil.swf.out.dir}/${tankUtil.name}.swf" static-rsls="true" accessible="true" debug="${debug}">
+			<jvmarg value="-Xmx2048m"/>
+			<jvmarg value="-Xms512m"/>
+			<jvmarg value="-XX:MaxPermSize=512m"/>
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<source-path path-element="${FLEX_HOME}/frameworks"/>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="lib"/>
+				<include name="locale/${i18n.local}"/>
+			</compiler.library-path>
+			<compiler.include-libraries dir="${tankUtil.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.include-libraries>
+		</mxmlc>
+	</target>
+
+	<target name="XTankNet">
+		<echo message="[${tankNet.name}] start compile"/>
+		<mxmlc file="${tankNet.source.dir}/${tankNet.name}.as" maxmemory="2048m" output="${tankNet.swf.out.dir}/${tankNet.name}.swf" static-rsls="true" accessible="true" debug="${debug}">
+			<jvmarg value="-Xmx2048m"/>
+			<jvmarg value="-Xms512m"/>
+			<jvmarg value="-XX:MaxPermSize=512m"/>
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<source-path path-element="${FLEX_HOME}/frameworks"/>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="lib"/>
+				<include name="locale/${i18n.local}"/>
+			</compiler.library-path>
+			<compiler.include-libraries dir="${tankNet.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.include-libraries>
+			<compiler.external-library-path dir="${tankUtil.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+		</mxmlc>
+	</target>
+
+	<target name="XTankCore">
+		<echo message="[${tankCore.name}] start compile"/>
+		<mxmlc file="${tankCore.source.dir}/${tankCore.name}.as" maxmemory="2048m" output="${tankCore.swf.out.dir}/${tankCore.name}.swf" static-rsls="true" accessible="true" debug="${debug}">
+			<jvmarg value="-Xmx2048m"/>
+			<jvmarg value="-Xms512m"/>
+			<jvmarg value="-XX:MaxPermSize=512m"/>
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<source-path path-element="${FLEX_HOME}/frameworks"/>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="lib"/>
+				<include name="locale/${i18n.local}"/>
+			</compiler.library-path>
+			<compiler.include-libraries dir="${tankCore.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.include-libraries>
+			<compiler.external-library-path dir="${tankUtil.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+			<compiler.external-library-path dir="${tankNet.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+		</mxmlc>
+	</target>
+
+	<target name="XTankApp">
+		<echo message="[${tankApp.name}] start compile"/>
+		<mxmlc file="${tankApp.source.dir}/${tankApp.name}.as" maxmemory="2048m" output="${tankApp.swf.out.dir}/${tankApp.name}.swf" static-rsls="true" accessible="true" debug="${debug}">
+			<jvmarg value="-Xmx2048m"/>
+			<jvmarg value="-Xms512m"/>
+			<jvmarg value="-XX:MaxPermSize=512m"/>
+			<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+			<source-path path-element="${FLEX_HOME}/frameworks"/>
+			<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+				<include name="lib"/>
+				<include name="locale/${i18n.local}"/>
+			</compiler.library-path>
+			<compiler.include-libraries dir="${tankApp.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.include-libraries>
+			<compiler.external-library-path dir="${tankCore.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+			<compiler.external-library-path dir="${tankUtil.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+			<compiler.external-library-path dir="${tankNet.swc.out.dir}" append="true">
+				<include name="*.swc"/>
+			</compiler.external-library-path>
+		</mxmlc>
+	</target>
+
+</project>

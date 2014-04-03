@@ -1,0 +1,12 @@
+<root debug="1">
+	<version path="version/zzz_config.txt"/>
+	<login path="dlls/XTankLogin.swf" ip="10.0.1.95" port="5902"/>
+	<ui path="dlls/XTankUI.swf"/>
+	<cfg path="config/cfg.zip"/>
+	<dll>
+		<item name="Util" path="dlls/XTankUtil.swf"/>
+		<item name="Core" path="dlls/XTankNet.swf"/>
+		<item name="Core" path="dlls/XTankCore.swf"/>
+		<item name="App" path="dlls/XTankApp.swf"/>
+	</dll>
+</root>

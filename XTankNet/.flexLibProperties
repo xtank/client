@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="XTankNet"/>
+    <classEntry path="x.tank.net.CommandSet"/>
+    <classEntry path="x.tank.net.locale.LabelMap"/>
+    <classEntry path="x.tank.net.locale.ErrorMap"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

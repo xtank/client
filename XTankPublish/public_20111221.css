@@ -1,0 +1,301 @@
+@charset "utf-8";
+/* $Id: public.css 14763 2011-11-03 03:14:57Z rpsh $ */
+/*
+*	ver:2011.08.25
+*	Mangage:rpsh
+*/
+/* reset */
+html{overflow-y:scroll;}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,button,input,textarea,th,td{margin:0;padding:0;}
+body,button,input,select,textarea{font:12px/1.5 helvetica,arial,sans-serif;}
+h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-size:100%;}
+em,cite{font-style:normal;}
+img{display:inline-block;border:0 none;}
+ul,ol{list-style:none;}
+table{border-collapse:collapse;border-spacing:0;}
+a{color:#232323;text-decoration:none;}
+a:hover{text-decoration:underline;}
+body{background:#EEEEEE;}
+.cf:before,.cf:after{content:'';display:table;}
+.clear,.cf:after{clear:both;}
+.cf{*zoom:1;}
+.index_hua{background:#330033;}
+/* topbar */
+.topbar_outer{
+	background:url(/common/index/images/topbar/topbar_bg.jpg) 0 0 repeat-x;
+	height:41px;
+	position:relative;
+	z-index:5;
+	width:100%;
+}
+.topbar_wrap{
+	width:1260px;
+	overflow:hidden;
+	margin:0 auto;
+}
+.topbar_logo,.topbar_nav_l,.topbar_nav_r,.slider_l,.slider_r,.slider_l_grey,.slider_r_grey,.ft_logo,.logo_green,.logo_netpolice{
+	background:url(/common/index/images/bg_sprite_grey.png) 0 0 no-repeat;
+}
+.index_hua .topbar_nav_l,.index_hua .topbar_nav_r,.index_hua .slider_l,.index_hua .slider_r,.index_hua .slider_l_grey,.index_hua .slider_r_grey,.index_hua .ft_logo,.index_hua .logo_green,.index_hua .logo_netpolice{
+	background-image:url(/common/index/images/bg_sprite_pink.jpg);
+}
+.notice_msg,.ico_hot,.product_link a{
+	background:url(/common/index/images/topbar/icon_sprite.gif) 0 0 no-repeat;
+}
+/* container */
+.container{
+	width:1260px;
+	margin:0 auto;
+}
+.flash_main{
+	margin:auto;
+	height:560px;
+	text-align:center;
+}
+.flash_tips{
+	font-size:16px;
+	text-align:left;
+	width:750px;
+	margin:100px auto;
+	display:table;
+	border:1px solid #DEEAF9;
+	background:#F4F9FF;
+	padding:10px 20px;
+	border-radius:5px;
+	line-height:2;
+	color:#444;
+}
+.flash_tips a{
+	color:#FF6900;
+}
+.game_notice{
+	text-align:center;
+	margin-top:20px;
+}
+.notice_msg{
+	color:#FE7100;
+	line-height:20px;
+	_line-height:24px;
+	padding-left:20px;
+	display:inline-block;
+	background:url(/common/index/images/topbar/icon_sprite.gif) no-repeat -24px -3px;
+	
+}
+.product{
+	padding-left:10px;
+	position:relative;
+	margin:6px auto 0;
+	overflow:hidden;
+	height:104px;
+	*zoom:1;
+	width:1260px
+}
+.brand_zoon{
+	width:920px;
+	overflow:hidden;
+	position:relative;
+	padding:10px 0 10px;
+	line-height:1;
+	*zoom:1;
+}
+.brands{
+	width:2000px;
+}
+.brand_link{
+	color:#303030;
+	background:url(/common/index/images/brand_game_grey.jpg?v=1223) 0 0 no-repeat;
+	width:72px;
+	height:83px;
+	float:left;
+	display:inline;
+	margin:0 15px;
+	overflow:hidden;
+	cursor:pointer;
+	text-decoration:none;
+	zoom:1;
+	-moz-transition:all .2s ease-in-out;
+	-webkit-transition:all .3s ease-in-out;
+	transition:all .3s ease-in-out;
+}
+.index_hua .brand_link{
+	background-image:url(/common/index/images/brand_game_pink.jpg?v=1223);
+}
+.brand_link:hover{
+	-moz-transform:translate(0,-10px);
+	-webkit-transform:translate(0,-10px);
+	transform:translate(0,-10px);
+	text-decoration:none;
+}
+.brand_link span{
+	display:block;
+	padding-top:66px;
+	text-align:center;
+	overflow:hidden;
+	height:16px;
+	line-height:16px;
+	width:72px;
+	text-decoration:none;
+}
+.brand_seer		{background-position:0 -83px;}
+.brand_seer2	{background-position:0 -755px;}
+.brand_gf		{background-position:0 -167px;}
+.brand_hero		{background-position:0 -251px;}
+.brand_hua		{background-position:0 -335px;}
+.brand_haqi		{background-position:0 -419px;}
+.brand_2125		{background-position:0 -503px;}
+.brand_ddt		{background-position:0 -587px;}
+.brand_dou		{background-position:0 -1008px;}
+.brand_renzhe	{background-position:0 -672px;}
+.brand_duola	{background-position:0 -840px;}
+.brand_pmxy		{background-position:0 -924px;}
+.brand_mj		{background-position:0 -1092px;}
+.brand_sxd		{background-position:0 -1176px;}
+.brand_huoying	{background-position:0 -1261px;}
+.brand_boke     	{background-position:0 -1350px;}
+.brand_mxw     	{background-position:0 -1450px;}
+.slider_l,.slider_r,.slider_l_grey,.slider_r_grey{
+	width:19px;
+	height:83px;
+	position:absolute;
+	overflow:hidden;
+	line-height:20;
+	background-position:0 -49px;
+	top:10px;
+	cursor:pointer;
+}
+.slider_l,.slider_l_grey{
+	left:0;
+}
+.slider_r,.slider_r_grey{
+	right:0;
+	background-position:-20px -49px;
+}
+.slider_l_grey{
+	background-position:-43px -49px;
+	cursor:default;
+}
+.slider_r_grey{
+	background-position:-64px -49px;
+	cursor:default;
+}
+.product_link{
+	text-align:center;
+	margin-top:6px;
+}
+.product_link a{
+	padding:0 20px 0 10px;
+	background-position:0 -22px;
+	color:#1D8B00;
+	text-decoration:underline;
+}
+/* footer */
+.footer{
+	width:805px;
+	margin:18px auto;
+	border-top:1px solid #C7CED4;
+	padding:15px 0 0 170px;
+	position:relative;
+	color:#9A9A9A;
+	line-height:20px;
+}
+.footer a{
+	color:#585858;
+}
+.footer .divide{
+	color:#9A9A9A;
+	padding:0 10px;
+}
+.ft_logo{
+	width:160px;
+	height:27px;
+	position:absolute;
+	left:0;
+	top:40px;
+	line-height:20;
+	overflow:hidden;
+}
+.logo_green,.logo_netpolice{
+	display:block;
+	line-height:20;
+	overflow:hidden;
+	width:32px;
+	height:32px;
+	position:absolute;
+}
+.logo_green{
+	background-position:-122px -146px;
+	right:130px;
+	top:42px;
+}
+.logo_netpolice{
+	background-position:0 -133px;
+	width:120px;
+	height:46px;
+	right:0;
+	top:35px;
+}
+/* ad */
+.action_banner{
+	margin:10px auto 0;
+	width:1260px;
+	height:70px;
+	overflow:hidden;
+	position:relative;
+}
+.banner_pic{
+	display:block;
+}
+.banner_pic img{
+	vertical-align:top;
+}
+.banner_num_area{
+	position:absolute;
+	right:1px;
+	bottom:2px;
+	text-align:center;
+}
+.banner_num{
+	display:inline-block;
+	line-height:16px;
+	width:16px;
+	color:#fff;
+	background:#000;
+	opacity:0.5;
+	filter:Alpha(Opacity=50);
+	margin-right:3px;
+}
+.banner_num_cur,.banner_num:hover{
+	opacity:0.75;
+	filter:Alpha(Opacity=75);
+	text-decoration:none;
+}
+/* hua */
+.index_hua .brand_link{
+	color:#F8B0C3;
+}
+.index_hua .product_link a,.index_hua .notice_msg{
+	color:#F489A5;
+}
+.index_hua .footer,.index_hua .footer .divide{
+	color:#6e5a6e;
+}
+.index_hua .ft_link a{
+	color:#7a647a;
+}
+
+.message {
+	height: 20px;
+	line-height: 20px;
+	margin: 20px auto 0;
+	overflow: hidden;
+	text-align: center;
+	width: 1260px;
+}
+.message a{
+	background:url(/common/index/images/topbar/icon_sprite.gif) no-repeat -24px -3px;
+	color: #FE7100;
+	display: inline-block;
+	line-height: 20px;
+	padding-left: 20px;
+}
+.message a:hover{cursor:text;text-decoration:none}

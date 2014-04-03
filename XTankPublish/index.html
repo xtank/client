@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+    <head>
+        <meta name="google" value="notranslate" />         
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+       
+        <style type="text/css" media="screen"> 
+            html, body  { height:100%; }
+            body { margin:0; padding:0; overflow:auto; text-align:center; 
+                   background-color: #06132e; }   
+            object:focus { outline:none; }
+            #flashContent { margin:0 auto; }
+			#downswfplayer{float:left;width:128px;height:76px;position: absolute;top:50%;left:50%;margin:-200px 0 0 -100px}
+        </style>  
+        
+        <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
+        <!-- BEGIN Browser History required section -->
+        <!-- END Browser History required section -->  
+            
+        <script type="text/javascript" src="swfobject.js"></script>
+        <script type="text/javascript">   
+        (function(){
+		     var e = document.createElement("script");
+		     e.src = "http://support-res.61.com/ad/gather.js?referrer=" + 
+		        document.referrer + "&version=1.0";
+		     e.type = "text/javascript";
+		     e.async = true;
+		     var p = document.getElementsByTagName("script")[0];
+		     p.parentNode.insertBefore(e,p);
+		 })();     
+        	function getAd() {
+			    try {
+			        return ad.get.g();
+			    } catch(e) {
+			        return "none";
+			    }
+			}	
+			
+			function addBookmark(title,url) {
+				if(window.sidebar) {
+					window.sidebar.addPanel(title, url,"");
+				}else if(window.external && ('AddFavorite' in window.external)) {
+					window.external.AddFavorite(url, title);
+				}else {
+					alert('请使用 Ctrl+D 添加到收藏夹');
+				}
+			}
+			
+			function getSessionID() {
+				var params = getUrlParams() ;
+				var sid = params['sid'] ;
+				return sid;
+			}
+			function getSign() {
+				var params = getUrlParams() ;
+				var sign = params['sign'] ;
+				return sign;
+			}
+        
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "11.1.0";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "XTank.swf";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+			params.wmode="direct";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "Test";
+            attributes.name = "Test";
+            attributes.align = "middle";
+            if (navigator.appName.indexOf("Microsoft") != -1) {
+            //attributes.codebase = "http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab#version=11,1,0,0";
+            }
+            attributes.classid = "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000";
+            swfobject.embedSWF(
+                "XTank.swf", "flashContent", 
+                "100%", "560", 
+                swfVersionStr, null, 
+                flashvars, params, attributes);
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+                      
+        </script>
+    </head>
+    <body>
+        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+             JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
+             when JavaScript is disabled.
+        -->
+        <div id="flashContent">
+            		<script type="text/javascript"> 
+				        var Sys = {};
+				        var ua = navigator.userAgent.toLowerCase();
+				        var s;
+				        (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+				        (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+				        (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+				        (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+				        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;                        
+				           if (Sys.chrome) {
+                            var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                            document.write("<a id='downswfplayer'><br><img src='tuijian.png' alt='当前浏览器需更新 使用IE体验更流畅' /></a>" );
+				            }
+				            else
+				            {
+                            var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://"); 
+                            document.write("<a id='downswfplayer' target='_blank' href='http://www.adobe.com/go/getflashplayer'><br><img src='get_flash_player.png' alt='点击安装最新版Flash Player' /></a>" );				            
+				            } 
+                       </script> 
+                      
+        </div>
+        
+        <noscript>
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="560" id="Test">
+                <param name="movie" value="XTank.swf" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#06132e" />
+                <param name="wmode" value="direct" />
+                <param name="allowScriptAccess" value="sameDomain" />
+                <param name="allowFullScreen" value="true" />
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="XTank.swf" width="100%" height="560" >
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#06132e" />
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="true" />
+                <!--<![endif]-->
+                <!--[if gte IE 6]>-->
+
+                <!--<![endif]-->
+                    <a href="http://www.adobe.com/go/getflashplayer">
+                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                    </a>
+                <!--[if !IE]>-->
+                </object>
+                <!--<![endif]-->
+            </object>
+        </noscript>     
+   </body>
+</html>

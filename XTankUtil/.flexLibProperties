@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="XTankUtil"/>
+    <classEntry path="x.game.manager.TimeManager"/>
+    <classEntry path="x.game.cfg.DataProxy"/>
+    <classEntry path="x.game.cfg.ICFGDataHandler"/>
+    <classEntry path="x.game.layer.scene.SceneLayer"/>
+    <classEntry path="x.game.layer.scene.IAbstractScene"/>
+    <classEntry path="x.game.net.core.ResponseMessage"/>
+    <classEntry path="x.game.net.post.ICallbackPost"/>
+    <classEntry path="x.game.net.processor.IMessageProcessor"/>
+    <classEntry path="x.game.net.core.RequestMessage"/>
+    <classEntry path="x.game.net.response.XMessageEvent"/>
+    <classEntry path="x.game.net.core.Command"/>
+    <classEntry path="x.game.net.post.SimplePost"/>
+    <classEntry path="x.game.net.post.CallbackPost"/>
+    <classEntry path="x.game.net.util.LittleEndianByteArray"/>
+    <classEntry path="x.game.net.TcpSocket"/>
+    <classEntry path="x.game.net.post.IPost"/>
+    <classEntry path="x.game.net.Connection"/>
+    <classEntry path="x.game.net.processor.SystemBaseMessageProgressor"/>
+    <classEntry path="x.game.net.post.SimpleCallbackPost"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

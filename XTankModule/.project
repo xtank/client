@@ -18,7 +18,7 @@
 		<link>
 			<name>bin-debug</name>
 			<type>2</type>
-			<locationURI>DOCUMENTS/source/XTankPublish/modules</locationURI>
+			<locationURI>DOCUMENTS/client/XTankPublish/modules</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

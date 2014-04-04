@@ -2,6 +2,14 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="XTankCore"/>
+    <classEntry path="x.tank.core.model.Player"/>
+    <classEntry path="x.tank.core.model.PlayerStatus"/>
+    <classEntry path="x.tank.core.model.Room"/>
+    <classEntry path="x.tank.core.model.RoomStatus"/>
+    <classEntry path="x.tank.core.event.PlayerEvent"/>
+    <classEntry path="x.tank.core.event.RoomEvent"/>
+    <classEntry path="x.tank.core.manager.PlayerManager"/>
+    <classEntry path="x.tank.core.manager.RoomManager"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

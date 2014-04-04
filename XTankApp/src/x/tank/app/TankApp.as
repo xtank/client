@@ -54,6 +54,8 @@ package x.tank.app
 		public function initGame(obj:Object):void
 		{
 			Logger.info("TankApp-game-init");
+			//
+			TankConfig.initGameConfig(obj) ;
 			// System Message Processor Init
 			new KeepLiveProcessor() ;
 			//

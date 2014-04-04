@@ -41,6 +41,7 @@ package x.tank.app.cfg
 			ip = obj["ip"] ;
 			port = obj["port"] ;
 			userId = obj["userId"] ;
+			//
 		}
 	}
 }

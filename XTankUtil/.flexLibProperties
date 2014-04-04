@@ -19,7 +19,7 @@
     <classEntry path="x.game.net.TcpSocket"/>
     <classEntry path="x.game.net.post.IPost"/>
     <classEntry path="x.game.net.Connection"/>
-    <classEntry path="x.game.net.processor.SystemBaseMessageProgressor"/>
+    <classEntry path="x.game.net.processor.BaseMessageProgressor"/>
     <classEntry path="x.game.net.post.SimpleCallbackPost"/>
   </includeClasses>
   <includeResources/>

@@ -25,7 +25,7 @@ package x.tank.app.scene.gateway
 			initMessageHandler();
 			//
 			blockCommands();
-			SceneManager.addEventListener(SceneEvent.SCENE_CHANG_END, onSwitchComplete);
+			SceneManager.addEventListener(SceneEvent.SCENE_SWITCH_COMPLETE, onSwitchComplete);
 		}
 
 		/**
@@ -35,7 +35,7 @@ package x.tank.app.scene.gateway
 		 */
 		protected function onSwitchComplete(evt:SceneEvent):void
 		{
-			SceneManager.removeEventListener(SceneEvent.SCENE_CHANG_END, onSwitchComplete);
+			SceneManager.removeEventListener(SceneEvent.SCENE_SWITCH_COMPLETE, onSwitchComplete);
 			realseCommands();
 		}
 		
@@ -51,7 +51,7 @@ package x.tank.app.scene.gateway
 		}
 
 		/**  需要阻塞的消息 */
-		protected function blockCommands():void
+		public function blockCommands():void
 		{
 			// override by child
 		}
@@ -59,7 +59,7 @@ package x.tank.app.scene.gateway
 		/**
 		 * 释放阻塞的消息
 		 */
-		protected function realseCommands():void
+		public function realseCommands():void
 		{
 			// override by child
 		}

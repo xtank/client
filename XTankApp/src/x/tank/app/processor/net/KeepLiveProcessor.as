@@ -9,13 +9,13 @@ package x.tank.app.processor.net
 	import x.game.manager.TimeManager;
 	import x.game.net.Connection;
 	import x.game.net.post.SimplePost;
-	import x.game.net.processor.SystemBaseMessageProgressor;
+	import x.game.net.processor.BaseMessageProgressor;
 	import x.game.net.response.XMessageEvent;
 	import x.game.tick.TimeTicker;
 	import x.tank.net.CommandSet;
 	
 	/** 心跳包处理器 */
-	public class KeepLiveProcessor extends SystemBaseMessageProgressor
+	public class KeepLiveProcessor extends BaseMessageProgressor
 	{
 		private var _keepLiveIndex:int ;
 		

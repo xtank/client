@@ -9,6 +9,7 @@
     <classEntry path="x.tank.app.scene.lobby.LobbyScene"/>
     <classEntry path="x.tank.app.scene.lobby.LobbyGateWay"/>
     <classEntry path="x.tank.app.scene.lobby.net.RoomUpdateProcessor"/>
+    <classEntry path="x.tank.app.scene.lobby.net.GetRoomListProcessor"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

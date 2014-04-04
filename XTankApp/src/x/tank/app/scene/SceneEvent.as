@@ -15,9 +15,9 @@ package x.tank.app.scene
 		public static const SCENE_LOADING_END:String = "SCENE_LOADING_END" ;
 		
 		/** 场景切换开始   */
-		public static const SCENE_CHANG_START:String = "SCENE_CHANG_START";
+		public static const SCENE_SWITCH_START:String = "SCENE_SWITCH_START";
 		/** 场景切换完成   */
-		public static const SCENE_CHANG_END:String = "SCENE_CHANG_END";
+		public static const SCENE_SWITCH_COMPLETE:String = "SCENE_SWITCH_COMPLETE";
 		
 		/** 切换场景时，传递额外的场景信息*/
 		public var params:Object;

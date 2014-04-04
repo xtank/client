@@ -2,9 +2,9 @@ package x.game.net.processor
 {
 	import x.game.net.response.XMessageEvent;
 	
-	public class SystemBaseMessageProgressor implements IMessageProcessor
+	public class BaseMessageProgressor implements IMessageProcessor
 	{
-		public function SystemBaseMessageProgressor()
+		public function BaseMessageProgressor()
 		{
 			setup() ;
 		}

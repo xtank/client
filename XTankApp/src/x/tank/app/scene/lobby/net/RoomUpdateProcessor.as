@@ -3,7 +3,7 @@ package x.tank.app.scene.lobby.net
 	import onlineproto.sc_notify_room_update;
 	
 	import x.game.net.Connection;
-	import x.game.net.processor.SystemBaseMessageProgressor;
+	import x.game.net.processor.BaseMessageProgressor;
 	import x.game.net.response.XMessageEvent;
 	import x.tank.app.scene.lobby.LobbyScene;
 	import x.tank.core.manager.RoomManager;
@@ -11,7 +11,7 @@ package x.tank.app.scene.lobby.net
 	import x.tank.net.CommandSet;
 
 	/** 房间信息更新 */
-	public class RoomUpdateProcessor extends SystemBaseMessageProgressor
+	public class RoomUpdateProcessor extends BaseMessageProgressor
 	{
 		private var _scene:LobbyScene;
 

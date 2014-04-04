@@ -1,6 +1,7 @@
 package x.tank.app.scene.lobby
 {
 	import x.tank.app.scene.gateway.MessageGateWay;
+	import x.tank.app.scene.lobby.net.GetRoomListProcessor;
 	import x.tank.app.scene.lobby.net.RoomUpdateProcessor;
 	
 	public class LobbyGateWay extends MessageGateWay
@@ -10,19 +11,20 @@ package x.tank.app.scene.lobby
 			super(scene);
 		}
 		
-		/**  需要阻塞的消息 */
-		override protected function blockCommands():void
-		{
-			// override by child
-		}
-		
 		override protected function initMessageHandler():void
 		{
 			// override by child
 			addMessageHandler(new RoomUpdateProcessor(_scene as LobbyScene));
+			addMessageHandler(new GetRoomListProcessor(_scene as LobbyScene));
 		}
 		
-		override protected function realseCommands():void
+		/**  需要阻塞的消息 */
+		override public function blockCommands():void
+		{
+			// override by child
+		}
+		
+		override public function realseCommands():void
 		{
 			// override by child
 		}

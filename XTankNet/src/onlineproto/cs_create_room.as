@@ -30,7 +30,27 @@ package onlineproto {
 		 */
 		public static const PASSWD:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.cs_create_room.passwd", "passwd", (3 << 3) | com.netease.protobuf.WireType.VARINT);
 
-		public var passwd:uint;
+		private var passwd$field:uint;
+
+		private var hasField$0:uint = 0;
+
+		public function clearPasswd():void {
+			hasField$0 &= 0xfffffffe;
+			passwd$field = new uint();
+		}
+
+		public function get hasPasswd():Boolean {
+			return (hasField$0 & 0x1) != 0;
+		}
+
+		public function set passwd(value:uint):void {
+			hasField$0 |= 0x1;
+			passwd$field = value;
+		}
+
+		public function get passwd():uint {
+			return passwd$field;
+		}
 
 		/**
 		 *  @private
@@ -40,8 +60,10 @@ package onlineproto {
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.mapId);
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
 			com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.name);
-			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
-			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.passwd);
+			if (hasPasswd) {
+				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
+				com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, passwd$field);
+			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}

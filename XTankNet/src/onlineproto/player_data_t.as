@@ -14,9 +14,9 @@ package onlineproto {
 		/**
 		 *  @private
 		 */
-		public static const USIERID:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.player_data_t.usierid", "usierid", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+		public static const USERID:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.player_data_t.userid", "userid", (1 << 3) | com.netease.protobuf.WireType.VARINT);
 
-		public var usierid:uint;
+		public var userid:uint;
 
 		/**
 		 *  @private
@@ -30,7 +30,7 @@ package onlineproto {
 		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
-			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.usierid);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.userid);
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.status);
 			for (var fieldKey:* in this) {
@@ -42,17 +42,17 @@ package onlineproto {
 		 *  @private
 		 */
 		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
-			var usierid$count:uint = 0;
+			var userid$count:uint = 0;
 			var status$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
 				case 1:
-					if (usierid$count != 0) {
-						throw new flash.errors.IOError('Bad data format: player_data_t.usierid cannot be set twice.');
+					if (userid$count != 0) {
+						throw new flash.errors.IOError('Bad data format: player_data_t.userid cannot be set twice.');
 					}
-					++usierid$count;
-					this.usierid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					++userid$count;
+					this.userid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 					break;
 				case 2:
 					if (status$count != 0) {

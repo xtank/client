@@ -9,19 +9,23 @@ package x.tank.app.scene
 	/**
 	 * 场景管理器
 	 * @author fraser
-	 * @modfiy lynx
 	 */
 	public class SceneManager
 	{
-		private static var _currentScene:IAbstractScene ;
 		
 		/** 显示大厅 */
 		public static function showLobby():void
 		{
-			_currentScene = LobbyScene.instance ;
-			LobbyScene.instance.showLobby() ;
-			//
 			dispatchEvent(new SceneEvent(SceneEvent.SCENE_SWITCH_COMPLETE)) ;
+			LobbyScene.instance.showLobby() ;
+		}
+		
+		
+		private static var _currentScene:IAbstractScene ;
+		
+		public static function showMap(mapId:uint):void
+		{
+			LobbyScene.instance.hideLobby() ;
 		}
 		
 		//############################################################

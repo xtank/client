@@ -34,9 +34,9 @@ package x.tank.core.manager
 			return player ;
 		}
 		
-		public static function removePlayer(id:uint):Player
+		public static function removePlayer(userId:uint):Player
 		{
-			var player:Player = getPlayer(id) ;
+			var player:Player = getPlayer(userId) ;
 			_players.remove(player) ;
 			//
 			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_DEL,player)) ;
@@ -44,14 +44,14 @@ package x.tank.core.manager
 			return player ;
 		}
 		
-		public static function getPlayer(id:uint):Player
+		public static function getPlayer(userId:uint):Player
 		{
-			return _players.get(id) as Player;
+			return _players.get(userId) as Player;
 		}
 		
-		public static function hasPlayer(id:uint):Boolean
+		public static function hasPlayer(userId:uint):Boolean
 		{
-			return _players.contains(id) ;
+			return _players.contains(userId) ;
 		}
 		
 		//############################################################

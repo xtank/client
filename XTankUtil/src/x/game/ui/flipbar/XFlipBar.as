@@ -34,6 +34,12 @@ package x.game.ui.flipbar
 			//
 			updateDisplay();
         }
+		
+		override public function dataClear():void
+		{
+			dataProvide = [] ;
+			super.dataClear() ;
+		}
         
         protected function initComponents():void
         {

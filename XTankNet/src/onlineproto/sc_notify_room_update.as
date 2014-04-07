@@ -24,7 +24,23 @@ package onlineproto {
 		 */
 		public static const ROOM:FieldDescriptor$TYPE_MESSAGE = new FieldDescriptor$TYPE_MESSAGE("onlineproto.sc_notify_room_update.room", "room", (2 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED, function():Class { return onlineproto.room_data_t; });
 
-		public var room:onlineproto.room_data_t;
+		private var room$field:onlineproto.room_data_t;
+
+		public function clearRoom():void {
+			room$field = null;
+		}
+
+		public function get hasRoom():Boolean {
+			return room$field != null;
+		}
+
+		public function set room(value:onlineproto.room_data_t):void {
+			room$field = value;
+		}
+
+		public function get room():onlineproto.room_data_t {
+			return room$field;
+		}
 
 		/**
 		 *  @private
@@ -32,8 +48,10 @@ package onlineproto {
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.oper);
-			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
-			com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, this.room);
+			if (hasRoom) {
+				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 2);
+				com.netease.protobuf.WriteUtils.write$TYPE_MESSAGE(output, room$field);
+			}
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}

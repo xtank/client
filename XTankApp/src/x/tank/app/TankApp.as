@@ -42,7 +42,7 @@ package x.tank.app
 			resourceManager.addResourceBundle(new LabelMap());
 			//
 			TickerLauncher.start();
-
+			//
 			LayerManager.initLayers() ;
 			TooltipManager.init(LayerManager.topLayer.skin);
 			AlertManager.setup(LayerManager.topLayer.skin);

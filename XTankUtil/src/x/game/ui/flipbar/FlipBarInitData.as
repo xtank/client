@@ -9,7 +9,7 @@ package x.game.ui.flipbar
     public class FlipBarInitData
     {
         /** 数据 */
-        private var _dataList:Array;
+        private var _dataList:Array = [];
         /** 当前页 [从0页开始计数] */
         private var _currentPage:uint = 0;
         /** 一页多少个数据 */
@@ -25,11 +25,11 @@ package x.game.ui.flipbar
         public var host:IFilpBarHost;
         public var soundName:String = "";
 
-        public function FlipBarInitData(list:Array, dataCountPerPage:uint, host:IFilpBarHost)
+        public function FlipBarInitData(dataCountPerPage:uint, host:IFilpBarHost)
         {
             _dataCountPerPage = dataCountPerPage;
-            dataProvider = list;
             this.host = host;
+			dataProvider = [] ;
         }
 
         public function set dataProvider(list:Array):void

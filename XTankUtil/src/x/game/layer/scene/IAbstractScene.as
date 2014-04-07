@@ -11,5 +11,8 @@ package x.game.layer.scene
 		
 		/** 场景皮肤 */
 		function get skin():Sprite ;
+		
+		/** 场景渲染 */
+		function renderer(dtime:Number):void ;
 	}
 }

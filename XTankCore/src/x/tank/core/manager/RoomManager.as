@@ -30,17 +30,27 @@ package x.tank.core.manager
 			dispatchEvent(new RoomEvent(RoomEvent.ROOM_UPDATE,room));
 		}
 		
-		public static function removeRoom(id:uint):void
+		public static function removeRoom(roomId:uint):void
 		{
-			var room:Room = getRoom(id) ; 
+			var room:Room = getRoom(roomId) ; 
 			_rooms.remove(room) ;
 			//
 			dispatchEvent(new RoomEvent(RoomEvent.ROOM_DEL,room));
 		}
 		
-		public static function getRoom(id:uint):Room
+		public static function getRoom(roomId:uint):Room
 		{
-			return _rooms.get(id) as Room;
+			return _rooms.get(roomId) as Room;
+		}
+		
+		public static function hasRoom(roomId:uint):Boolean
+		{
+			return _rooms.hasKey(roomId) ;
+		}
+		
+		public static function getRooms():Array
+		{
+			return _rooms.toArray() ;
 		}
 		
 		//############################################################

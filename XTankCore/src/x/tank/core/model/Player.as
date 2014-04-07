@@ -19,7 +19,7 @@ package x.tank.core.model
 		
 		public function parse(data:player_data_t):void
 		{
-			this.id = data.usierid ;
+			this.id = data.userid ;
 			this.status = data.status ;
 		}
 	}

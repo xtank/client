@@ -65,7 +65,10 @@ package x.tank.app.scene.lobby
 			_needRender = true ;
 			//
 			_roomEventStack.splice(0,_roomEventStack.length-1) ;
-			_flipBar.dataProvide = RoomManager.getRooms() ;
+			var roomList:Array = RoomManager.getRooms() ;
+			_flipBar.dataProvide = roomList ;
+			
+			trace("房间数量：" + roomList.length);
 		}
 
 		private function onRoomUpdateStack(event:RoomEvent):void

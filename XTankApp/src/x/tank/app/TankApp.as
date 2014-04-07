@@ -59,7 +59,7 @@ package x.tank.app
 			// System Message Processor Init
 			new KeepLiveProcessor() ;
 			//
-			SceneManager.showLobby() ;
+			 SceneManager.showLobby() ;
 		}
 
 		public function updatePosition(w:Number, h:Number):void

@@ -15,6 +15,7 @@ package x.game.manager
 		
 		public static function updateDelayTime(requestTime:int,serverTime:int):void
 		{
+			trace("设置服务器时间：" + serverTime);
 			_refreshTag = getTimer() ;
 			//
 			_delayTime = (_refreshTag - requestTime)/2 ; 

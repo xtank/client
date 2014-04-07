@@ -70,16 +70,18 @@ package x.game.net
 			if (_tempBuffer.length > 0)
 			{
 				_tempBuffer.position = 0;
-				_tempBuffer.readBytes(_chunkBuffer, 0, _tempBuffer.length);
+				_tempBuffer.readBytes(_chunkBuffer, 0, _tempBuffer.length); // 将上次剩余的数据放入buffer
 				_tempBuffer.clear();
 			}
 			readBytes(_chunkBuffer, _chunkBuffer.length, bytesAvailable);
 			_chunkBuffer.position = 0;
+			//
 			while (_chunkBuffer.bytesAvailable > 0)
 			{
 				if (_chunkBuffer.bytesAvailable > MSG_FIRST_TOKEN_LEN)
 				{
 					var msgLen:int = _chunkBuffer.readUnsignedInt() - MSG_FIRST_TOKEN_LEN;
+					//
 					if (msgLen > _chunkBuffer.bytesAvailable)
 					{
 						_chunkBuffer.position = _chunkBuffer.position - MSG_FIRST_TOKEN_LEN;

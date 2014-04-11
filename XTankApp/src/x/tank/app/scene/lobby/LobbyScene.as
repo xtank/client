@@ -14,7 +14,7 @@ package x.tank.app.scene.lobby
 	import x.game.ui.flipbar.IFilpBarHost;
 	import x.game.ui.flipbar.XMultiFlipBar;
 	import x.game.util.DisplayUtil;
-	import x.tank.app.scene.lobby.view.LobbyRoomView;
+	import x.tank.app.scene.lobby.view.RoomListView;
 	import x.tank.core.event.RoomEvent;
 	import x.tank.core.manager.RoomManager;
 	import x.tank.net.CommandSet;
@@ -34,11 +34,12 @@ package x.tank.app.scene.lobby
 
 		private var _gateway:LobbyGateWay;
 		//
-		private var _roomView:Vector.<LobbyRoomView> ;
 		private var _flipBar:XMultiFlipBar ;
 		//
 		private var _needRender:Boolean;
 		private var _roomEventStack:Vector.<RoomEvent> = new Vector.<RoomEvent>();
+		//
+		private var _roomList:RoomListView ;
 
 		public function LobbyScene()
 		{
@@ -50,7 +51,7 @@ package x.tank.app.scene.lobby
 		private function initLobby():void
 		{
 			// 1. init skins
-			_roomView = new Vector.<LobbyRoomView>() ;
+			_roomList = new RoomListView(_skin["roomListUI"]) ;
 			// 
 			_flipBar = new XMultiFlipBar(new FlipBarInitData(6,this),_skin["flipbar"]) ;
 			// 2. init event

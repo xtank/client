@@ -83,7 +83,6 @@ package x.game.module
 			{
 				closeModules(Vector.<String>([moduleName]));
 			}
-			// AlertManager.removeAllAlert();
 		}
 		
 		// 模块开启条件集合
@@ -127,7 +126,7 @@ package x.game.module
          * @param subName
          *
          */
-        public static function toggleModule(moduleName:String, title:String = "正在加载面板，请稍等...", data:IModuleInitData = null, closeOtherModule:Boolean =
+        public static function toggleModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等...", closeOtherModule:Boolean =
             true):ModuleProxy
         {
 			if(!checkOpenModuleConditions(moduleName))
@@ -169,7 +168,7 @@ package x.game.module
          * @param subName
          *
          */
-        public static function showModule(moduleName:String, title:String = "正在加载面板，请稍等...", data:IModuleInitData = null, closeOtherModule:Boolean =
+        public static function showModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等...", closeOtherModule:Boolean =
             true):ModuleProxy
         {
 			if(!checkOpenModuleConditions(moduleName))

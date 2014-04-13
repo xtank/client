@@ -5,7 +5,6 @@ package x.game.loader
 	import x.game.loader.core.ContentInfo;
 	import x.game.loader.core.QueueInfo;
 	import x.game.loader.core.QueueLoaderImpl;
-	import x.game.loader.core.QueuePriority;
 	import x.game.loader.loadingUI.ILoaderUI;
 
 	/**

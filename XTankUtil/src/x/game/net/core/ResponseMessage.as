@@ -71,7 +71,7 @@ package x.game.net.core
 			statusCode = data.readUnsignedInt();
 			checksum = data.readUnsignedInt();
 			//
-			trace("commandId：[" + commandId + "]#" + "stamp[" + stamp + "]# length[" + _length + "]");
+//			trace("commandId：[" + commandId + "]#" + "stamp[" + stamp + "]# length[" + _length + "]");
 		}
 
 		public function get dataLength():uint

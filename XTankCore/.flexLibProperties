@@ -10,6 +10,8 @@
     <classEntry path="x.tank.core.event.RoomEvent"/>
     <classEntry path="x.tank.core.manager.PlayerManager"/>
     <classEntry path="x.tank.core.manager.RoomManager"/>
+    <classEntry path="x.tank.core.cfg.model.MapConfigInfo"/>
+    <classEntry path="x.tank.core.cfg.model.MapDataTeamInfo"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -10,16 +10,11 @@ package x.tank.app.scene.lobby
 	import x.game.net.post.CallbackPost;
 	import x.game.tick.FrameTicker;
 	import x.game.ui.XComponent;
-	import x.game.ui.flipbar.FlipBarInitData;
-	import x.game.ui.flipbar.IFilpBarHost;
-	import x.game.ui.flipbar.XMultiFlipBar;
 	import x.game.util.DisplayUtil;
 	import x.tank.app.scene.lobby.view.RoomListView;
-	import x.tank.core.event.RoomEvent;
-	import x.tank.core.manager.RoomManager;
 	import x.tank.net.CommandSet;
 
-	public class LobbyScene extends XComponent implements IAbstractScene,IFilpBarHost
+	public class LobbyScene extends XComponent implements IAbstractScene
 	{
 		private static var _instance:LobbyScene;
 
@@ -34,11 +29,6 @@ package x.tank.app.scene.lobby
 
 		private var _gateway:LobbyGateWay;
 		//
-		private var _flipBar:XMultiFlipBar ;
-		//
-		private var _needRender:Boolean;
-		private var _roomEventStack:Vector.<RoomEvent> = new Vector.<RoomEvent>();
-		//
 		private var _roomList:RoomListView ;
 
 		public function LobbyScene()
@@ -52,59 +42,12 @@ package x.tank.app.scene.lobby
 		{
 			// 1. init skins
 			_roomList = new RoomListView(_skin["roomListUI"]) ;
-			// 
-			_flipBar = new XMultiFlipBar(new FlipBarInitData(6,this),_skin["flipbar"]) ;
-			// 2. init event
-			RoomManager.addEventListener(RoomEvent.ROOM_LIST_UPDATE,onRoomListUpdate) ;
-			RoomManager.addEventListener(RoomEvent.ROOM_ADD, onRoomUpdateStack);
-			RoomManager.addEventListener(RoomEvent.ROOM_UPDATE, onRoomUpdateStack);
-			RoomManager.addEventListener(RoomEvent.ROOM_DEL, onRoomUpdateStack);
-		}
-		
-		private function onRoomListUpdate(event:RoomEvent):void
-		{
-			_needRender = true ;
-			//
-			_roomEventStack.splice(0,_roomEventStack.length-1) ;
-			var roomList:Array = RoomManager.getRooms() ;
-			_flipBar.dataProvide = roomList ;
-			
-			trace("房间数量：" + roomList.length+ "-");
-		}
-
-		private function onRoomUpdateStack(event:RoomEvent):void
-		{
-			_needRender = true ;
-			_roomEventStack.push(event);
 		}
 
 		/** 场景渲染 */
 		public function renderer(dtime:Number):void
 		{
-			if (_needRender)
-			{
-				_needRender = false;
-				// update room view
-				if (_roomEventStack.length > 0)
-				{
-					var roomEvent:RoomEvent ;
-					while(_roomEventStack.length > 0)
-					{
-						roomEvent = _roomEventStack.shift() ;
-						switch(roomEvent.type)
-						{
-							case RoomEvent.ROOM_ADD:
-								break;
-							case RoomEvent.ROOM_DEL:
-								break;
-							case RoomEvent.ROOM_UPDATE:
-								break;
-						}
-					}
-				}
-				
-				// extra view processor
-			}
+			_roomList.renderer(dtime) ;
 		}
 
 		override public function dispose():void
@@ -127,7 +70,7 @@ package x.tank.app.scene.lobby
 					FrameTicker.clearInterval(_tickerIndex);
 					_tickerIndex = 0;
 				}
-				_needRender = true;
+				needRender = true;
 				_tickerIndex = FrameTicker.setInterval(renderer, 1);
 			}
 			else
@@ -143,6 +86,11 @@ package x.tank.app.scene.lobby
 		public function get skin():Sprite
 		{
 			return _skin as Sprite;
+		}
+		
+		public function set needRender(value:Boolean):void
+		{
+			_roomList.needRender = value ;
 		}
 
 		//  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //
@@ -181,11 +129,6 @@ package x.tank.app.scene.lobby
 					$getRoomList();
 				}).send();
 			}
-		}
-		
-		public function updatePageData(data:Array):void 
-		{
-			//更新当前页数据
 		}
 	}
 }

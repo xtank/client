@@ -3,7 +3,6 @@ package x.game.module
     import flash.utils.getQualifiedClassName;
     
     import x.game.layer.LayerManager;
-    import x.game.layer.module.ModuleLayer;
     import x.game.manager.FocusManager;
     import x.game.manager.StageManager;
     import x.game.resize.IResizeable;

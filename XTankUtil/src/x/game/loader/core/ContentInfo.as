@@ -24,11 +24,13 @@ package x.game.loader.core
 		//
 		private var _url:String;
 		private var _type:String;
+		private var _isCover:Boolean ;
 		
-		public function ContentInfo(url:String,type:String,content:*,domain:ApplicationDomain=null,data:*=null)
+		public function ContentInfo(url:String,type:String,content:*,domain:ApplicationDomain=null,data:*=null,isCover:Boolean = true)
 		{
 			_url = url;
 			_type = type;
+			_isCover = isCover ;
 			this.content = content;
 			this.domain = domain;
 			this.data = data;
@@ -59,6 +61,11 @@ package x.game.loader.core
 		public function get type():String
 		{
 			return _type;
+		}
+		
+		public function get isCover():Boolean
+		{
+			return _isCover ;
 		}
 	}
 }

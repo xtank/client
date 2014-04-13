@@ -22,14 +22,12 @@ package x.game.module
 		protected var _lifecycleType:String = LifecycleType.NONCE;
 		/** 模块UI资源    */
 		protected var _mainUI:MovieClip;
-		/** 背景面板 */
-		protected var _basePlate:UIPlate;
 		/** 模块的关闭按钮  */
 		protected var _closeBtn:XSimpleButton;
 		/** 拖动条  */
 		protected var _dragSprite:DisplayObject;
 		/** 是否覆盖背景  */
-		protected var _cover:Boolean;
+		protected var _cover:Boolean = true;
 		/** 初始化数据 */
 		protected var _initData:IModuleInitData;
 		
@@ -40,55 +38,27 @@ package x.game.module
 			
 		}
 		
-		/** 初始化背景面板 */
-		protected function setUpBasePlate(basePlate:UIPlate):void
-		{
-			_basePlate = basePlate;
-			addChildAt(_basePlate, 0);
-			//
-			if(_closeBtn != null)
-			{
-                _closeBtn.x = _closeBtn.x + _basePlate.plateWidth - _closeBtn.width - 19 ;
-                _closeBtn.y = _closeBtn.y + 6 ;
-			}
-		}
-		
 		public function get moduleWidth():Number
 		{
-			if (_basePlate != null)
+			if(_mainUI)
 			{
-				return _basePlate.width;
+				return _mainUI.width;
 			}
 			else
 			{
-				if(_mainUI)
-				{
-					return _mainUI.width;
-				}
-				else
-				{
-					return  0;
-				}
+				throw new Error("module skin has not init!");
 			}
-			
 		}
 		
 		public function get moduleHeight():Number
 		{
-			if (_basePlate != null)
+			if(_mainUI)
 			{
-				return _basePlate.height;
+				return _mainUI.height;
 			}
 			else
 			{
-				if(_mainUI)
-				{
-					return _mainUI.height;
-				}
-				else
-				{
-					return  0;
-				}
+				throw new Error("module skin has not init!");
 			}
 		}
 		
@@ -117,12 +87,6 @@ package x.game.module
 				}
 				_closeBtn = new XSimpleButton(_mainUI["close_btn"]);
 			}
-            //
-            if(_closeBtn != null && _basePlate != null)
-            {
-                _closeBtn.x = _closeBtn.x + _basePlate.plateWidth - _closeBtn.width - 19 ;
-                _closeBtn.y = _closeBtn.y + 6 ;
-            }
             //
 			
 			if (_mainUI.hasOwnProperty("dragMC"))
@@ -200,12 +164,6 @@ package x.game.module
 			DisplayObjectUtil.removeAllChildren(_mainUI);
 			_mainUI = null;
 			_initData = null;
-			//
-			if(_basePlate != null)
-			{
-				_basePlate.dispose() ;
-				_basePlate = null;
-			}
 			
 			_moduleProxy = null;
 			

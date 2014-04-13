@@ -48,7 +48,8 @@ package x.game.loader.core
         //--------------------------------------------------
 
         public function load(url:String, type:String, complete:Function, error:Function = null, 
-            data:* = null, priority:int = 2, open:Function = null, progress:Function = null):void
+            data:* = null, priority:int = 2, open:Function = null, progress:Function = null,
+			isCover:Boolean = true):void
         {
             if (hasCompleteHandler(url, complete))
             {
@@ -58,6 +59,7 @@ package x.game.loader.core
             var info:QueueInfo = new QueueInfo();
             info.url = url;
             info.type = type;
+			info.isCover = isCover ;
             info.data = data;
             info.priority = priority;
             info.completeHandler = complete;
@@ -430,7 +432,7 @@ package x.game.loader.core
                 _timeoutID = setTimeout(onTimeout, 5000);
                 if (info.openHandler != null)
                 {
-                    info.openHandler(new ContentInfo(info.url, info.type, null, null, info.data));
+                    info.openHandler(new ContentInfo(info.url, info.type, null, null, info.data,info.isCover));
                 }
             }
         }
@@ -495,7 +497,7 @@ package x.game.loader.core
             {
                 if (info.completeHandler != null)
                 {
-                    info.completeHandler(new ContentInfo(info.url, info.type, content, domain, info.data));
+                    info.completeHandler(new ContentInfo(info.url, info.type, content, domain, info.data,info.isCover));
                 }
                 info.dispose();
             }
@@ -518,7 +520,7 @@ package x.game.loader.core
             {
                 if (info.errorHandler != null)
                 {
-                    info.errorHandler(new ContentInfo(info.url, info.type, null, null, info.data));
+                    info.errorHandler(new ContentInfo(info.url, info.type, null, null, info.data,info.isCover));
                 }
                 info.dispose();
             }

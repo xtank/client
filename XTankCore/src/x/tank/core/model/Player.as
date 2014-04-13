@@ -9,7 +9,7 @@ package x.tank.core.model
 	public class Player
 	{
 		public var id:uint ;
-		public var name:String ;
+		public var name:String = " - ";
 		/** @see PlayerStatus */
 		public var status:uint ;
 		
@@ -21,6 +21,7 @@ package x.tank.core.model
 		{
 			this.id = data.userid ;
 			this.status = data.status ;
+			this.name = data.name ;
 		}
 	}
 }

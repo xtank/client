@@ -38,7 +38,7 @@ package x.tank.app.processor.net
 			var msg:sc_keep_live = event.msg as sc_keep_live ; 
 			TimeManager.updateDelayTime(msg.time,msg.serverTime) ;
 			//
-			Logger.info(TimeManager.serverDate.time + "#" + TimeManager.serverDate.toDateString()) ;
+//			Logger.info(TimeManager.serverDate.time + "#" + TimeManager.serverDate.toDateString()) ;
 		}
 		
 		override public function dispose():void

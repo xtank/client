@@ -3,9 +3,9 @@ package x.game.module
 	import flash.events.EventDispatcher;
 	
 	import x.game.core.IDisposeable;
+	import x.game.loader.UILoader;
 	import x.game.loader.core.ContentInfo;
 	import x.game.loader.core.LoadType;
-	import x.game.loader.UILoader;
 	import x.game.manager.StageManager;
 	import x.game.util.StringUtil;
 
@@ -62,8 +62,6 @@ package x.game.module
 			_data = null;
             _isDisposed = true ;
 			ModuleManager.dispatchEvent(_name, ModuleEvent.DISPOSE);
-			// 激活场景
-//			SceneManager.activeScene();
 		}
 
 		public function init(data:IModuleInitData = null):void
@@ -89,7 +87,6 @@ package x.game.module
 				if (_module.parent)
 				{
 					_module.hide();
-					//
 				}
 			}
 			else if(state == LOADING)
@@ -100,8 +97,6 @@ package x.game.module
 				ModuleManager.dispatchEvent(_name, ModuleEvent.HIDE);
 			}
 			_data = null;
-			// 激活场景
-//			SceneManager.activeScene();
 		}
 
 		//--------------------------------------------------------------
@@ -119,8 +114,6 @@ package x.game.module
 			}
 			_state = SHOW;
 			ModuleManager.dispatchEvent(_name, ModuleEvent.SHOW);
-			// 锁住场景
-//			SceneManager.lockScene();
 			//
             _module.updatePosition(StageManager.fixWidth,StageManager.fixHeight) ;
 		}
@@ -133,7 +126,7 @@ package x.game.module
 			}
 			_state = LOADING ;			 
 			// 加载模块资源
-			UILoader.load(_url, LoadType.MODULE, onLoadComplete, onLoadError,_title);
+			UILoader.load(_url, LoadType.MODULE, onLoadComplete, onLoadError,_title,null,null,null,true);
 		}
 		
 		private function onLoadError(info:ContentInfo):void

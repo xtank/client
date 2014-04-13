@@ -13,7 +13,7 @@ package x.tank.core.cfg
 		static public function addHanlder(handler:ICFGDataHandler):void
 		{
 			handler.parser(DataProxy.getXmlFile(handler.fileName)) ;
-			_handlers.set(handler.fileName,_handlers) ;
+			_handlers.set(handler.fileName,handler) ;
 		}
 
 		/** 地图配置文件 **/

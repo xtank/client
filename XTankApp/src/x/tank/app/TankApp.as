@@ -5,6 +5,7 @@ package x.tank.app
 	
 	import x.game.alert.AlertManager;
 	import x.game.layer.LayerManager;
+	import x.game.loader.UILoader;
 	import x.game.log.core.Logger;
 	import x.game.log.profile.Stats;
 	import x.game.manager.StageManager;
@@ -16,6 +17,7 @@ package x.tank.app
 	import x.tank.app.scene.SceneManager;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.handler.MapDataHandler;
+	import x.tank.core.ui.GameLoadingBar;
 	import x.tank.net.locale.ErrorMap;
 	import x.tank.net.locale.LabelMap;
 
@@ -40,26 +42,27 @@ package x.tank.app
 			resourceManager.localeChain = ["zh_CN"];
 			resourceManager.addResourceBundle(new ErrorMap());
 			resourceManager.addResourceBundle(new LabelMap());
+
+			// System config xml files
+			DataProxyManager.addHanlder(new MapDataHandler());
 			//
 			TickerLauncher.start();
 			//
-			LayerManager.initLayers() ;
+			LayerManager.initLayers();
 			TooltipManager.init(LayerManager.topLayer.skin);
 			AlertManager.setup(LayerManager.topLayer.skin);
-
-			// System config xml files
-			DataProxyManager.addHanlder(new MapDataHandler()) ;
+			UILoader.setLoaderUI(GameLoadingBar.instance);
 		}
 
 		public function initGame(obj:Object):void
 		{
 			Logger.info("TankApp-game-init");
 			//
-			TankConfig.initGameConfig(obj) ;
+			TankConfig.initGameConfig(obj);
 			// System Message Processor Init
-			new KeepLiveProcessor() ;
+			new KeepLiveProcessor();
 			//
-			 SceneManager.showLobby() ;
+			SceneManager.showLobby();
 		}
 
 		public function updatePosition(w:Number, h:Number):void

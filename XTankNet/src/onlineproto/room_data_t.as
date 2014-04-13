@@ -78,6 +78,13 @@ package onlineproto {
 		/**
 		 *  @private
 		 */
+		public static const NAME:FieldDescriptor$TYPE_STRING = new FieldDescriptor$TYPE_STRING("onlineproto.room_data_t.name", "name", (7 << 3) | com.netease.protobuf.WireType.LENGTH_DELIMITED);
+
+		public var name:String;
+
+		/**
+		 *  @private
+		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.id);
@@ -95,6 +102,8 @@ package onlineproto {
 				com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
 				com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, passwd$field);
 			}
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 7);
+			com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.name);
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}
@@ -109,6 +118,7 @@ package onlineproto {
 			var mapid$count:uint = 0;
 			var status$count:uint = 0;
 			var passwd$count:uint = 0;
+			var name$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -149,6 +159,13 @@ package onlineproto {
 					}
 					++passwd$count;
 					this.passwd = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					break;
+				case 7:
+					if (name$count != 0) {
+						throw new flash.errors.IOError('Bad data format: room_data_t.name cannot be set twice.');
+					}
+					++name$count;
+					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

@@ -1,14 +1,15 @@
 package x.game.loader
 {
     import flash.events.ProgressEvent;
-    import x.game.loader.loadingUI.ILoaderUI;
+    
     import x.game.loader.core.ContentInfo;
     import x.game.loader.core.QueueInfo;
     import x.game.loader.core.QueueLoaderImpl;
+    import x.game.loader.loadingUI.ILoaderUI;
 
     /**
      * 有loading显示的加载器
-     * @author tb
+     * @author fraser
      *
      */
     public class UILoader
@@ -40,7 +41,8 @@ package x.game.loader
                                     title:String = "",
 									data:* = null, 
                                     open:Function = null, 
-									progress:Function = null):void
+									progress:Function = null,
+									isCover:Boolean = true):void
         {
             if (hasWaitList(url, complete))
             {
@@ -50,6 +52,7 @@ package x.game.loader
             var info:QueueInfo = new QueueInfo();
             info.url = url;
             info.type = type;
+			info.isCover = isCover ;
             info.title = title;
             info.data = data;
             info.completeHandler = complete;
@@ -58,7 +61,7 @@ package x.game.loader
             info.progressHandler = progress;
             _waitList.push(info);
             //
-            _loader.load(url, type, onComplete, onError, null, 2, onOpen, onProgress);
+            _loader.load(url, type, onComplete, onError, null, 2, onOpen, onProgress,isCover);
         }
 
         /**
@@ -128,11 +131,11 @@ package x.game.loader
                 {
                     if (info.url == contentInfo.url)
                     {
-                        _loaderUI.show(info.title);
+                        _loaderUI.show(info.title,info.isCover);
                         
                         if (info.openHandler != null)
                         {
-                            info.openHandler(new ContentInfo(info.url, info.type, null, null, info.data));
+                            info.openHandler(new ContentInfo(info.url, info.type, null, null, info.data,info.isCover));
                         }
                         break;
                     }
@@ -154,7 +157,7 @@ package x.game.loader
                         i--;
                         if (info.completeHandler != null)
                         {
-                            info.completeHandler(new ContentInfo(info.url, info.type, contentInfo.content, contentInfo.domain, info.data));
+                            info.completeHandler(new ContentInfo(info.url, info.type, contentInfo.content, contentInfo.domain, info.data,info.isCover));
                         }
                         info.dispose();
                     }
@@ -177,7 +180,7 @@ package x.game.loader
                         i--;
                         if (info.errorHandler != null)
                         {
-                            info.errorHandler(new ContentInfo(info.url, info.type, null, null, info.data));
+                            info.errorHandler(new ContentInfo(info.url, info.type, null, null, info.data,info.isCover));
                         }
                         info.dispose();
                     }

@@ -12,6 +12,7 @@
     <classEntry path="x.tank.app.scene.lobby.net.GetRoomListProcessor"/>
     <classEntry path="x.tank.app.scene.lobby.view.LobbyRoomView"/>
     <classEntry path="x.tank.app.scene.lobby.view.RoomListView"/>
+    <classEntry path="x.tank.app.cfg.ModuleName"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

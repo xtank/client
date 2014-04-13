@@ -13,6 +13,7 @@ package x.game.loader.core
 		public var priority:int = QueuePriority.STANDARD;
 		public var url:String;
 		public var type:String;
+		public var isCover:Boolean ;
 		public var title:String;
 		public var data:*;
 		public var isShowBar:Boolean ;

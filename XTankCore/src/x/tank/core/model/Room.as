@@ -1,5 +1,7 @@
 package x.tank.core.model
 {
+	import de.polygonal.ds.HashMap;
+	
 	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
 	
@@ -16,23 +18,36 @@ package x.tank.core.model
 		public var mapid:uint;
 		/** @see RoomStatus */
 		public var status:uint; //0 free 1 busy
-		public var playlist:Vector.<Player>;
+		public var playlist:HashMap ;
 		public var passwd:uint;
+		public var name:String = " - ";
 
 		public function Room()
 		{
-			playlist = new Vector.<Player>();
+			playlist = new HashMap() ;
+		}
+		
+		public function get owner():Player
+		{
+			return playlist.get(ownerid) as Player;
+		}
+		
+		// 当前参与房间的玩家数量
+		public function get currentCount():uint
+		{
+			return playlist.size() ;
 		}
 
 		public function parse(data:room_data_t):void
 		{
-			this.id = data.usierid;
+			this.id = data.id;
 			this.ownerid = data.ownerid;
 			this.status = data.status;
 			this.mapid = data.mapid;
 			this.passwd = data.passwd;
+			this.name = data.name ;
 			//
-			playlist.splice(0, playlist.length - 1);
+			playlist.clear() ;
 			//
 			var player:Player ;
 			for each(var playData:player_data_t in data.playlist)
@@ -45,7 +60,7 @@ package x.tank.core.model
 				{
 					player = PlayerManager.addPlayer(playData) ;
 				}
-				playlist.push(player) ;
+				playlist.set(player.id,player) ;
 			}
 		}
 	}

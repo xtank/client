@@ -1,5 +1,6 @@
 package x.game.loader.loadingUI
 {
+	import flash.display.DisplayObjectContainer;
     
     /**
      * XFlash - class_name
@@ -9,7 +10,7 @@ package x.game.loader.loadingUI
      */
     public interface ILoaderUI
     {
-        function show(title:String):void ;
+        function show(title:String = "", isCover:Boolean = true, parent:DisplayObjectContainer = null):void
         //
         function hide():void ;
         //

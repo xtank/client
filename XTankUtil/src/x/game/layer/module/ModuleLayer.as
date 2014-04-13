@@ -83,8 +83,8 @@ package x.game.layer.module
 			var index:uint = _showModules.indexOf(module);
 			if (index != -1)
 			{
-				checkHideCoverUI();
 				_showModules.splice(index, 1);
+				checkHideCoverUI();
 			}
 			//
 			if (module.isPlayShowEffect)

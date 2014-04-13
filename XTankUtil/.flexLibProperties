@@ -21,6 +21,7 @@
     <classEntry path="x.game.net.Connection"/>
     <classEntry path="x.game.net.processor.BaseMessageProgressor"/>
     <classEntry path="x.game.net.post.SimpleCallbackPost"/>
+    <classEntry path="x.game.ui.digital.DigitalNumber"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

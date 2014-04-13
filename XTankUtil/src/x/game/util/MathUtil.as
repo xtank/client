@@ -9,6 +9,29 @@ package x.game.util
      */
     public class MathUtil
     {
+		
+		/**
+		 * 范围控制数值
+		 * @param	value
+		 * @param	min
+		 * @param	max
+		 * @return
+		 */
+		public static function clamp(value:Number, min:Number, max:Number):Number
+		{
+			return Math.min(Math.max(value, min), max);
+		}
+		
+		/** 数字转化为设定长度的字符串数组 */
+		public static function parseNumberToLimitLengthDigitVec(number:int, length:uint):Vector.<int>
+		{
+			var tmp:Vector.<int> = parseNumberToDigitVec(number) ;
+			while (tmp.length < length)
+			{
+				tmp.unshift(0);
+			}
+			return tmp;
+		}
         
         /**  解析数字返回数组  */
         public static function parseNumberToDigitVec(number:int):Vector.<int>

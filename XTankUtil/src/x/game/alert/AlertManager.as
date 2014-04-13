@@ -7,9 +7,7 @@ package x.game.alert
     import x.game.alert.impls.AlertBase;
     import x.game.alert.impls.ImageAlert;
     import x.game.alert.processor.AlertSkinProcessor;
-    import x.game.manager.StageManager;
     import x.game.util.DisplayObjectUtil;
-    import x.game.util.DisplayUtil;
 
     /**
      * 提示管理器

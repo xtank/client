@@ -57,6 +57,7 @@ package x.game.layer
 			super();
 			_layer = layer;
 			ResizeManager.addComponent(this);
+			updatePosition(1,1) ;
 		}
 
 		public function get resizeName():String
@@ -70,7 +71,7 @@ package x.game.layer
 			var rect:Rectangle = StageManager.stageRect;
 			//
 			graphics.clear();
-			graphics.beginFill(0x000000, .3);
+			graphics.beginFill(0x000000, .6);
 			graphics.drawRect(0, 0, rect.width, rect.height);
 			graphics.endFill();
 		}

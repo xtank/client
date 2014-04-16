@@ -1,6 +1,7 @@
 package x.tank.login
 {
 	import onlineproto.cs_enter_server;
+	import onlineproto.sc_enter_server;
 	
 	import x.game.log.core.Logger;
 	import x.game.net.Connection;
@@ -38,10 +39,10 @@ package x.tank.login
 			function $onLoginSuccess(event:XMessageEvent):void
 			{
 				// var userId:uint=event.response.userId;
-				
+				var msg:sc_enter_server = event.msg as sc_enter_server;
 				if (onLoginSuccess != null)
 				{
-					onLoginSuccess();
+					onLoginSuccess(msg);
 				}
 			}
 

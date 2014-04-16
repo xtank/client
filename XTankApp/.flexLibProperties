@@ -13,6 +13,7 @@
     <classEntry path="x.tank.app.scene.lobby.view.LobbyRoomView"/>
     <classEntry path="x.tank.app.scene.lobby.view.RoomListView"/>
     <classEntry path="x.tank.app.cfg.ModuleName"/>
+    <classEntry path="x.tank.app.scene.lobby.view.UserInfoView"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

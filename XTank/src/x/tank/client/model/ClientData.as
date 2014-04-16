@@ -30,7 +30,7 @@ package x.tank.client.model
 		public var ip:String ;
 		public var port:uint ;
 		//
-		public var userId:String ;
+		public var loginUserObject:Object ;
 		
 		public function ClientData(stage:Stage, root:Sprite, rootURL:String)
 		{

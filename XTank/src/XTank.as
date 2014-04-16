@@ -332,8 +332,10 @@ package
 			_loginContent["init"](_initData, onLoginSuccess);
 		}
 		
-		private function onLoginSuccess():void
+		private function onLoginSuccess(msg:Object):void
 		{
+			_initData.loginUserObject = msg ;
+			//
 			this.removeChild(_loginContent);
 			//
 			_loginLoader.unloadAndStop();

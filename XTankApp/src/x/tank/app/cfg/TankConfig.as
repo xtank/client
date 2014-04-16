@@ -2,9 +2,13 @@ package x.tank.app.cfg
 {
 	import flash.ui.ContextMenu;
 	
+	import onlineproto.player_data_t;
+	import onlineproto.sc_enter_server;
+	
 	import x.game.manager.StageManager;
 	import x.game.manager.UIManager;
 	import x.game.manager.VersionManager;
+	import x.tank.core.manager.PlayerManager;
 
 	public class TankConfig
 	{
@@ -34,14 +38,21 @@ package x.tank.app.cfg
 		static public var ip:String ;
 		static public var port:uint ;
 		//
-		static public var userId:String ;
+		static public var userId:uint ;
 		
 		static public function initGameConfig(obj:Object):void
 		{
 			ip = obj["ip"] ;
 			port = obj["port"] ;
-			userId = obj["userId"] ;
+			
+			var loginUserMsg:sc_enter_server = obj["loginUserObject"] as sc_enter_server;
+			userId = loginUserMsg.userid
 			//
+			var data:player_data_t = new player_data_t() ;
+			data.userid = userId ;
+			data.name = loginUserMsg.name ;
+			//
+			PlayerManager.addPlayer(data) ;
 		}
 	}
 }

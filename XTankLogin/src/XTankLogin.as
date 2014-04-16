@@ -3,7 +3,8 @@ package
     import flash.display.Sprite;
     import flash.text.TextField;
     
-    import x.game.alert.AlertManager;
+    import onlineproto.sc_enter_server;
+    
     import x.game.log.core.Logger;
     import x.game.manager.TooltipManager;
     import x.game.tooltip.NodesTipSkin;
@@ -12,7 +13,6 @@ package
     import x.game.ui.button.IButton;
     import x.game.ui.button.XSimpleButton;
     import x.game.util.Random;
-    import x.tank.app.processor.alert.SimpleAlertProcessor;
     import x.tank.login.CheckBox;
     import x.tank.login.LoginUtil;
     import x.tank.login.XtankInitData;
@@ -113,21 +113,21 @@ package
 			_loginBtn.enable = false ;
 			//
 			var loginModule:XTankLogin = this ;
-			AlertManager.showAlert(1,new SimpleAlertProcessor("弹出框测试？",
-				function():void
-				{
+//			AlertManager.showAlert(1,new SimpleAlertProcessor("弹出框测试？",
+//				function():void
+//				{
 					var userId:uint = uint(_accountInputTxt.text);
 					//
 					Logger.info("USERID:" + userId);
 					//
 					if (target == _loginBtn)
 					{
-						LoginUtil.actualLogin(loginModule,userId,function():void
+						LoginUtil.actualLogin(loginModule,userId,function(msg:sc_enter_server):void
 						{
 							Logger.info("登陆成功！");
 							if(_successFun != null)
 							{
-								_successFun() ;
+								_successFun(msg) ;
 							}
 						},function():void
 						{
@@ -135,7 +135,7 @@ package
 							Logger.info("登陆失败！") ;
 						}) ;
 					}
-				})) ;
+//				})) ;
 		}
     }
 }

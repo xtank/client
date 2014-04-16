@@ -11,7 +11,10 @@ package x.tank.app.scene.lobby
 	import x.game.tick.FrameTicker;
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayUtil;
+	import x.tank.app.cfg.TankConfig;
 	import x.tank.app.scene.lobby.view.RoomListView;
+	import x.tank.app.scene.lobby.view.UserInfoView;
+	import x.tank.core.manager.PlayerManager;
 	import x.tank.net.CommandSet;
 
 	public class LobbyScene extends XComponent implements IAbstractScene
@@ -30,6 +33,7 @@ package x.tank.app.scene.lobby
 		private var _gateway:LobbyGateWay;
 		//
 		private var _roomList:RoomListView ;
+		private var _userInfo:UserInfoView ;
 
 		public function LobbyScene()
 		{
@@ -42,6 +46,7 @@ package x.tank.app.scene.lobby
 		{
 			// 1. init skins
 			_roomList = new RoomListView(_skin["roomListUI"]) ;
+			_userInfo = new UserInfoView(_skin["userInfoUI"]) ;
 		}
 
 		/** 场景渲染 */
@@ -54,6 +59,12 @@ package x.tank.app.scene.lobby
 		{
 			_gateway.dispose();
 			_gateway = null;
+			//
+			_userInfo.dispose() ;
+			_userInfo = null ;
+			//
+			_roomList.dispose() ;
+			_roomList = null ;
 			super.dispose();
 		}
 
@@ -104,6 +115,7 @@ package x.tank.app.scene.lobby
 			//
 			_count = 0;
 			$getRoomList();
+			_userInfo.updateInfo(PlayerManager.getPlayer(TankConfig.userId)) ;
 		}
 
 		public function hideLobby():void

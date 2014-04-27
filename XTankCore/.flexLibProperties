@@ -13,6 +13,8 @@
     <classEntry path="x.tank.core.cfg.handler.TankDataHandler"/>
     <classEntry path="x.tank.core.cfg.model.TankConfigInfo"/>
     <classEntry path="x.tank.core.model.TankConstant"/>
+    <classEntry path="x.tank.core.cfg.handler.BarrierDataHandler"/>
+    <classEntry path="x.tank.core.cfg.model.BarrierConfigInfo"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

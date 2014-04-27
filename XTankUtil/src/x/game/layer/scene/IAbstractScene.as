@@ -6,8 +6,8 @@ package x.game.layer.scene
 	
 	public interface IAbstractScene extends IDisposeable
 	{
-		/** 激活 锁定 场景 */
-		function set activeScene(value:Boolean):void;
+//		/** 激活 锁定 场景 */
+//		function set activeScene(value:Boolean):void;
 		
 		/** 场景皮肤 */
 		function get skin():Sprite ;

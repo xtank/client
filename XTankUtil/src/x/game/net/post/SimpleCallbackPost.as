@@ -63,7 +63,7 @@ package x.game.net.post
 		{
 			if(_disposed || _message == null)
 				return ;
-			// 比对消息序号  todo ????
+			// 比对消息序号
 			if ((FILTER_CMDS.indexOf(_message.cmdId) == -1) && _message.stamp != 0 && _message.stamp != event.response.stamp)
 			{
 				Logger.error("比对消息序号值失败！" + _message.stamp + "-" + event.response.stamp);

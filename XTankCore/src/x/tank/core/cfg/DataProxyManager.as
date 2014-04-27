@@ -4,6 +4,7 @@ package x.tank.core.cfg
 	
 	import x.game.cfg.DataProxy;
 	import x.game.cfg.ICFGDataHandler;
+	import x.tank.core.cfg.handler.BarrierDataHandler;
 	import x.tank.core.cfg.handler.MapDataHandler;
 	import x.tank.core.cfg.handler.TankDataHandler;
 	
@@ -26,6 +27,11 @@ package x.tank.core.cfg
 		static public function get tankData():TankDataHandler
 		{
 			return _handlers.get(TankDataHandler.FILE_NAME) as TankDataHandler ;
+		}
+		
+		static public function get barrierData():BarrierDataHandler
+		{
+			return _handlers.get(BarrierDataHandler.FILE_NAME) as BarrierDataHandler ;
 		}
 	}
 }

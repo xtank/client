@@ -24,7 +24,6 @@ package x.tank.core.cfg.handler
 
 		public function parser(xml:XML):void
 		{
-//			trace("解析地图配置文件") ;
 			var tp:XMLList = xml.map;
 			var len:uint = tp.length();
 			for (var i:uint = 0; i < len; i++)

@@ -23,20 +23,19 @@ package x.tank.app.scene.gateway
 			//
 			_msgHandlerVec = new Vector.<IMessageProcessor>();
 			initMessageHandler();
-			//
 			blockCommands();
-			SceneManager.addEventListener(SceneEvent.SCENE_SWITCH_COMPLETE, onSwitchComplete);
+			SceneManager.addEventListener(SceneEvent.SHOW_LOBBY, onShowLobby);
+			SceneManager.addEventListener(SceneEvent.HIDE_LOBBY, onHideLobby);
 		}
 
-		/**
-		 * 场景成功交替后被触发
-		 * @param evt
-		 *
-		 */
-		protected function onSwitchComplete(evt:SceneEvent):void
+		private function onShowLobby(evt:SceneEvent):void
 		{
-			SceneManager.removeEventListener(SceneEvent.SCENE_SWITCH_COMPLETE, onSwitchComplete);
 			realseCommands();
+		}
+		
+		private function onHideLobby(evt:SceneEvent):void
+		{
+			blockCommands();
 		}
 		
 		protected function addMessageHandler(handler:IMessageProcessor):void
@@ -51,15 +50,13 @@ package x.tank.app.scene.gateway
 		}
 
 		/**  需要阻塞的消息 */
-		public function blockCommands():void
+		protected function blockCommands():void
 		{
 			// override by child
 		}
 
-		/**
-		 * 释放阻塞的消息
-		 */
-		public function realseCommands():void
+		/** 释放阻塞的消息  */
+		protected function realseCommands():void
 		{
 			// override by child
 		}

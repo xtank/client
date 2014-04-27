@@ -8,16 +8,9 @@ package x.tank.app.scene
 	 *
 	 */
 	public class SceneEvent extends Event
-	{
-		/** 开始加载地图资源 */
-		public static const SCENE_LOADING_START:String = "SCENE_LOADING_START" ;
-		/** 结束加载地图资源 */
-		public static const SCENE_LOADING_END:String = "SCENE_LOADING_END" ;
-		
-		/** 场景切换开始   */
-		public static const SCENE_SWITCH_START:String = "SCENE_SWITCH_START";
-		/** 场景切换完成   */
-		public static const SCENE_SWITCH_COMPLETE:String = "SCENE_SWITCH_COMPLETE";
+	{	
+		public static const SHOW_LOBBY:String = "SHOW_LOBBY";
+		public static const HIDE_LOBBY:String = "HIDE_LOBBY";
 		
 		/** 切换场景时，传递额外的场景信息*/
 		public var params:Object;

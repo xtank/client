@@ -57,7 +57,7 @@ package com.xtank.module
 		public function RoomCreateModule()
 		{
 			super();
-			_lifecycleType = LifecycleType.GLOBAL;
+			_lifecycleType = LifecycleType.NONCE;
 		}
 		
 		override public function dispose():void

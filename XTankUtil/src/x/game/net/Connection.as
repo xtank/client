@@ -265,7 +265,7 @@ package x.game.net
 		// ###################################################################################
 		//				Logger Filter
 		// ###################################################################################
-		private static var filterIds:Array = []; // 过滤不需要输出日志的命令号id列表
+		private static var filterIds:Array = [102]; // 过滤不需要输出日志的命令号id列表
 
 		private static function netLog(content:String, commandId:uint):void
 		{

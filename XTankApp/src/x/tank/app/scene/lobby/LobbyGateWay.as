@@ -14,19 +14,19 @@ package x.tank.app.scene.lobby
 		
 		override protected function initMessageHandler():void
 		{
-			// override by child
+			// 大厅的消息处理器
 			addMessageHandler(new RoomUpdateProcessor(_scene as LobbyScene));
 			addMessageHandler(new GetRoomListProcessor(_scene as LobbyScene));
 			addMessageHandler(new PlayerStatusUpdateProcessor(_scene as LobbyScene));
 		}
 		
 		/**  需要阻塞的消息 */
-		override public function blockCommands():void
+		override protected function blockCommands():void
 		{
 			// override by child
 		}
 		
-		override public function realseCommands():void
+		override protected function realseCommands():void
 		{
 			// override by child
 		}

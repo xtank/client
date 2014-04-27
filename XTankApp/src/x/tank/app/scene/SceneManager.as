@@ -3,7 +3,6 @@ package x.tank.app.scene
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
-	import x.game.layer.scene.IAbstractScene;
 	import x.tank.app.scene.lobby.LobbyScene;
 
 	/**
@@ -12,20 +11,26 @@ package x.tank.app.scene
 	 */
 	public class SceneManager
 	{
+		private static var _instance:LobbyScene;
+		
+		private static function getLobby():LobbyScene
+		{
+			if (_instance == null)
+			{
+				_instance = new LobbyScene();
+			}
+			return _instance;
+		}
 		
 		/** 显示大厅 */
 		public static function showLobby():void
 		{
-			dispatchEvent(new SceneEvent(SceneEvent.SCENE_SWITCH_COMPLETE)) ;
-			LobbyScene.instance.showLobby() ;
+			getLobby().showLobby() ;
 		}
 		
-		
-		private static var _currentScene:IAbstractScene ;
-		
-		public static function showMap(mapId:uint):void
+		public static function hideLobby():void
 		{
-			LobbyScene.instance.hideLobby() ;
+			getLobby().hideLobby() ;
 		}
 		
 		//############################################################

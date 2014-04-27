@@ -6,6 +6,7 @@ package com.xtank.module
 	
 	import onlineproto.cs_cancel_inside_ready;
 	import onlineproto.cs_inside_ready;
+	import onlineproto.cs_inside_start;
 	import onlineproto.cs_leave_room;
 	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
@@ -13,7 +14,9 @@ package com.xtank.module
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
 	import x.game.module.Module;
+	import x.game.net.Connection;
 	import x.game.net.post.CallbackPost;
+	import x.game.net.post.SimplePost;
 	import x.game.net.response.XMessageEvent;
 	import x.game.ui.button.IButton;
 	import x.game.ui.button.XSimpleButton;
@@ -118,7 +121,6 @@ package com.xtank.module
 			{
 				_cancelBtn.visible = _cancelBtn.enable = false ;
 				_readyBtn.visible = _readyBtn.enable = false ;
-				//
 				_startBtn.visible = _startBtn.enable = true ;
 			}
 			else
@@ -138,6 +140,7 @@ package com.xtank.module
 			RoomManager.addEventListener(RoomEvent.ROOM_UPDATE,onRoomUpdate) ;
 			RoomManager.addEventListener(RoomEvent.ROOM_DEL,onRoomDel) ;
 			PlayerManager.addEventListener(PlayerEvent.PLAYER_UPDATE,onUpdatePlayer) ;
+			Connection.addCommandListener(CommandSet.$155.id, onStartGameMessage);
 		}
 		
 		override public function hide():void
@@ -147,6 +150,7 @@ package com.xtank.module
 			RoomManager.removeEventListener(RoomEvent.ROOM_UPDATE,onRoomUpdate) ;
 			RoomManager.removeEventListener(RoomEvent.ROOM_DEL,onRoomDel) ;
 			PlayerManager.removeEventListener(PlayerEvent.PLAYER_UPDATE,onUpdatePlayer) ;
+			Connection.removeCommandListener(CommandSet.$155.id, onStartGameMessage);
 		}
 		
 		private function onUpdatePlayer(event:PlayerEvent):void
@@ -251,7 +255,19 @@ package com.xtank.module
 		
 		private function onStartClick(btn:IButton):void
 		{
-			
+			var initData:RoomModuleData = _initData as RoomModuleData ;
+			var roomData:room_data_t = RoomManager.getRoom(initData.roomId) ;
+			//
+			if(TankConfig.userId == roomData.ownerid)
+			{
+				btn.enable = false ;
+				// $155
+				new SimplePost(CommandSet.$155.id,new cs_inside_start()).send() ;
+			}
+			else
+			{
+				// 没有满足条件  [提示]
+			}
 		}
 		
 		private function onReadyClick(btn:IButton):void
@@ -304,6 +320,13 @@ package com.xtank.module
 			{
 				// 没有满足条件  提示
 			}
+		}
+		
+		private function onStartGameMessage(event:XMessageEvent):void
+		{
+			// todo [open battle module]
+			//
+			close();
 		}
 	}
 }

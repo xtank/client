@@ -13,26 +13,19 @@ package x.tank.app.scene.lobby
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayUtil;
 	import x.tank.app.cfg.TankConfig;
+	import x.tank.app.scene.SceneEvent;
+	import x.tank.app.scene.SceneManager;
 	import x.tank.app.scene.lobby.view.RoomListView;
 	import x.tank.app.scene.lobby.view.UserInfoView;
 	import x.tank.core.manager.PlayerManager;
 	import x.tank.net.CommandSet;
 
+	/** 大厅 */
 	public class LobbyScene extends XComponent implements IAbstractScene
 	{
-		private static var _instance:LobbyScene;
-
-		public static function get instance():LobbyScene
-		{
-			if (_instance == null)
-			{
-				_instance = new LobbyScene();
-			}
-			return _instance;
-		}
-
+		private var _activable:Boolean;
+		private var _tickerIndex:int;
 		private var _gateway:LobbyGateWay;
-		//
 		private var _roomList:RoomListView ;
 		private var _userInfo:UserInfoView ;
 
@@ -69,10 +62,7 @@ package x.tank.app.scene.lobby
 			super.dispose();
 		}
 
-		private var _activable:Boolean;
-		private var _tickerIndex:int;
-
-		public function set activeScene(value:Boolean):void
+		private function set activeScene(value:Boolean):void
 		{
 			_activable = value;
 			if (_activable)
@@ -106,6 +96,7 @@ package x.tank.app.scene.lobby
 		}
 
 		//  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //
+		//  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //
 
 		private var _count:uint = 0;
 
@@ -115,18 +106,20 @@ package x.tank.app.scene.lobby
 			LayerManager.sceneLayer.addScene(this);
 			//
 			_count = 0;
-			$getRoomList();
+			$getRoomList(); // 拉取当前大厅的房间列表
 			_userInfo.updateInfo(PlayerManager.getPlayer(TankConfig.userId)) ;
+			//
+			SceneManager.dispatchEvent(new SceneEvent(SceneEvent.SHOW_LOBBY)) ;
 		}
 
 		public function hideLobby():void
 		{
 			activeScene = false;
-			_gateway.blockCommands();
 			DisplayUtil.removeForParent(skin, false);
+			//
+			SceneManager.dispatchEvent(new SceneEvent(SceneEvent.HIDE_LOBBY)) ;
 		}
 
-		//  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //  ==  //
 		private function $getRoomList():void
 		{
 			// 获取房间列表 [3次失败重试]

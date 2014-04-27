@@ -7,36 +7,34 @@ package x.tank.core.manager
 	import onlineproto.player_data_t;
 	
 	import x.tank.core.event.PlayerEvent;
-	import x.tank.core.model.Player;
 
 	public class PlayerManager
 	{
 		private static var _players:HashMap = new HashMap();
 		
-		public static function addPlayer(data:player_data_t):Player
+		public static function addPlayer(data:player_data_t):player_data_t
 		{
-			var player:Player = new Player() ;
-			player.parse(data) ;
-			_players.set(player.id,player) ;
+			_players.set(data.userid,data) ;
+			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_ADD,data)) ;
 			//
-			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_ADD,player)) ;
-			//
-			return player ;
+			return data ;
 		}
 		
-		public static function updatePlayer(data:player_data_t):Player
+		public static function updatePlayer(data:player_data_t):player_data_t
 		{
-			var player:Player = getPlayer(data.id) ;
-			player.parse(data) ;
+			var player:player_data_t = getPlayer(data.userid) ;
+			player.name = data.name ;
+			player.status = data.status ;
+			player.teamid = data.teamid ;
 			//
 			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_UPDATE,player));
 			//
 			return player ;
 		}
 		
-		public static function removePlayer(userId:uint):Player
+		public static function removePlayer(userId:uint):player_data_t
 		{
-			var player:Player = getPlayer(userId) ;
+			var player:player_data_t = getPlayer(userId) ;
 			_players.remove(player) ;
 			//
 			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_DEL,player)) ;
@@ -44,9 +42,9 @@ package x.tank.core.manager
 			return player ;
 		}
 		
-		public static function getPlayer(userId:uint):Player
+		public static function getPlayer(userId:uint):player_data_t
 		{
-			return _players.get(userId) as Player;
+			return _players.get(userId) as player_data_t;
 		}
 		
 		public static function hasPlayer(userId:uint):Boolean

@@ -2,7 +2,7 @@ package x.tank.core.event
 {
 	import flash.events.Event;
 	
-	import x.tank.core.model.Room;
+	import onlineproto.room_data_t;
 	
 	public class RoomEvent extends Event
 	{
@@ -12,9 +12,9 @@ package x.tank.core.event
 		//
 		public static const ROOM_LIST_UPDATE:String = "ROOM_LIST_UPDATE" ;
 		
-		public var room:Room ;
+		public var room:room_data_t ;
 		
-		public function RoomEvent(type:String, room:Room = null ,bubbles:Boolean=false, cancelable:Boolean=false)
+		public function RoomEvent(type:String, room:room_data_t = null ,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 			this.room = room ;

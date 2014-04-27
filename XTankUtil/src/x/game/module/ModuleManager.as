@@ -187,6 +187,24 @@ package x.game.module
             moduleProxy.init(data);
             return moduleProxy;
         }
+		
+		public static function closeModule(moduleName:String):void
+		{
+			var moduleProxy:ModuleProxy = _moduleMap.get(moduleName) as ModuleProxy ;
+			//
+			if (moduleProxy != null)
+			{
+				if (moduleProxy.lifecycleType == LifecycleType.NONCE)
+				{
+					_moduleMap.remove(moduleProxy.name);
+					moduleProxy.dispose();
+				}
+				else
+				{
+					moduleProxy.hide();
+				}
+			}
+		}
 
         private static function closeModules(panelNames:Vector.<String> = null):void
         {
@@ -255,28 +273,6 @@ package x.game.module
         }
 
         /**
-         * 销毁模块，在模块外部使用
-         * @param name 模块名
-         *
-         */
-        public static function closeModuleByName(name:String):void
-        {
-            var moduleProxy:ModuleProxy = _moduleMap.get(name) as ModuleProxy;
-            if (moduleProxy != null)
-            {
-                if (moduleProxy.lifecycleType == LifecycleType.NONCE)
-                {
-                    _moduleMap.remove(name);
-                    moduleProxy.dispose();
-                }
-                else
-                {
-                    moduleProxy.hide();
-                }
-            }
-        }
-
-        /**
          * 关闭全部显示模块
          * @param excepts 需要排除的模块名称
          */
@@ -306,7 +302,7 @@ package x.game.module
          */
         public static function closeForInstance(o:Object):void
         {
-            closeModuleByName(ObjectUtil.getClassName(o));
+            closeModule(ObjectUtil.getClassName(o));
         }
 
         //==========================================================================

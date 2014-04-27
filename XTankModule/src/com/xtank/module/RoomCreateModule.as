@@ -8,6 +8,7 @@ package com.xtank.module
 	import onlineproto.cs_create_room;
 	import onlineproto.sc_create_room;
 	
+	import x.game.alert.AlertManager;
 	import x.game.manager.StageManager;
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
@@ -25,6 +26,7 @@ package com.xtank.module
 	import x.game.util.StringUtil;
 	import x.tank.app.cfg.ModuleName;
 	import x.tank.app.module.RoomModuleData;
+	import x.tank.app.processor.alert.SimpleAlertProcessor;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.model.MapConfigInfo;
 	import x.tank.net.CommandSet;
@@ -51,7 +53,6 @@ package com.xtank.module
 		private var _vScroller:VScroller ;
 		private var _list:XList ;
 		private var _currentSelectedMapConfig:MapConfigInfo ;
-		
 		
 		public function RoomCreateModule()
 		{
@@ -119,6 +120,9 @@ package com.xtank.module
 		{
 			super.init(data);
 			//
+			_list.clear() ;
+			_okBtn.enable = true ;
+			//
 			var maps:Array = DataProxyManager.mapData.getAllMapInfos() ;
 			var len:uint = maps.length ;
 			for(var i:uint = 0;i<len;i++)
@@ -152,6 +156,7 @@ package com.xtank.module
 		{
 			trace("percent:" + percent);
 			// 0 - 1
+			_list.listSkin.height
 			_list.y = - _list.height * percent ;
 		}
 		
@@ -176,7 +181,9 @@ package com.xtank.module
 				function(event:XMessageEvent):void
 				{
 					var msg:sc_create_room = event.msg as sc_create_room ;
-//					ModuleManager.toggleModule(ModuleName.RoomModule,new RoomModuleData(msg) ;	
+					//
+					ModuleManager.toggleModule(ModuleName.RoomModule,new RoomModuleData(msg.roomid)) ;	
+					ModuleManager.closeModule(ModuleName.RoomCreateModule) ;
 				},
 				function(event:XMessageEvent):void
 				{
@@ -187,7 +194,12 @@ package com.xtank.module
 		
 		private function onCancelClick(btn:IButton):void
 		{
-			ModuleManager.toggleModule(ModuleName.RoomCreateModule) ;
+			AlertManager.showAlert(1,new SimpleAlertProcessor("确定取消创建房间吗?",
+				function():void
+				{
+					ModuleManager.closeModule(ModuleName.RoomCreateModule) ;
+				}
+			)) ;
 		}
 	}
 }

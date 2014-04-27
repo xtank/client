@@ -3,6 +3,10 @@
 	<name>XTankModule</name>
 	<comment></comment>
 	<projects>
+		<project>XTankApp</project>
+		<project>XTankCore</project>
+		<project>XTankNet</project>
+		<project>XTankUtil</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -2,7 +2,7 @@ package x.tank.core.event
 {
 	import flash.events.Event;
 	
-	import x.tank.core.model.Player;
+	import onlineproto.player_data_t;
 	
 	public class PlayerEvent extends Event
 	{
@@ -10,9 +10,9 @@ package x.tank.core.event
 		public static const PLAYER_DEL:String = "PLAYER_DEL" ;
 		public static const PLAYER_UPDATE:String = "PLAYER_UPDATE" ;
 		
-		public var player:Player ;
+		public var player:player_data_t ;
 		
-		public function PlayerEvent(type:String, player:Player,bubbles:Boolean=false, cancelable:Boolean=false)
+		public function PlayerEvent(type:String, player:player_data_t,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 			this.player = player ;

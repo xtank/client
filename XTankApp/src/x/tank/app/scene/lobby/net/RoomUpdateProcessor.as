@@ -7,7 +7,6 @@ package x.tank.app.scene.lobby.net
 	import x.game.net.response.XMessageEvent;
 	import x.tank.app.scene.lobby.LobbyScene;
 	import x.tank.core.manager.RoomManager;
-	import x.tank.core.model.Room;
 	import x.tank.net.CommandSet;
 
 	/** 房间信息更新 */
@@ -36,7 +35,6 @@ package x.tank.app.scene.lobby.net
 		{
 			var msg:sc_notify_room_update = event.msg as sc_notify_room_update;
 			// 0 update 1 add 2 del
-			var room:Room
 			switch (msg.oper)
 			{
 				case 0:{

@@ -1,16 +1,14 @@
 package x.tank.app.module
 {
-	import onlineproto.room_data_t;
-	
 	import x.game.module.IModuleInitData;
 	
 	public class RoomModuleData implements IModuleInitData
 	{
-		public var roomdata:room_data_t ;
+		public var roomId:uint ;
 		
-		public function RoomModuleData(roomdata:room_data_t)
+		public function RoomModuleData(roomId:uint)
 		{
-			this.roomdata = roomdata ;
+			this.roomId = roomId ;
 		}
 	}
 }

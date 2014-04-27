@@ -56,7 +56,7 @@ package x.tank.app.processor.net
 			{
 				if(Connection.isConnecting())
 				{
-					sendKeepLiveRequest() ;
+					// sendKeepLiveRequest() ;
 				}
 				else
 				{

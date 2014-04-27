@@ -35,6 +35,13 @@ package onlineproto {
 		/**
 		 *  @private
 		 */
+		public static const TEAMID:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.player_data_t.teamid", "teamid", (4 << 3) | com.netease.protobuf.WireType.VARINT);
+
+		public var teamid:uint;
+
+		/**
+		 *  @private
+		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.userid);
@@ -42,6 +49,8 @@ package onlineproto {
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.status);
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.LENGTH_DELIMITED, 3);
 			com.netease.protobuf.WriteUtils.write$TYPE_STRING(output, this.name);
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 4);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.teamid);
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}
@@ -54,6 +63,7 @@ package onlineproto {
 			var userid$count:uint = 0;
 			var status$count:uint = 0;
 			var name$count:uint = 0;
+			var teamid$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -77,6 +87,13 @@ package onlineproto {
 					}
 					++name$count;
 					this.name = com.netease.protobuf.ReadUtils.read$TYPE_STRING(input);
+					break;
+				case 4:
+					if (teamid$count != 0) {
+						throw new flash.errors.IOError('Bad data format: player_data_t.teamid cannot be set twice.');
+					}
+					++teamid$count;
+					this.teamid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

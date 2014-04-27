@@ -57,6 +57,8 @@ package com.xtank.module.room
 				_mapDifficultStar.gotoAndStop(configInfo.difficult);
 				_teamLimit.gotoAndStop(configInfo.teamLimitCount + 1);
 				_playerLimit.gotoAndStop(configInfo.playerLimitCount + 1);
+				//
+				_roomNameTxt.text = roomData.name ;
 			}
 		}
 	}

@@ -28,6 +28,7 @@ package com.xtank.module.roomCreate
 		
 		override public function dispose():void
 		{
+			_clickHandler = null ;
 			skin.removeEventListener(MouseEvent.CLICK,onClick) ;
 			super.dispose() ;
 		}

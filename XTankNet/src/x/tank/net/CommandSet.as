@@ -24,6 +24,8 @@ package x.tank.net
       public static const $155: Command = new Command(155, cs_inside_start, sc_inside_start);      // 房主开始游戏
       public static const $156: Command = new Command(156, cs_notify_room_update, sc_notify_room_update);      // 房间信息更新
       public static const $157: Command = new Command(157, cs_create_room, sc_create_room);      // 创建房间
+      public static const $158: Command = new Command(158, cs_cancel_inside_ready, sc_cancel_inside_ready);      // 玩家取消准备
+      public static const $159: Command = new Command(159, cs_select_team, sc_select_team);      // 玩家选择队伍
       public static const $201: Command = new Command(201, cs_notify_player_update, sc_notify_player_update);      // 玩家状态更新
 
 	}

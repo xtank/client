@@ -32,6 +32,11 @@ package x.tank.core.cfg.handler
 			}
 		}
 		
+		public function get tanks():Array
+		{
+			return _datas.toArray() ;
+		}
+		
 		public function getTankInfo(mapId:uint):TankConfigInfo
 		{
 			return _datas.get(mapId) as TankConfigInfo ;

@@ -4,13 +4,14 @@ package x.tank.app.scene.lobby.view
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	
+	import onlineproto.player_data_t;
+	
 	import x.game.ui.XComponent;
 	import x.game.ui.digital.DigitalNumber;
 	import x.game.util.DisplayObjectUtil;
 	import x.tank.app.cfg.TankConfig;
 	import x.tank.core.event.PlayerEvent;
 	import x.tank.core.manager.PlayerManager;
-	import x.tank.core.model.Player;
 	
 	public class UserInfoView extends XComponent
 	{
@@ -42,9 +43,9 @@ package x.tank.app.scene.lobby.view
 			}
 		}
 		
-		public function updateInfo(player:Player):void
+		public function updateInfo(player:player_data_t):void
 		{
-			_nameTxt.text = player.name ;
+			_nameTxt.text = player.name+"[" + player.userid+ "]" ;
 			_rank.updateValue(99) ;
 		}
 	}

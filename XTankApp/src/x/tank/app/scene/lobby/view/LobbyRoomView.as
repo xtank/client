@@ -2,15 +2,26 @@ package x.tank.app.scene.lobby.view
 {
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import onlineproto.cs_enter_room;
+	import onlineproto.room_data_t;
+	import onlineproto.sc_enter_room;
+	
+	import x.game.module.ModuleManager;
+	import x.game.net.post.CallbackPost;
+	import x.game.net.response.XMessageEvent;
 	import x.game.ui.XComponent;
 	import x.game.ui.digital.DigitalNumber;
 	import x.game.util.DisplayObjectUtil;
+	import x.tank.app.cfg.ModuleName;
+	import x.tank.app.module.RoomModuleData;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.handler.MapDataHandler;
 	import x.tank.core.cfg.model.MapConfigInfo;
-	import x.tank.core.model.Room;
+	import x.tank.net.CommandSet;
 
 	public class LobbyRoomView extends XComponent
 	{
@@ -39,6 +50,42 @@ package x.tank.app.scene.lobby.view
 			digitals.push(_skin["shiwei"]) ;
 			digitals.push(_skin["gewei"]) ;
 			_digitals = new DigitalNumber(_skin,digitals) ;
+			//
+			skinLobby.buttonMode = true ;
+			skinLobby.useHandCursor = true ;
+			//
+			skinLobby.addEventListener(MouseEvent.CLICK,onClickRoom) ;
+		}
+		
+		override public function dispose():void
+		{
+			skinLobby.removeEventListener(MouseEvent.CLICK,onClickRoom) ;
+			super.dispose() ;
+		}
+		
+		public function get skinLobby():Sprite
+		{
+			return _skin as Sprite ;
+		}
+		
+		private function onClickRoom(event:MouseEvent):void
+		{
+			// 通知服务器进入房间
+			var roomData:room_data_t = _data as room_data_t;
+			if(roomData != null)
+			{
+				var msg:cs_enter_room = new cs_enter_room() ;
+				msg.roomId = roomData.id ;
+				new CallbackPost(CommandSet.$152.id,msg,
+					function(event:XMessageEvent):void
+					{
+						var msg:sc_enter_room = event.msg as sc_enter_room ;
+						//
+						ModuleManager.toggleModule(ModuleName.RoomModule,new RoomModuleData(msg.roomid)) ;	
+						ModuleManager.closeModule(ModuleName.RoomCreateModule) ;
+					}
+				).send() ;
+			}
 		}
 
 		override public function set data(value:Object):void
@@ -57,13 +104,13 @@ package x.tank.app.scene.lobby.view
 			}
 			else
 			{
-				var roomData:Room = _data as Room;
+				var roomData:room_data_t = _data as room_data_t;
 				//
 				var handler:MapDataHandler = DataProxyManager.mapData ;
 				var mapCfg:MapConfigInfo = handler.getMapInfo(roomData.mapid) ;
 				//
 				_nameTxt.text = roomData.name ;
-				_countTxt.text = roomData.currentCount + "/" + mapCfg.playerLimitCount;
+				_countTxt.text = roomData.playlist.length + "/" + mapCfg.playerLimitCount;
 				_tag.gotoAndStop(roomData.status + 1);
 				_lockFlag.gotoAndStop(roomData.passwd == 0 ? 1 : 2);
 				_digitals.updateValue(roomData.id) ;

@@ -4,10 +4,10 @@ package x.tank.core.manager
 	
 	import de.polygonal.ds.HashMap;
 	
+	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
 	
 	import x.tank.core.event.RoomEvent;
-	import x.tank.core.model.Room;
 
 	public class RoomManager
 	{
@@ -15,32 +15,49 @@ package x.tank.core.manager
 		
 		public static function addRoom(data:room_data_t):void
 		{
-			var room:Room = new Room() ;
-			room.parse(data) ;
-			_rooms.set(room.id,room) ;
+			_rooms.set(data.id,data) ;
 			//
-			dispatchEvent(new RoomEvent(RoomEvent.ROOM_ADD,room));
+			dispatchEvent(new RoomEvent(RoomEvent.ROOM_ADD,data));
 		}
 		
 		public static function updateRoom(data:room_data_t):void
 		{
-			var room:Room = getRoom(room.id) ;
-			room.parse(data) ;
+			var room:room_data_t = getRoom(data.id) ;
+			room.ownerid = data.ownerid;
+			room.status = data.status;
+			room.mapid = data.mapid;
+			room.passwd = data.passwd;
+			room.name = data.name ;
 			//
-			dispatchEvent(new RoomEvent(RoomEvent.ROOM_UPDATE,room));
+			var len:uint = data.playlist.length ;
+			var player:player_data_t ;
+			for(var i:uint = 0;i<len;i++)
+			{
+				player = data.playlist[i] ;
+				if(PlayerManager.hasPlayer(player.userid) )
+				{
+					data.playlist[i] = PlayerManager.updatePlayer(player) ;
+				}
+				else
+				{
+					data.playlist[i] = PlayerManager.addPlayer(player) ;
+				}
+			}
+			//
+			dispatchEvent(new RoomEvent(RoomEvent.ROOM_UPDATE,data));
 		}
 		
 		public static function removeRoom(roomId:uint):void
 		{
-			var room:Room = getRoom(roomId) ; 
+			var room:room_data_t = getRoom(roomId) ; 
 			_rooms.remove(room) ;
 			//
 			dispatchEvent(new RoomEvent(RoomEvent.ROOM_DEL,room));
 		}
 		
-		public static function getRoom(roomId:uint):Room
+		public static function getRoom(roomId:uint):room_data_t
 		{
-			return _rooms.get(roomId) as Room;
+			return _rooms.get(roomId) as room_data_t;
 		}
 		
 		public static function hasRoom(roomId:uint):Boolean

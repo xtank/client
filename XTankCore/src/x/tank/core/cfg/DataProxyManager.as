@@ -23,7 +23,7 @@ package x.tank.core.cfg
 			return _handlers.get(MapDataHandler.FILE_NAME) as MapDataHandler ;
 		}
 		
-		static public function get rankData():TankDataHandler
+		static public function get tankData():TankDataHandler
 		{
 			return _handlers.get(TankDataHandler.FILE_NAME) as TankDataHandler ;
 		}

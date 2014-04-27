@@ -242,9 +242,9 @@ package x.game.net
 
 		private static var _messageDispatcher:EventDispatcher = new EventDispatcher();
 
-		public static function addCommandListener(cmdId:uint, listener:Function):void
+		public static function addCommandListener(cmdId:uint, listener:Function, priority:uint = 0):void
 		{
-			_messageDispatcher.addEventListener(String(cmdId), listener);
+			_messageDispatcher.addEventListener(String(cmdId), listener, false, priority);
 		}
 
 		public static function hasCommadnListener(cmdId:uint):Boolean

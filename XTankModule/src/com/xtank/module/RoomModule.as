@@ -9,18 +9,18 @@ package com.xtank.module
 	import onlineproto.cs_leave_room;
 	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
-	import onlineproto.sc_notify_room_update;
 	
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
 	import x.game.module.Module;
-	import x.game.net.Connection;
 	import x.game.net.post.CallbackPost;
 	import x.game.net.response.XMessageEvent;
 	import x.game.ui.button.IButton;
 	import x.game.ui.button.XSimpleButton;
 	import x.tank.app.cfg.TankConfig;
 	import x.tank.app.module.RoomModuleData;
+	import x.tank.core.event.PlayerEvent;
+	import x.tank.core.event.RoomEvent;
 	import x.tank.core.manager.PlayerManager;
 	import x.tank.core.manager.RoomManager;
 	import x.tank.core.model.PlayerStatus;
@@ -128,24 +128,47 @@ package com.xtank.module
 				_startBtn.visible = _startBtn.enable = false ;
 			}
 			//
-			on156Message();
+			onRoomUpdate();
 		}
 		
 		override public function show():void
 		{
 			super.show() ;
 			//
-			Connection.addCommandListener(CommandSet.$156.id, on156Message);
+			RoomManager.addEventListener(RoomEvent.ROOM_UPDATE,onRoomUpdate) ;
+			RoomManager.addEventListener(RoomEvent.ROOM_DEL,onRoomDel) ;
+			PlayerManager.addEventListener(PlayerEvent.PLAYER_UPDATE,onUpdatePlayer) ;
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			//
-			Connection.removeCommandListener(CommandSet.$156.id, on156Message);
+			RoomManager.removeEventListener(RoomEvent.ROOM_UPDATE,onRoomUpdate) ;
+			RoomManager.removeEventListener(RoomEvent.ROOM_DEL,onRoomDel) ;
+			PlayerManager.removeEventListener(PlayerEvent.PLAYER_UPDATE,onUpdatePlayer) ;
 		}
 		
-		private function on156Message(event:XMessageEvent = null):void
+		private function onUpdatePlayer(event:PlayerEvent):void
+		{
+			var initData:RoomModuleData = _initData as RoomModuleData ;
+			var roomData:room_data_t = RoomManager.getRoom(initData.roomId) ;
+			if(roomData.playlist.indexOf(event.player.userid) != -1)
+			{
+				onRoomUpdate() ;
+			}
+		}
+		
+		private function onRoomDel(event:RoomEvent = null):void
+		{
+			var initData:RoomModuleData = _initData as RoomModuleData ;
+			if(event.room.id == initData.roomId)
+			{
+				close();
+			}
+		}
+		
+		private function onRoomUpdate(event:RoomEvent = null):void
 		{
 			var initData:RoomModuleData = _initData as RoomModuleData ;
 			var refreshTag:Boolean = false ;
@@ -155,8 +178,7 @@ package com.xtank.module
 			}
 			else 
 			{
-				var msg:sc_notify_room_update = event.msg as sc_notify_room_update;
-				if(msg.room.id == initData.roomId && msg.oper == 0)
+				if(event.room.id == initData.roomId)
 				{
 					refreshTag = true ;
 				}
@@ -165,6 +187,7 @@ package com.xtank.module
 			if(refreshTag)
 			{
 				var roomData:room_data_t = RoomManager.getRoom(initData.roomId) ;
+				trace(roomData.playlist.length + "[2] 房间人数");
 				//
 				var players:Vector.<player_data_t> = getAllPlayersInTeam(1) ;
 				var len:uint = _playerTeam1Views.length ;
@@ -253,7 +276,7 @@ package com.xtank.module
 			}
 			else
 			{
-				// 没有满足条件  提示
+				// 没有满足条件  [提示]
 			}
 		}
 		

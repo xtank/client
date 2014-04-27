@@ -22,7 +22,7 @@ package x.tank.app.scene.lobby.net
 
 		override public function setup():void
 		{
-			Connection.addCommandListener(CommandSet.$156.id, onMessage);
+			Connection.addCommandListener(CommandSet.$156.id, onMessage,99999);
 		}
 
 		override public function dispose():void

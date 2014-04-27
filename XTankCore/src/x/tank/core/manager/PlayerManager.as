@@ -23,11 +23,18 @@ package x.tank.core.manager
 		public static function updatePlayer(data:player_data_t):player_data_t
 		{
 			var player:player_data_t = getPlayer(data.userid) ;
-			player.name = data.name ;
-			player.status = data.status ;
-			player.teamid = data.teamid ;
-			//
-			dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_UPDATE,player));
+			if(player == null)
+			{
+				addPlayer(data) ;
+			}
+			else
+			{
+				player.name = data.name ;
+				player.status = data.status ;
+				player.teamid = data.teamid ;
+				//
+				dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_UPDATE,player));
+			}
 			//
 			return player ;
 		}
@@ -49,7 +56,7 @@ package x.tank.core.manager
 		
 		public static function hasPlayer(userId:uint):Boolean
 		{
-			return _players.contains(userId) ;
+			return _players.hasKey(userId) ;
 		}
 		
 		//############################################################

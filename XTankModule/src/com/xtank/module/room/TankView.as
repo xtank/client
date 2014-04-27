@@ -20,6 +20,7 @@ package com.xtank.module.room
 		{
 			super(skin);
 			_selectedTag = skin["tag"] ;
+			_selectedTag.visible = false ;
 			DisplayObjectUtil.disableTarget(_selectedTag) ;
 			//
 			_tank = skin["tank"];
@@ -58,7 +59,7 @@ package com.xtank.module.room
 		public function set selected(value:Boolean):void
 		{
 			_selected = value ;
-			_selectedTag.visible =  _selected ;
+			_selectedTag.visible = _selected ;
 		}
 		
 		override public function set data(value:Object):void

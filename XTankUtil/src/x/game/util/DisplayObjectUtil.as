@@ -96,7 +96,7 @@ package x.game.util
 				target.mouseEnabled = true ;
 				if(target is Sprite)
 				{
-					(target as Sprite).mouseChildren = false;
+					(target as Sprite).mouseChildren = true;
 				}
 			}
 		}

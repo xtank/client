@@ -38,5 +38,10 @@ package x.tank.core.cfg.handler
 		{
 			return _mapDatas.get(mapId) as MapConfigInfo ;
 		}
+		
+		public function getAllMapInfos():Array
+		{
+			return _mapDatas.toArray() ;
+		}
 	}
 }

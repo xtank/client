@@ -2,11 +2,13 @@ package x.tank.core.cfg.model
 {
 	public class MapDataTeamInfo
 	{
-		public var count:uint ;
+		private var _count:uint ;
 		
 		public function MapDataTeamInfo(xml:XML)
 		{
-			count = xml.@count ;
+			_count = xml.@count ;
 		}
+		
+		public function get count():uint{return _count;}
 	}
 }

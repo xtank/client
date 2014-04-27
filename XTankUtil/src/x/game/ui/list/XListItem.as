@@ -1,6 +1,7 @@
 package x.game.ui.list
 {
     import flash.display.DisplayObject;
+    import flash.display.MovieClip;
     
     import x.game.ui.XComponent;
     
@@ -15,10 +16,28 @@ package x.game.ui.list
      */
     public class XListItem extends XComponent
     {
+		private var _selected:Boolean = false ;
+		
         public function XListItem(skin:DisplayObject)
         {
             super(skin);
+			selected = false ;
         }
+		
+		public function get skin():MovieClip
+		{
+			return _skin as MovieClip ;
+		}
+		
+		public function get selected():Boolean
+		{
+			return _selected ;
+		}
+		
+		public function set selected(value:Boolean):void
+		{
+			_selected = value ;
+		}
         
         // 根据新刷入的数据  更新视图
         protected function updateItemView():void

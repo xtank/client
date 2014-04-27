@@ -5,6 +5,7 @@ package x.tank.core.cfg
 	import x.game.cfg.DataProxy;
 	import x.game.cfg.ICFGDataHandler;
 	import x.tank.core.cfg.handler.MapDataHandler;
+	import x.tank.core.cfg.handler.TankDataHandler;
 	
 	public class DataProxyManager
 	{
@@ -20,6 +21,11 @@ package x.tank.core.cfg
 		static public function get mapData():MapDataHandler
 		{
 			return _handlers.get(MapDataHandler.FILE_NAME) as MapDataHandler ;
+		}
+		
+		static public function get rankData():TankDataHandler
+		{
+			return _handlers.get(TankDataHandler.FILE_NAME) as TankDataHandler ;
 		}
 	}
 }

@@ -37,6 +37,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="com/xtank/module/RoomModule.as"/>
     <application path="com/xtank/module/RoomCreateModule.as"/>
     <application path="XTankModule.as"/>
   </applications>

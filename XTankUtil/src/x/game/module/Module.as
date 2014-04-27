@@ -24,7 +24,6 @@ package x.game.module
         public function Module()
         {
             super();
-            _lifecycleType = LifecycleType.NONCE;
             ResizeManager.addComponent(this);
         }
 

@@ -8,6 +8,7 @@ package x.tank.app.scene.lobby
 	import x.game.layer.scene.IAbstractScene;
 	import x.game.manager.UIManager;
 	import x.game.net.post.CallbackPost;
+	import x.game.net.response.XMessageEvent;
 	import x.game.tick.FrameTicker;
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayUtil;
@@ -132,10 +133,10 @@ package x.tank.app.scene.lobby
 			if (_count < 3)
 			{
 				var msg:cs_get_room_list = new cs_get_room_list();
-				new CallbackPost(CommandSet.$151.id, msg, function():void
+				new CallbackPost(CommandSet.$151.id, msg, function(event:XMessageEvent):void
 				{
 					_count = 0;
-				}, function():void
+				}, function(event:XMessageEvent):void
 				{
 					_count++;
 					$getRoomList();

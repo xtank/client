@@ -71,19 +71,19 @@ package x.game.ui.scroller
             
             //
             _topLimit = skin[_initData.trackName].y;
-            if (_upBtn != null)
-            {
-                _topLimit += _upBtn.height;
-            }
+//            if (_upBtn != null)
+//            {
+//                _topLimit += _upBtn.height;
+//            }
             _thumbRange = skin[_initData.trackName].height - _sliderBtn.height;
-            if (_upBtn != null)
-            {
-                _thumbRange -= _upBtn.height;
-            }
-            if (_downBtn != null)
-            {
-                _thumbRange -= _downBtn.height;
-            }
+//            if (_upBtn != null)
+//            {
+//                _thumbRange -= _upBtn.height;
+//            }
+//            if (_downBtn != null)
+//            {
+//                _thumbRange -= _downBtn.height;
+//            }
             _bottomLimit = _topLimit + _thumbRange;
             _sliderBtn.y = _topLimit;
         }

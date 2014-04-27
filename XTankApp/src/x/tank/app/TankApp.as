@@ -17,6 +17,7 @@ package x.tank.app
 	import x.tank.app.scene.SceneManager;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.handler.MapDataHandler;
+	import x.tank.core.cfg.handler.TankDataHandler;
 	import x.tank.core.ui.GameLoadingBar;
 	import x.tank.net.locale.ErrorMap;
 	import x.tank.net.locale.LabelMap;
@@ -45,6 +46,7 @@ package x.tank.app
 
 			// System config xml files
 			DataProxyManager.addHanlder(new MapDataHandler());
+			DataProxyManager.addHanlder(new TankDataHandler()) ;
 			//
 			TickerLauncher.start();
 			//

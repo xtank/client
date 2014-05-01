@@ -1,8 +1,8 @@
 package com.xtank.module
 {
 	import com.xtank.module.room.MapInfoView;
-	import com.xtank.module.room.PlayerView;
 	import com.xtank.module.room.TankSelectView;
+	import com.xtank.module.room.TeamSeatView;
 	
 	import onlineproto.cs_cancel_inside_ready;
 	import onlineproto.cs_inside_ready;
@@ -39,12 +39,13 @@ package com.xtank.module
 	{
 		private var _mapInfo:MapInfoView;
 		private var _tankInfoView:TankSelectView;
-		private var _playerTeam1Views:Vector.<PlayerView>;
-		private var _playerTeam2Views:Vector.<PlayerView>;
+		private var _playerTeam1Views:Vector.<TeamSeatView>;
+		private var _playerTeam2Views:Vector.<TeamSeatView>;
 		//
 		private var _startBtn:XSimpleButton;
 		private var _readyBtn:XSimpleButton;
 		private var _cancelBtn:XSimpleButton;
+
 		//
 
 		public function RoomModule()
@@ -96,15 +97,15 @@ package com.xtank.module
 			_cancelBtn = new XSimpleButton(_mainUI["cancelBtn"]);
 			_cancelBtn.addClick(onCancelClick);
 			//
-			_playerTeam1Views = new Vector.<PlayerView>();
-			_playerTeam1Views.push(new PlayerView(_mainUI["p1"]));
-			_playerTeam1Views.push(new PlayerView(_mainUI["p2"]));
-			_playerTeam1Views.push(new PlayerView(_mainUI["p3"]));
+			_playerTeam1Views = new Vector.<TeamSeatView>();
+			_playerTeam1Views.push(new TeamSeatView(_mainUI["p1"], 1, 1));
+			_playerTeam1Views.push(new TeamSeatView(_mainUI["p2"], 1, 2));
+			_playerTeam1Views.push(new TeamSeatView(_mainUI["p3"], 1, 3));
 			//
-			_playerTeam2Views = new Vector.<PlayerView>();
-			_playerTeam2Views.push(new PlayerView(_mainUI["p4"]));
-			_playerTeam2Views.push(new PlayerView(_mainUI["p5"]));
-			_playerTeam2Views.push(new PlayerView(_mainUI["p6"]));
+			_playerTeam2Views = new Vector.<TeamSeatView>();
+			_playerTeam2Views.push(new TeamSeatView(_mainUI["p4"], 2, 1));
+			_playerTeam2Views.push(new TeamSeatView(_mainUI["p5"], 2, 2));
+			_playerTeam2Views.push(new TeamSeatView(_mainUI["p6"], 2, 3));
 			//
 			_mapInfo = new MapInfoView(_mainUI);
 			_tankInfoView = new TankSelectView(_mainUI["tankView"]);
@@ -157,12 +158,71 @@ package com.xtank.module
 
 		private function onUpdatePlayer(event:PlayerEvent):void
 		{
-			var initData:RoomModuleData = _initData as RoomModuleData;
-			var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-			if (roomData.playlist.indexOf(event.player.userid) != -1)
+			var player:player_data_t = event.player;
+			var tsv:TeamSeatView = getTeamSeatViewByUser(player);
+			if (tsv.seatIndex == player.seatid)
 			{
-				onRoomUpdate();
+				tsv.updateView() ;// 
 			}
+			else
+			{
+				var initData:RoomModuleData = _initData as RoomModuleData;
+				var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
+				tsv.data = null;
+				tsv = getTeamSeatView(player.teamid, player.seatid);
+				tsv.data = {room: roomData, player: player};
+			}
+		}
+
+		/** 获取对应team的座位号上的作为 */
+		private function getTeamSeatView(teamId:uint, seatIndex:uint):TeamSeatView
+		{
+			var rs:TeamSeatView;
+			var views:Vector.<TeamSeatView> = getTeamSeatViews(teamId);
+			var len:uint = views.length;
+			for (var i:uint = 0; i < len; i++)
+			{
+				if (views[i].seatIndex == seatIndex)
+				{
+					rs = views[i];
+					break;
+				}
+			}
+			return rs;
+		}
+
+		private function getTeamSeatViews(teamId:uint):Vector.<TeamSeatView>
+		{
+			if (teamId == 1)
+			{
+				return _playerTeam1Views;
+			}
+			else if (teamId == 2)
+			{
+				return _playerTeam2Views;
+			}
+			return null;
+		}
+
+		/** 获取玩家当前坐的座位  */
+		private function getTeamSeatViewByUser(player:player_data_t):TeamSeatView
+		{
+			var views:Vector.<TeamSeatView> = getTeamSeatViews(player.teamid);
+			//
+			var rs:TeamSeatView;
+			for each (var tsv:TeamSeatView in views)
+			{
+				if (tsv.data != null)
+				{
+					var pd:player_data_t = tsv.data["player"] as player_data_t;
+					if (pd != null && pd.userid == player.userid)
+					{
+						rs = tsv;
+						break;
+					}
+				}
+			}
+			return rs;
 		}
 
 		private function onRoomDel(event:RoomEvent = null):void
@@ -172,6 +232,21 @@ package com.xtank.module
 			{
 				close();
 			}
+		}
+
+		private function getPlayerBySeat(players:Vector.<player_data_t>, seatIndex:uint):player_data_t
+		{
+			var rs:player_data_t;
+			var len:uint = players.length;
+			for (var i:uint = 0; i < len; i++)
+			{
+				if (players[i].seatid == seatIndex)
+				{
+					rs = players[i];
+					break;
+				}
+			}
+			return rs;
 		}
 
 		private function onRoomUpdate(event:RoomEvent = null):void
@@ -193,20 +268,18 @@ package com.xtank.module
 			if (refreshTag)
 			{
 				var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-				trace("房间人数更新 [" + roomData.playlist.length + "] ");
-				for each(var p:player_data_t in roomData.playlist)
-				{
-					trace("[Team][" + p.teamid + "]:" + p.userid) ;
-				}
 				//
 				var players:Vector.<player_data_t> = getAllPlayersInTeam(1);
+				var player:player_data_t;
+				//
 				var len:uint = _playerTeam1Views.length;
 				var i:uint = 0;
 				for (i = 0; i < len; i++)
 				{
-					if (i < players.length)
+					player = getPlayerBySeat(players, _playerTeam1Views[i].seatIndex);
+					if (player != null)
 					{
-						_playerTeam1Views[i].data = {room: roomData, player: players[i]};
+						_playerTeam1Views[i].data = {room: roomData, player: player};
 					}
 					else
 					{
@@ -218,17 +291,17 @@ package com.xtank.module
 				len = _playerTeam2Views.length;
 				for (i = 0; i < len; i++)
 				{
-					if (i < players.length)
+					player = getPlayerBySeat(players, _playerTeam2Views[i].seatIndex);
+					if (player != null)
 					{
-						_playerTeam2Views[i].data = {room: roomData, player: players[i]};
+						_playerTeam1Views[i].data = {room: roomData, player: player};
 					}
 					else
 					{
-						_playerTeam2Views[i].data = null;
+						_playerTeam1Views[i].data = null;
 					}
 				}
 			}
-
 		}
 
 		private function getAllPlayersInTeam(teamId:uint):Vector.<player_data_t>
@@ -271,7 +344,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  [提示]
-				SurfaceManager.addTextSurface("您不是房主 无法开始游戏!") ;
+				SurfaceManager.addTextSurface("您不是房主 无法开始游戏!");
 			}
 		}
 
@@ -295,7 +368,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  [提示]
-				SurfaceManager.addTextSurface("无法准备!") ;
+				SurfaceManager.addTextSurface("无法准备!");
 			}
 		}
 
@@ -319,7 +392,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  提示
-				SurfaceManager.addTextSurface("无法取消准备!") ;
+				SurfaceManager.addTextSurface("无法取消准备!");
 			}
 		}
 

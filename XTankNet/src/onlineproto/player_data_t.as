@@ -49,6 +49,13 @@ package onlineproto {
 		/**
 		 *  @private
 		 */
+		public static const SEATID:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.player_data_t.seatid", "seatid", (6 << 3) | com.netease.protobuf.WireType.VARINT);
+
+		public var seatid:uint;
+
+		/**
+		 *  @private
+		 */
 		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.userid);
@@ -60,6 +67,8 @@ package onlineproto {
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.teamid);
 			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 5);
 			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.tankid);
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 6);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.seatid);
 			for (var fieldKey:* in this) {
 				super.writeUnknown(output, fieldKey);
 			}
@@ -74,6 +83,7 @@ package onlineproto {
 			var name$count:uint = 0;
 			var teamid$count:uint = 0;
 			var tankid$count:uint = 0;
+			var seatid$count:uint = 0;
 			while (input.bytesAvailable > bytesAfterSlice) {
 				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 				switch (tag >> 3) {
@@ -111,6 +121,13 @@ package onlineproto {
 					}
 					++tankid$count;
 					this.tankid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					break;
+				case 6:
+					if (seatid$count != 0) {
+						throw new flash.errors.IOError('Bad data format: player_data_t.seatid cannot be set twice.');
+					}
+					++seatid$count;
+					this.seatid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
 					break;
 				default:
 					super.readUnknown(input, tag);

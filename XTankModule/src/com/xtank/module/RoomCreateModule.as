@@ -10,6 +10,7 @@ package com.xtank.module
 	
 	import x.game.alert.AlertManager;
 	import x.game.manager.StageManager;
+	import x.game.manager.SurfaceManager;
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
 	import x.game.module.Module;
@@ -167,7 +168,7 @@ package com.xtank.module
 			if(StringUtil.isBlank(roomName)) 
 			{
 				// 提示房间名称不可为空
-				AlertManager.showAlert(1,new SimpleAlertProcessor("房间名称不可为空!")) ;
+				SurfaceManager.addTextSurface("房间名称不可为空!") ;
 				btn.enable = true ;
 				return ;
 			}

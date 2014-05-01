@@ -11,6 +11,7 @@ package com.xtank.module
 	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
 	
+	import x.game.manager.SurfaceManager;
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
 	import x.game.module.Module;
@@ -44,6 +45,7 @@ package com.xtank.module
 		private var _startBtn:XSimpleButton;
 		private var _readyBtn:XSimpleButton;
 		private var _cancelBtn:XSimpleButton;
+		//
 
 		public function RoomModule()
 		{
@@ -218,7 +220,6 @@ package com.xtank.module
 				{
 					if (i < players.length)
 					{
-						trace("[Team][2]:" + players[i].name) ;
 						_playerTeam2Views[i].data = {room: roomData, player: players[i]};
 					}
 					else
@@ -270,6 +271,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  [提示]
+				SurfaceManager.addTextSurface("您不是房主 无法开始游戏!") ;
 			}
 		}
 
@@ -293,6 +295,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  [提示]
+				SurfaceManager.addTextSurface("无法准备!") ;
 			}
 		}
 
@@ -316,6 +319,7 @@ package com.xtank.module
 			else
 			{
 				// 没有满足条件  提示
+				SurfaceManager.addTextSurface("无法取消准备!") ;
 			}
 		}
 

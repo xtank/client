@@ -5,15 +5,24 @@ package com.xtank.module.room
 	import flash.display.Sprite;
 	import flash.text.TextField;
 	
+	import onlineproto.cs_select_tank;
+	
+	import x.game.manager.SurfaceManager;
+	import x.game.net.post.SimplePost;
 	import x.game.ui.XComponent;
+	import x.game.ui.button.IButton;
+	import x.game.ui.button.XSimpleButton;
 	import x.game.ui.flipbar.FlipBarInitData;
 	import x.game.ui.flipbar.IFilpBarHost;
 	import x.game.ui.flipbar.XFlipBar;
 	import x.game.util.DisplayObjectUtil;
 	import x.game.util.MathUtil;
+	import x.tank.app.cfg.TankConfig;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.model.TankConfigInfo;
+	import x.tank.core.manager.PlayerManager;
 	import x.tank.core.model.TankConstant;
+	import x.tank.net.CommandSet;
 
 	public class TankSelectView extends XComponent implements IFilpBarHost
 	{
@@ -30,6 +39,8 @@ package com.xtank.module.room
 		private var _tankBoxs:Vector.<TankView>;
 		private var _flipBar:XFlipBar;
 		private var _selectedTankView:TankView ;
+		private var _useBtn:XSimpleButton ;
+		private var _useTag:MovieClip ;
 
 		public function TankSelectView(skin:DisplayObject)
 		{
@@ -60,10 +71,26 @@ package com.xtank.module.room
 			//
 			_flipBar = new XFlipBar(new FlipBarInitData(3, this), _skin["flipBar"] as Sprite);
 			_flipBar.dataProvide = DataProxyManager.tankData.tanks;
+			//
+			_useBtn = new XSimpleButton(skin["useBtn"]) ;
+			_useBtn.addClick(onUseTank) ;
+			//
+			_useTag = skin["useTag"] ;
+			_useTag.visible = false ;
+			DisplayObjectUtil.disableTarget(_useTag) ;
 		}
 
 		override public function dispose():void
 		{
+			while(_tankBoxs.length > 0)
+			{
+				_tankBoxs.pop().dispose() ;
+			}
+			_tankBoxs = null ;
+			_flipBar.dispose() ;
+			_flipBar = null ;
+			_useBtn.dispose() ;
+			_useBtn = null ;
 			super.dispose();
 		}
 
@@ -71,6 +98,20 @@ package com.xtank.module.room
 		{
 			super.data = value;
 			updateView();
+		}
+		
+		private function onUseTank(btn:IButton):void
+		{
+			if(_selectedTankView != null && _selectedTankView.data != null)
+			{
+				var msg:cs_select_tank = new cs_select_tank() ;
+				msg.tankid = (_selectedTankView.data as TankConfigInfo).id ;
+				new SimplePost(CommandSet.$160.id, msg).send();
+			}
+			else
+			{
+				SurfaceManager.addTextSurface("请选择要出战的坦克!") ;
+			}
 		}
 		
 		public function set lock(value:Boolean):void
@@ -121,6 +162,17 @@ package com.xtank.module.room
 			_attackScopeBar.gotoAndStop(MathUtil.ceil(tankInfo.attackScope * 100 / TankConstant.MAX_ATTACKSCOPE));
 			//
 			_selectedTank.gotoAndStop(tankInfo.id) ;
+			//
+			if(tankInfo.id == PlayerManager.getPlayer(TankConfig.userId).tankid)
+			{
+				_useBtn.enable = _useBtn.visible = false ;
+				_useTag.visible = true ;
+			}
+			else
+			{
+				_useBtn.enable = _useBtn.visible = true ;
+				_useTag.visible = false ;
+			}
 		}
 	}
 }

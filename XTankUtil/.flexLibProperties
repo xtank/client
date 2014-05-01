@@ -22,6 +22,9 @@
     <classEntry path="x.game.net.processor.BaseMessageProgressor"/>
     <classEntry path="x.game.net.post.SimpleCallbackPost"/>
     <classEntry path="x.game.ui.digital.DigitalNumber"/>
+    <classEntry path="x.game.manager.SurfaceManager"/>
+    <classEntry path="x.game.surface.ISurfaceView"/>
+    <classEntry path="x.game.surface.DefaultTextSurfaceView"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -17,6 +17,7 @@ package x.tank.net
         }
       public static const $101: Command = new Command(101, cs_enter_server, sc_enter_server);      // 进入在线服务器
       public static const $102: Command = new Command(102, cs_keep_live, sc_keep_live);      // 心跳包
+      public static const $103: Command = new Command(103, cs_create_role, sc_create_role);      // create role
       public static const $151: Command = new Command(151, cs_get_room_list, sc_get_room_list);      // 拉取房间列表
       public static const $152: Command = new Command(152, cs_enter_room, sc_enter_room);      // 进入房间
       public static const $153: Command = new Command(153, cs_leave_room, sc_leave_room);      // 离开房间
@@ -26,6 +27,7 @@ package x.tank.net
       public static const $157: Command = new Command(157, cs_create_room, sc_create_room);      // 创建房间
       public static const $158: Command = new Command(158, cs_cancel_inside_ready, sc_cancel_inside_ready);      // 玩家取消准备
       public static const $159: Command = new Command(159, cs_select_team, sc_select_team);      // 玩家选择队伍
+      public static const $160: Command = new Command(160, cs_select_tank, sc_select_tank);      // 玩家选择出战坦克
       public static const $201: Command = new Command(201, cs_notify_player_update, sc_notify_player_update);      // 玩家状态更新
 
 	}

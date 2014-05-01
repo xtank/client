@@ -3,9 +3,9 @@ package com.xtank.module.room
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.text.TextField;
-
+	
 	import onlineproto.room_data_t;
-
+	
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	import x.tank.core.cfg.DataProxyManager;
@@ -13,6 +13,7 @@ package com.xtank.module.room
 
 	public class MapInfoView extends XComponent
 	{
+		//
 		private var _roomNameTxt:TextField;
 		private var _mapNameTxt:TextField;
 		private var _mapDifficultStar:MovieClip;

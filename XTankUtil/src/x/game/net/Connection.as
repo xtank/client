@@ -144,7 +144,7 @@ package x.game.net
 			if (_blockedMap.hasKey(commandId) == true)
 			{
 				var blockedCommandStructure:BlockedCommandStructure = _blockedMap.get(commandId) as BlockedCommandStructure;
-				_blockedMap.remove(commandId);
+				_blockedMap.clr(commandId);
 				//
 				var sMsgs:Vector.<RequestMessage> = blockedCommandStructure.sendMessageVec;
 				for each (var msg:RequestMessage in sMsgs)

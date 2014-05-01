@@ -164,7 +164,7 @@ package x.game.module
 			DisplayObjectUtil.removeAllChildren(_mainUI);
 			_mainUI = null;
 			_initData = null;
-			
+			//
 			_moduleProxy = null;
 			
 			super.dispose();

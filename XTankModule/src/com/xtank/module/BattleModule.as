@@ -5,9 +5,11 @@ package com.xtank.module
 	import x.game.module.Module;
 	import x.game.net.processor.IMessageProcessor;
 	
+	/** 
+	 *  战斗模块
+	 */
 	public class BattleModule extends Module
 	{
-		
 		protected var _msgHandlerVec:Vector.<IMessageProcessor>;
 		
 		public function BattleModule()

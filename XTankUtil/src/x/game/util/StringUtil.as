@@ -104,6 +104,7 @@ package x.game.util
         {
             switch ($str)
             {
+				case "":
                 case " ":
                 case "\t":
                 case "\r":

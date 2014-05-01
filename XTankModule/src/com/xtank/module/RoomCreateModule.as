@@ -167,8 +167,7 @@ package com.xtank.module
 			if(StringUtil.isBlank(roomName)) 
 			{
 				// 提示房间名称不可为空
-				
-				//
+				AlertManager.showAlert(1,new SimpleAlertProcessor("房间名称不可为空!")) ;
 				btn.enable = true ;
 				return ;
 			}

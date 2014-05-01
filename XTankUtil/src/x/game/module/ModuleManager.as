@@ -6,6 +6,7 @@ package x.game.module
     import de.polygonal.ds.Itr;
     
     import x.game.enum.PostFix;
+    import x.game.log.core.Logger;
     import x.game.manager.VersionManager;
     import x.game.util.ObjectUtil;
     import x.game.util.StringUtil;
@@ -74,14 +75,13 @@ package x.game.module
 		/** 游戏模块资源  */
 		private static function getAppModule(name:String):String
 		{
-			return VersionManager.getURL("modules/" + name + PostFix.SWF);
-		}
-		
-		private static function dealpopWinsBeforeOpenModule(moduleName:String,closeOtherModule:Boolean = true):void
-		{
-			if (closeOtherModule == true)
+			if(Logger.isDebug)
 			{
-				closeModules(Vector.<String>([moduleName]));
+				return "modules/" + name + PostFix.SWF + "?" + Math.random()
+			}
+			else
+			{
+				return VersionManager.getURL("modules/" + name + PostFix.SWF);
 			}
 		}
 		
@@ -126,15 +126,13 @@ package x.game.module
          * @param subName
          *
          */
-        public static function toggleModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等...", closeOtherModule:Boolean =
-            true):ModuleProxy
+        public static function toggleModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等..."):ModuleProxy
         {
 			if(!checkOpenModuleConditions(moduleName))
 			{
 				return null ; // 打开条件不满足
 			}
 
-			dealpopWinsBeforeOpenModule(moduleName,closeOtherModule) ;
             //
             var url:String = getAppModule(moduleName);
             //
@@ -168,15 +166,12 @@ package x.game.module
          * @param subName
          *
          */
-        public static function showModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等...", closeOtherModule:Boolean =
-            true):ModuleProxy
+        public static function showModule(moduleName:String, data:IModuleInitData = null, title:String = "正在加载面板，请稍等..."):ModuleProxy
         {
 			if(!checkOpenModuleConditions(moduleName))
 			{
 				return null ; // 打开条件不满足
 			}
-            //
-			dealpopWinsBeforeOpenModule(moduleName,closeOtherModule) ;
             //
             var url:String = getAppModule(moduleName);
             var moduleProxy:ModuleProxy = _moduleMap.get(StringUtil.getFileName(url)) as ModuleProxy;
@@ -196,7 +191,7 @@ package x.game.module
 			{
 				if (moduleProxy.lifecycleType == LifecycleType.NONCE)
 				{
-					_moduleMap.remove(moduleProxy.name);
+					_moduleMap.clr(moduleProxy.name);
 					moduleProxy.dispose();
 				}
 				else
@@ -219,7 +214,7 @@ package x.game.module
                     {
                         if (moduleProxy.lifecycleType == LifecycleType.NONCE)
                         {
-                            _moduleMap.remove(moduleProxy.name);
+                            _moduleMap.clr(moduleProxy.name);
                             moduleProxy.dispose();
                         }
                         else
@@ -269,7 +264,8 @@ package x.game.module
          */
         public static function removeModuleByName(name:String):void
         {
-            _moduleMap.remove(name);
+			_moduleMap.clr(name) ;
+//            _moduleMap.remove(name);
         }
 
         /**
@@ -284,7 +280,7 @@ package x.game.module
                 var moduleProxy:ModuleProxy = itr.next() as ModuleProxy ;
                 if (moduleProxy.lifecycleType == LifecycleType.NONCE)
                 {
-                    _moduleMap.remove(moduleProxy.name);
+                    _moduleMap.clr(moduleProxy.name);
                     moduleProxy.dispose();
                 }
                 else

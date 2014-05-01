@@ -50,7 +50,7 @@ package x.game.tooltip
 				var baseTip:BaseTipSkin = _map.get(target) as BaseTipSkin;
 				baseTip.dispose();
 				baseTip = null;
-                _map.remove(target);
+                _map.clr(target);
             }
 			target = null;
         }

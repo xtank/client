@@ -64,18 +64,17 @@ package x.game.ui.scroller
 		
 		override public function dispose():void
 		{
+			if (_sliderBtn != null)
+			{
+				_sliderBtn.dispose();
+				_sliderBtn = null;
+			}
+			//
+			_initData.stage.removeEventListener(MouseEvent.MOUSE_MOVE, stage_onMouseMove);
+			_initData.stage.removeEventListener(MouseEvent.MOUSE_UP, stage_onMouseUp);
+			_initData.stage.removeEventListener(MouseEvent.MOUSE_WHEEL, stage_onMouseWheel);
             _initData = null ;
 			_onScroll = null;
-            //
-            if (_sliderBtn != null)
-            {
-                _sliderBtn.dispose();
-                _sliderBtn = null;
-            }
-            //
-            _initData.stage.removeEventListener(MouseEvent.MOUSE_MOVE, stage_onMouseMove);
-            _initData.stage.removeEventListener(MouseEvent.MOUSE_UP, stage_onMouseUp);
-            _initData.stage.removeEventListener(MouseEvent.MOUSE_WHEEL, stage_onMouseWheel);
             //
 			super.dispose();
 		}

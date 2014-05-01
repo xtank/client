@@ -43,6 +43,7 @@ package x.tank.core.manager
 					data.playlist[i] = PlayerManager.addPlayer(player) ;
 				}
 			}
+			room.playlist = data.playlist ;
 			//
 			dispatchEvent(new RoomEvent(RoomEvent.ROOM_UPDATE,data));
 		}

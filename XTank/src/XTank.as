@@ -110,7 +110,7 @@ package
 		
 		private var _xmlloader:XMLLoader;
 		private var _dlls:Vector.<DllInfo>;
-		private var _versionRUL:String;
+		private var _versionURL:String;
 		private var _loginSWFURL:String ;
 		private var _uiSWFURL:String ;
 		private var _cfgURL:String ;
@@ -145,7 +145,7 @@ package
 				_initData.ip = configXML.login.@ip ;
 				_initData.port = configXML.login.@port ;
 				//
-				_versionRUL = configXML.version.@path;
+				_versionURL = configXML.version.@path;
 				//
 				loadVersion() ;
 			}
@@ -159,7 +159,7 @@ package
 		private function loadVersion():void
 		{
 			_progressBar.loadingTip = "版本文件加载中...";
-			PandaVersionManager.getInstance().load(_initData.rootURL + _versionRUL, true, null, onVersionComplete);
+			PandaVersionManager.getInstance().load(_initData.rootURL + _versionURL, true, null, onVersionComplete);
 		}
 		
 		private function onVersionComplete():void

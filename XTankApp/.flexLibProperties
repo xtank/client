@@ -12,10 +12,19 @@
     <classEntry path="x.tank.app.scene.lobby.net.GetRoomListProcessor"/>
     <classEntry path="x.tank.app.scene.lobby.view.LobbyRoomView"/>
     <classEntry path="x.tank.app.scene.lobby.view.RoomListView"/>
-    <classEntry path="x.tank.app.cfg.ModuleName"/>
+    <classEntry path="x.tank.app.module.ModuleName"/>
     <classEntry path="x.tank.app.scene.lobby.view.UserInfoView"/>
     <classEntry path="x.tank.app.module.RoomModuleData"/>
     <classEntry path="x.tank.app.scene.lobby.net.PlayerStatusUpdateProcessor"/>
+    <classEntry path="x.tank.app.battle.map.elements.BaseMapElement"/>
+    <classEntry path="x.tank.app.battle.map.BattleMap"/>
+    <classEntry path="x.tank.app.battle.manager.BattleInfoManager"/>
+    <classEntry path="x.tank.app.battle.map.elements.Tank"/>
+    <classEntry path="x.tank.app.battle.map.elements.Barrier"/>
+    <classEntry path="x.tank.app.battle.map.layer.BgLayer"/>
+    <classEntry path="x.tank.app.battle.map.layer.ElemLayer"/>
+    <classEntry path="x.tank.app.battle.map.layer.PathLayer"/>
+    <classEntry path="x.tank.app.battle.map.model.MapGrid"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

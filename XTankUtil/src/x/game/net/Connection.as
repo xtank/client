@@ -1,15 +1,15 @@
 package x.game.net
 {
 	import com.netease.protobuf.Message;
-
+	
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
-
+	
 	import de.polygonal.ds.HashMap;
-
+	
 	import x.game.log.core.Logger;
 	import x.game.net.core.Command;
 	import x.game.net.core.RequestMessage;

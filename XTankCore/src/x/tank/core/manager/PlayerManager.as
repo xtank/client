@@ -32,6 +32,8 @@ package x.tank.core.manager
 				player.name = data.name ;
 				player.status = data.status ;
 				player.teamid = data.teamid ;
+				player.seatid = data.seatid ;
+				player.tankid = data.tankid ;
 				//
 				dispatchEvent(new PlayerEvent(PlayerEvent.PLAYER_UPDATE,player));
 			}

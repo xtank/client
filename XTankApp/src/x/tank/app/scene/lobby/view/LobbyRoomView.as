@@ -16,7 +16,7 @@ package x.tank.app.scene.lobby.view
 	import x.game.ui.XComponent;
 	import x.game.ui.digital.DigitalNumber;
 	import x.game.util.DisplayObjectUtil;
-	import x.tank.app.cfg.ModuleName;
+	import x.tank.app.module.ModuleName;
 	import x.tank.app.module.RoomModuleData;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.handler.MapDataHandler;

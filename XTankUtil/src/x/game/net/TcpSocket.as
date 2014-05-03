@@ -6,6 +6,7 @@ package x.game.net
 	import flash.utils.ByteArray;
 	
 	import x.game.log.core.Logger;
+	import x.game.manager.SurfaceManager;
 	import x.game.net.core.ResponseMessage;
 
 	[Event(name = "connect", type = "flash.events.Event")]
@@ -126,7 +127,7 @@ package x.game.net
 				{
 					closeAlertFlag = true ;
 					//
-					Logger.info("[连接已断开]");
+					SurfaceManager.addTextSurface("[连接已断开]");
 				}
 			}
 		}

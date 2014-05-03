@@ -1,4 +1,4 @@
-package x.tank.app.cfg
+package x.tank.app.module
 {
 	public class ModuleName
 	{

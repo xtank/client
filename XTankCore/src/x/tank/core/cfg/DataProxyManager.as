@@ -17,6 +17,11 @@ package x.tank.core.cfg
 			handler.parser(DataProxy.getXmlFile(handler.fileName)) ;
 			_handlers.set(handler.fileName,handler) ;
 		}
+		
+		static public function addHandler2(handler:ICFGDataHandler):void
+		{
+			_handlers.set(handler.fileName,handler) ;
+		}
 
 		/** 地图配置文件 **/
 		static public function get mapData():MapDataHandler

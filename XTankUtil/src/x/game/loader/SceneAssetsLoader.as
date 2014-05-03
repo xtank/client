@@ -6,6 +6,7 @@ package x.game.loader
 	import x.game.loader.core.QueueInfo;
 	import x.game.loader.core.QueueLoaderImpl;
 	import x.game.loader.loadingUI.ILoaderUI;
+	import x.game.log.core.Logger;
 
 	/**
 	 * @author fraser
@@ -45,7 +46,7 @@ package x.game.loader
 				return;
 			}
 
-//			Logger.info("UILoader:load " + url);
+			Logger.info("UILoader:load " + url);
 			var info:QueueInfo = new QueueInfo();
 			info.url = url;
 			info.type = type;

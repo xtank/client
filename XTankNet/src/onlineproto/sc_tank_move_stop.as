@@ -1,0 +1,89 @@
+package onlineproto {
+	import com.netease.protobuf.*;
+	use namespace com.netease.protobuf.used_by_generated_code;
+	import com.netease.protobuf.fieldDescriptors.*;
+	import flash.utils.Endian;
+	import flash.utils.IDataInput;
+	import flash.utils.IDataOutput;
+	import flash.utils.IExternalizable;
+	import flash.errors.IOError;
+	// @@protoc_insertion_point(imports)
+
+	// @@protoc_insertion_point(class_metadata)
+	public dynamic final class sc_tank_move_stop extends com.netease.protobuf.Message {
+		/**
+		 *  @private
+		 */
+		public static const USERID:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.sc_tank_move_stop.userid", "userid", (1 << 3) | com.netease.protobuf.WireType.VARINT);
+
+		public var userid:uint;
+
+		/**
+		 *  @private
+		 */
+		public static const STOP_X:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.sc_tank_move_stop.stop_x", "stopX", (2 << 3) | com.netease.protobuf.WireType.VARINT);
+
+		public var stopX:uint;
+
+		/**
+		 *  @private
+		 */
+		public static const STOP_Y:FieldDescriptor$TYPE_UINT32 = new FieldDescriptor$TYPE_UINT32("onlineproto.sc_tank_move_stop.stop_y", "stopY", (3 << 3) | com.netease.protobuf.WireType.VARINT);
+
+		public var stopY:uint;
+
+		/**
+		 *  @private
+		 */
+		override com.netease.protobuf.used_by_generated_code final function writeToBuffer(output:com.netease.protobuf.WritingBuffer):void {
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 1);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.userid);
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 2);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.stopX);
+			com.netease.protobuf.WriteUtils.writeTag(output, com.netease.protobuf.WireType.VARINT, 3);
+			com.netease.protobuf.WriteUtils.write$TYPE_UINT32(output, this.stopY);
+			for (var fieldKey:* in this) {
+				super.writeUnknown(output, fieldKey);
+			}
+		}
+
+		/**
+		 *  @private
+		 */
+		override com.netease.protobuf.used_by_generated_code final function readFromSlice(input:flash.utils.IDataInput, bytesAfterSlice:uint):void {
+			var userid$count:uint = 0;
+			var stop_x$count:uint = 0;
+			var stop_y$count:uint = 0;
+			while (input.bytesAvailable > bytesAfterSlice) {
+				var tag:uint = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+				switch (tag >> 3) {
+				case 1:
+					if (userid$count != 0) {
+						throw new flash.errors.IOError('Bad data format: sc_tank_move_stop.userid cannot be set twice.');
+					}
+					++userid$count;
+					this.userid = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					break;
+				case 2:
+					if (stop_x$count != 0) {
+						throw new flash.errors.IOError('Bad data format: sc_tank_move_stop.stopX cannot be set twice.');
+					}
+					++stop_x$count;
+					this.stopX = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					break;
+				case 3:
+					if (stop_y$count != 0) {
+						throw new flash.errors.IOError('Bad data format: sc_tank_move_stop.stopY cannot be set twice.');
+					}
+					++stop_y$count;
+					this.stopY = com.netease.protobuf.ReadUtils.read$TYPE_UINT32(input);
+					break;
+				default:
+					super.readUnknown(input, tag);
+					break;
+				}
+			}
+		}
+
+	}
+}

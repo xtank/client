@@ -7,20 +7,26 @@ package x.tank.core.cfg.model
 		private var _id:uint;
 		private var _block:Boolean; //0 不可通过  1 可通过
 		private var _type:uint; // 0 不可击穿  1 可击穿
-		private var _occupys:Vector.<Point> = new Vector.<Point>(); //占据的点集合
+		private var _regPoint:Point ;
+		private var _hp:uint = uint.MAX_VALUE ;
+		private var _cls:String ;
+		private var _occpys:Vector.<Point> ;
 
-		//<barrier id="1" occupys="0,0;1,0;0,1" block="0" type="1" hp=""/>
 		public function BarrierConfigInfo(xml:XML)
 		{
 			_id = xml.@id;
 			_block = (xml.@block == 0);
 			_type = xml.@type;
 			//
-			var ps:Array = String(xml.@occupys).split(";");
-			for each (var p:String in ps)
+			var reg:Array = String(xml.@reg).split(",") ;
+			_regPoint = new Point(reg[0],reg[1]) ;
+			if(_type == 1)
 			{
-				_occupys.push(new Point(p.split(",")[0], p.split(",")[1]));
+				_hp = uint(xml.@hp) ;
 			}
+			_cls = String(xml.@cls) ;
+			//
+			_occpys = new Vector.<Point>() ;
 		}
 
 		public function get id():uint
@@ -37,10 +43,20 @@ package x.tank.core.cfg.model
 		{
 			return _type;
 		}
-
-		public function get occupys():Vector.<Point>
+		
+		public function get hp():uint
 		{
-			return _occupys;
+			return _hp ;
+		}
+		
+		public function get reg():Point
+		{
+			return _regPoint ;
+		}
+		
+		public function get cls():String
+		{
+			return _cls ;
 		}
 	}
 }

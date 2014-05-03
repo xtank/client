@@ -69,15 +69,15 @@ package com.xtank.module.room
 			_tankBoxs.push(new TankView(_skin["tankBox2"],onTankViewClick));
 			_tankBoxs.push(new TankView(_skin["tankBox3"],onTankViewClick));
 			//
-			_flipBar = new XFlipBar(new FlipBarInitData(3, this), _skin["flipBar"] as Sprite);
-			_flipBar.dataProvide = DataProxyManager.tankData.tanks;
-			//
 			_useBtn = new XSimpleButton(skin["useBtn"]) ;
 			_useBtn.addClick(onUseTank) ;
 			//
 			_useTag = skin["useTag"] ;
 			_useTag.visible = false ;
 			DisplayObjectUtil.disableTarget(_useTag) ;
+			//
+			_flipBar = new XFlipBar(new FlipBarInitData(3, this), _skin["flipBar"] as Sprite);
+			_flipBar.dataProvide = DataProxyManager.tankData.tanks;
 		}
 
 		override public function dispose():void
@@ -149,7 +149,7 @@ package com.xtank.module.room
 			data = _selectedTankView.data ;
 		}
 
-		private function updateView():void
+		public function updateView():void
 		{
 			var tankInfo:TankConfigInfo = data as TankConfigInfo;
 			_tankName.text = tankInfo.name;

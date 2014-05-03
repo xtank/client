@@ -74,6 +74,7 @@ package com.xtank.module.room
 				_playerName.text = player.name+"[" + player.userid+ "]" ; ;
 				_ownerTag.visible = (room.ownerid == player.userid);
 				_statusTag.gotoAndStop(player.status) ;
+				_statusTag.visible = true ;
 				//
 				_tank.gotoAndStop(player.tankid) ;
 				_tank.visible = true ;

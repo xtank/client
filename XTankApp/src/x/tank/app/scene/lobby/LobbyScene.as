@@ -11,7 +11,7 @@ package x.tank.app.scene.lobby
 	import x.game.net.response.XMessageEvent;
 	import x.game.tick.FrameTicker;
 	import x.game.ui.XComponent;
-	import x.game.util.DisplayUtil;
+	import x.game.util.DisplayObjectUtil;
 	import x.tank.app.cfg.TankConfig;
 	import x.tank.app.scene.SceneEvent;
 	import x.tank.app.scene.SceneManager;
@@ -115,7 +115,7 @@ package x.tank.app.scene.lobby
 		public function hideLobby():void
 		{
 			activeScene = false;
-			DisplayUtil.removeForParent(skin, false);
+			DisplayObjectUtil.removeFromParent(skin, false);
 			//
 			SceneManager.dispatchEvent(new SceneEvent(SceneEvent.HIDE_LOBBY)) ;
 		}

@@ -25,7 +25,7 @@ package com.xtank.module
 	import x.game.ui.scroller.VScroller;
 	import x.game.util.DisplayObjectUtil;
 	import x.game.util.StringUtil;
-	import x.tank.app.cfg.ModuleName;
+	import x.tank.app.module.ModuleName;
 	import x.tank.app.module.RoomModuleData;
 	import x.tank.app.processor.alert.SimpleAlertProcessor;
 	import x.tank.core.cfg.DataProxyManager;

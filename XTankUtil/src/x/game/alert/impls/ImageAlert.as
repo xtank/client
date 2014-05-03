@@ -9,7 +9,7 @@ package x.game.alert.impls
 	import x.game.loader.core.QueueLoader;
 	import x.game.manager.StageManager;
 	import x.game.manager.VersionManager;
-	import x.game.util.DisplayUtil;
+	import x.game.util.DisplayObjectUtil;
 
 
 
@@ -60,7 +60,7 @@ package x.game.alert.impls
 				_processor.alert = this;
 			}
 			// 居中显示提示框
-			DisplayUtil.align(this, StageManager.stageRect);
+			DisplayObjectUtil.align(this, StageManager.stageRect);
 		}
 		
 		public function get alertDomain():ApplicationDomain

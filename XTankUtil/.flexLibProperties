@@ -25,6 +25,7 @@
     <classEntry path="x.game.manager.SurfaceManager"/>
     <classEntry path="x.game.surface.ISurfaceView"/>
     <classEntry path="x.game.surface.DefaultTextSurfaceView"/>
+    <classEntry path="x.game.surface.BaseSurfaceView"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

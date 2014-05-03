@@ -3,7 +3,7 @@ package x.tank.app.scene.lobby.view
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	
-	import x.game.alert.AlertManager;
+	import x.game.manager.SurfaceManager;
 	import x.game.module.ModuleManager;
 	import x.game.ui.XComponent;
 	import x.game.ui.button.IButton;
@@ -13,8 +13,7 @@ package x.tank.app.scene.lobby.view
 	import x.game.ui.flipbar.FlipBarInitData;
 	import x.game.ui.flipbar.IFilpBarHost;
 	import x.game.ui.flipbar.XMultiFlipBar;
-	import x.tank.app.cfg.ModuleName;
-	import x.tank.app.processor.alert.SimpleAlertProcessor;
+	import x.tank.app.module.ModuleName;
 	import x.tank.core.event.RoomEvent;
 	import x.tank.core.manager.RoomManager;
 	
@@ -125,17 +124,16 @@ package x.tank.app.scene.lobby.view
 		
 		private function onFastAddClick(btn:IButton):void
 		{
-			AlertManager.showAlert(1,new SimpleAlertProcessor("还未实现功能!")) ;
+			SurfaceManager.addTextSurface("还未实现功能!");
 		}
 		
 		private function onFindClick(btn:IButton):void
 		{
-			AlertManager.showAlert(1,new SimpleAlertProcessor("还未实现功能!")) ;
+			SurfaceManager.addTextSurface("还未实现功能!");
 		}
 		
 		private function onCreateClick(btn:IButton):void
 		{
-//			AlertManager.showAlert(1,new SimpleAlertProcessor("还未实现功能!")) ;
 			ModuleManager.showModule(ModuleName.RoomCreateModule) ;
 		}
 	}

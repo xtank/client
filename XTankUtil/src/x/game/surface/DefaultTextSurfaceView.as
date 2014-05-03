@@ -1,20 +1,19 @@
 package x.game.surface
 {
-	import flash.display.Sprite;
 	import flash.text.TextField;
 	
+	import x.game.manager.StageManager;
 	import x.game.manager.UIManager;
 	import x.game.tween.TweenLite;
-	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	
-	public class DefaultTextSurfaceView extends XComponent implements ISurfaceView
+	public class DefaultTextSurfaceView extends BaseSurfaceView
 	{
 		private var _txtContent:TextField ;
 		
 		public function DefaultTextSurfaceView()
 		{
-			super(UIManager.getSprite("Surface_DefaultFloatView_UI"));
+			super(UIManager.getMovieClip("Surface_DefaultFloatView_UI"));
 			//
 			_txtContent = surfaceSkin["txtContent"] ;
 			DisplayObjectUtil.disableTarget(_txtContent) ;
@@ -26,13 +25,9 @@ package x.game.surface
 			super.dispose() ;
 		}
 		
-		public function get surfaceSkin():Sprite 
+		override public function show(args:*):void 
 		{
-			return _skin as Sprite ;
-		}
-		
-		public function show(args:*):void 
-		{
+			DisplayObjectUtil.align(surfaceSkin, StageManager.stageRect);
 			if(args != null)
 			{
 				_txtContent.text = String(args) ;
@@ -42,8 +37,8 @@ package x.game.surface
 				_txtContent.text = "什么也没有!" ;
 			}
 			//
-			TweenLite.to(surfaceSkin,2,{y:surfaceSkin.y - 100,onComplete:function():void{
-				DisplayObjectUtil.removeFromParent(surfaceSkin) ;
+			TweenLite.to(surfaceSkin,1.5,{y:surfaceSkin.y - 100,onComplete:function():void{
+				dispose() ;
 			}}) ;
 		}
 	}

@@ -39,15 +39,15 @@ package com.xtank.module
 	{
 		private var _mapInfo:MapInfoView;
 		private var _tankInfoView:TankSelectView;
-		private var _playerTeam1Views:Vector.<TeamSeatView>;
-		private var _playerTeam2Views:Vector.<TeamSeatView>;
+		private var _seats:Vector.<TeamSeatView> ;
+//		private var _playerTeam1Views:Vector.<TeamSeatView>;
+//		private var _playerTeam2Views:Vector.<TeamSeatView>;
 		//
 		private var _startBtn:XSimpleButton;
 		private var _readyBtn:XSimpleButton;
 		private var _cancelBtn:XSimpleButton;
 
 		//
-
 		public function RoomModule()
 		{
 			super();
@@ -71,14 +71,9 @@ package com.xtank.module
 			_cancelBtn.dispose();
 			_cancelBtn = null;
 			//
-			while (_playerTeam1Views.length > 0)
+			while (_seats.length > 0)
 			{
-				_playerTeam1Views.pop().dispose();
-			}
-			//
-			while (_playerTeam2Views.length > 0)
-			{
-				_playerTeam2Views.pop().dispose();
+				_seats.pop().dispose();
 			}
 			//
 			super.dispose();
@@ -97,15 +92,13 @@ package com.xtank.module
 			_cancelBtn = new XSimpleButton(_mainUI["cancelBtn"]);
 			_cancelBtn.addClick(onCancelClick);
 			//
-			_playerTeam1Views = new Vector.<TeamSeatView>();
-			_playerTeam1Views.push(new TeamSeatView(_mainUI["p1"], 1, 1));
-			_playerTeam1Views.push(new TeamSeatView(_mainUI["p2"], 1, 2));
-			_playerTeam1Views.push(new TeamSeatView(_mainUI["p3"], 1, 3));
-			//
-			_playerTeam2Views = new Vector.<TeamSeatView>();
-			_playerTeam2Views.push(new TeamSeatView(_mainUI["p4"], 2, 1));
-			_playerTeam2Views.push(new TeamSeatView(_mainUI["p5"], 2, 2));
-			_playerTeam2Views.push(new TeamSeatView(_mainUI["p6"], 2, 3));
+			_seats = new Vector.<TeamSeatView>();
+			_seats.push(new TeamSeatView(_mainUI["p1"], 1, 1));
+			_seats.push(new TeamSeatView(_mainUI["p2"], 1, 2));
+			_seats.push(new TeamSeatView(_mainUI["p3"], 1, 3));
+			_seats.push(new TeamSeatView(_mainUI["p4"], 2, 1));
+			_seats.push(new TeamSeatView(_mainUI["p5"], 2, 2));
+			_seats.push(new TeamSeatView(_mainUI["p6"], 2, 3));
 			//
 			_mapInfo = new MapInfoView(_mainUI);
 			_tankInfoView = new TankSelectView(_mainUI["tankView"]);
@@ -117,7 +110,7 @@ package com.xtank.module
 			//
 			var initData:RoomModuleData = data as RoomModuleData;
 			var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-			_mapInfo.data = roomData
+			_mapInfo.data = roomData ;
 			_tankInfoView.lock = false;
 			//
 			if (roomData.ownerid == TankConfig.userId) // 我是房主
@@ -160,7 +153,7 @@ package com.xtank.module
 		{
 			var player:player_data_t = event.player;
 			var tsv:TeamSeatView = getTeamSeatViewByUser(player);
-			if (tsv.seatIndex == player.seatid)
+			if (tsv != null && tsv.seatIndex == player.seatid)
 			{
 				tsv.updateView() ;// 
 			}
@@ -168,49 +161,39 @@ package com.xtank.module
 			{
 				var initData:RoomModuleData = _initData as RoomModuleData;
 				var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-				tsv.data = null;
+				//
+				if(tsv != null)
+				{
+					tsv.data = null;
+				}
 				tsv = getTeamSeatView(player.teamid, player.seatid);
 				tsv.data = {room: roomData, player: player};
 			}
+			//
+			_tankInfoView.updateView() ;
 		}
 
 		/** 获取对应team的座位号上的作为 */
 		private function getTeamSeatView(teamId:uint, seatIndex:uint):TeamSeatView
 		{
 			var rs:TeamSeatView;
-			var views:Vector.<TeamSeatView> = getTeamSeatViews(teamId);
-			var len:uint = views.length;
+			var len:uint = _seats.length;
 			for (var i:uint = 0; i < len; i++)
 			{
-				if (views[i].seatIndex == seatIndex)
+				if (_seats[i].teamId == teamId && _seats[i].seatIndex == seatIndex)
 				{
-					rs = views[i];
+					rs = _seats[i];
 					break;
 				}
 			}
 			return rs;
 		}
 
-		private function getTeamSeatViews(teamId:uint):Vector.<TeamSeatView>
-		{
-			if (teamId == 1)
-			{
-				return _playerTeam1Views;
-			}
-			else if (teamId == 2)
-			{
-				return _playerTeam2Views;
-			}
-			return null;
-		}
-
 		/** 获取玩家当前坐的座位  */
 		private function getTeamSeatViewByUser(player:player_data_t):TeamSeatView
 		{
-			var views:Vector.<TeamSeatView> = getTeamSeatViews(player.teamid);
-			//
 			var rs:TeamSeatView;
-			for each (var tsv:TeamSeatView in views)
+			for each (var tsv:TeamSeatView in _seats)
 			{
 				if (tsv.data != null)
 				{
@@ -225,22 +208,14 @@ package com.xtank.module
 			return rs;
 		}
 
-		private function onRoomDel(event:RoomEvent = null):void
-		{
-			var initData:RoomModuleData = _initData as RoomModuleData;
-			if (event.room.id == initData.roomId)
-			{
-				close();
-			}
-		}
-
-		private function getPlayerBySeat(players:Vector.<player_data_t>, seatIndex:uint):player_data_t
+		/** 获取当前坐在改位置的玩家数据 */
+		private function getPlayerBySeat(players:Array, teamId:uint, seatIndex:uint):player_data_t
 		{
 			var rs:player_data_t;
 			var len:uint = players.length;
 			for (var i:uint = 0; i < len; i++)
 			{
-				if (players[i].seatid == seatIndex)
+				if ((players[i] as player_data_t).teamid == teamId && (players[i] as player_data_t).seatid == seatIndex)
 				{
 					rs = players[i];
 					break;
@@ -268,58 +243,24 @@ package com.xtank.module
 			if (refreshTag)
 			{
 				var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-				//
-				var players:Vector.<player_data_t> = getAllPlayersInTeam(1);
 				var player:player_data_t;
-				//
-				var len:uint = _playerTeam1Views.length;
-				var i:uint = 0;
-				for (i = 0; i < len; i++)
+				var len:uint = _seats.length;
+				for (var i:uint = 0; i < len; i++)
 				{
-					player = getPlayerBySeat(players, _playerTeam1Views[i].seatIndex);
+					player = getPlayerBySeat(roomData.playlist, _seats[i].teamId,_seats[i].seatIndex) ;
 					if (player != null)
 					{
-						_playerTeam1Views[i].data = {room: roomData, player: player};
+						_seats[i].data = {room: roomData, player: player};
 					}
 					else
 					{
-						_playerTeam1Views[i].data = null;
+						_seats[i].data = null;
 					}
 				}
-				//
-				players = getAllPlayersInTeam(2);
-				len = _playerTeam2Views.length;
-				for (i = 0; i < len; i++)
-				{
-					player = getPlayerBySeat(players, _playerTeam2Views[i].seatIndex);
-					if (player != null)
-					{
-						_playerTeam1Views[i].data = {room: roomData, player: player};
-					}
-					else
-					{
-						_playerTeam1Views[i].data = null;
-					}
-				}
+				_tankInfoView.updateView() ;
 			}
 		}
-
-		private function getAllPlayersInTeam(teamId:uint):Vector.<player_data_t>
-		{
-			var rs:Vector.<player_data_t> = new Vector.<player_data_t>();
-			//
-			var initData:RoomModuleData = _initData as RoomModuleData;
-			var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
-			for each (var dd:player_data_t in roomData.playlist)
-			{
-				if (dd.teamid == teamId)
-				{
-					rs.push(dd);
-				}
-			}
-			return rs;
-		}
-
+		
 		override protected function onClose(button:IButton):void
 		{
 			new CallbackPost(CommandSet.$153.id, new cs_leave_room(), function(event:XMessageEvent):void
@@ -328,6 +269,15 @@ package com.xtank.module
 			}, function(event:XMessageEvent):void
 			{
 			}).send();
+		}
+		
+		private function onRoomDel(event:RoomEvent = null):void
+		{
+			var initData:RoomModuleData = _initData as RoomModuleData;
+			if (event.room.id == initData.roomId)
+			{
+				close();
+			}
 		}
 
 		private function onStartClick(btn:IButton):void

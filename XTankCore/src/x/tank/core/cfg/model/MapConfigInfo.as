@@ -8,6 +8,10 @@ package x.tank.core.cfg.model
 		private var _difficult:uint;
 		private var _res:uint;
 		public var teams:Vector.<MapDataTeamInfo>;
+		//
+		private var _bgLayer:String ;
+		private var _elemLayer:String ;
+		private var _pathLayer:String ;
 
 		public function MapConfigInfo(xml:XML)
 		{
@@ -22,11 +26,30 @@ package x.tank.core.cfg.model
 			{
 				teams.push(new MapDataTeamInfo(teamInfo));
 			}
+			//
+			_bgLayer = (xml.bgLayer[0] as XML).toString() ;
+			_elemLayer = (xml.elemLayer[0] as XML).toString() ;
+			_pathLayer = (xml.pathLyaer[0] as XML).toString() ;
 		}
 
 		public function get id():uint
 		{
 			return _id;
+		}
+		
+		public function get elemLayer():String
+		{
+			return _elemLayer ;
+		}
+		
+		public function get pathLayer():String
+		{
+			return _pathLayer ;
+		}
+		
+		public function get bgLayer():String
+		{
+			return _bgLayer ;
 		}
 
 		public function get name():String

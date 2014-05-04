@@ -1,4 +1,4 @@
-package x.tank.app.battle.map.layer
+ package x.tank.app.battle.map.layer
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -8,22 +8,27 @@ package x.tank.app.battle.map.layer
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	import x.game.util.StringUtil;
+	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.elements.Barrier;
 	import x.tank.app.battle.map.elements.BaseMapElement;
 	import x.tank.app.battle.map.elements.Tank;
 	import x.tank.core.cfg.DataProxyManager;
+	import x.tank.core.cfg.model.BarrierConfigInfo;
 	import x.tank.core.cfg.model.MapConfigInfo;
 
 	// 1. 需要实时排序
 	public class ElemLayer extends XComponent
 	{
+		private var _battleMap:BattleMap;
+		//
 		private var _intervalIndex:uint ;
 		private var _elems:Vector.<BaseMapElement>;
 		private var _tanks:Vector.<Tank>;
 
-		public function ElemLayer(mapConfigInfo:MapConfigInfo)
+		public function ElemLayer(battleMap:BattleMap,mapConfigInfo:MapConfigInfo)
 		{
 			super(new Sprite());
+			_battleMap = battleMap ;
 			initLayer(mapConfigInfo);
 		}
 
@@ -55,7 +60,8 @@ package x.tank.app.battle.map.layer
 				{
 					var infos:Array = ele.split("-") ;
 					var bitMap:Bitmap = new Bitmap(UIManager.getBitmapData("Barrier_" + infos[0])) ;
-					barrier = new Barrier(bitMap,DataProxyManager.barrierData.getBarrier(infos[0])) ;
+					var configInfo:BarrierConfigInfo = DataProxyManager.barrierData.getBarrier(infos[0]) ;
+					barrier = new Barrier(bitMap,configInfo) ;
 					barrier.mapx = String(infos[1]).split(",")[0] ; // 96 * 56
 					barrier.mapy = String(infos[1]).split(",")[1] ; // 96 * 56
 					_elems.push(barrier) ;

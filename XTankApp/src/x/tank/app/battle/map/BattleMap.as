@@ -41,10 +41,10 @@ package x.tank.app.battle.map
 			_bgLayer = new BgLayer(UIManager.getBitmapData(_mapConfigInfo.bgLayer)) ;
 			mapSkin.addChild(_bgLayer.layerSkin) ;
 			//
-			_elemLayer = new ElemLayer(_mapConfigInfo) ;
-			mapSkin.addChild(_elemLayer.layerSkin) ;
-			//
 			_pathLayer = new PathLayer(_mapConfigInfo) ;
+			_elemLayer = new ElemLayer(this,_mapConfigInfo) ;
+			//
+			mapSkin.addChild(_elemLayer.layerSkin) ;
 			mapSkin.addChild(_pathLayer.layerSkin) ;
 		}
 		

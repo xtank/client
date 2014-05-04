@@ -25,8 +25,19 @@ package x.tank.core.cfg.model
 				_hp = uint(xml.@hp) ;
 			}
 			_cls = String(xml.@cls) ;
-			//
+			// <barrier id="6" reg="-61.5,-118.5" type="0" hp="0" cls="Barrier_6" occpy="-1,0;0,0;1,0;-1,-1;0,-1;1,-1"/>
+			// -1,0;0,0;1,0;1,1;0,1;-1,1
 			_occpys = new Vector.<Point>() ;
+			var datas:Array = String(xml.@occpy).split(";") ;
+			for each(var d:String in datas)
+			{
+				_occpys.push(new Point(d.split(",")[0],d.split(",")[1])) ;
+			}
+		}
+		
+		public function get occpys():Vector.<Point>
+		{
+			return _occpys ;
 		}
 
 		public function get id():uint

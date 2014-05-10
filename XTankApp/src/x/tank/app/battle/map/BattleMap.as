@@ -62,5 +62,9 @@ package x.tank.app.battle.map
 			super.dispose() ;
 		}
 		
+		public function get pathLayer():PathLayer
+		{
+			return _pathLayer ;
+		}
 	}
 }

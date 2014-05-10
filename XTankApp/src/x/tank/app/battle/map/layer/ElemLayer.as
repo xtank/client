@@ -61,21 +61,51 @@
 					var infos:Array = ele.split("-") ;
 					var bitMap:Bitmap = new Bitmap(UIManager.getBitmapData("Barrier_" + infos[0])) ;
 					var configInfo:BarrierConfigInfo = DataProxyManager.barrierData.getBarrier(infos[0]) ;
+					//
 					barrier = new Barrier(bitMap,configInfo) ;
 					barrier.mapx = String(infos[1]).split(",")[0] ; // 96 * 56
 					barrier.mapy = String(infos[1]).split(",")[1] ; // 96 * 56
 					_elems.push(barrier) ;
 					//
-					layerSkin.addChild(barrier.barrierSkin) ;
+					layerSkin.addChild(barrier.elementSkin) ;
 				}
 			}
+			_battleMap.pathLayer.initElements(_elems) ;
+			_battleMap.pathLayer.refresh() ;
 			//
 			_intervalIndex = TimeTicker.setInterval(1000,onSortElements) ;
 		}
 		
+		// 定时排序
 		private function onSortElements(dtime:Number):void
 		{
-			
+			_elems = _elems.sort(function(a:BaseMapElement,b:BaseMapElement):int{
+				if(a.mapy > b.mapy)
+				{
+					return 1 ;
+				}
+				else if(a.mapy < b.mapy)
+				{
+					return -1
+				}
+				else
+				{
+					if(a.mapx > b.mapx)
+					{
+						return 1 ;
+					}
+					else
+					{
+						return -1 ;
+					}
+				}
+			}) ;
+			var len:uint = _elems.length ;
+			for(var i:uint = 0;i<len;i++)
+			{
+				layerSkin.addChild(_elems[i].elementSkin) ;
+			}
+			//trace("sort...");
 		}
 
 		public function addTank(tank:Tank):void

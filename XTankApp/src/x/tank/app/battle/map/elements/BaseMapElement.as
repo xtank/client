@@ -1,6 +1,7 @@
 package x.tank.app.battle.map.elements
 {
 	import flash.display.DisplayObject;
+	import flash.geom.Point;
 	
 	import x.game.ui.XComponent;
 
@@ -21,6 +22,16 @@ package x.tank.app.battle.map.elements
 		public function BaseMapElement(skin:DisplayObject)
 		{
 			super(skin);
+		}
+		
+		public function get occpys():Vector.<Point> 
+		{
+			return null ;
+		}
+		
+		public function get elementSkin():DisplayObject
+		{
+			return _skin ;
 		}
 
 		public function get passable():Boolean

@@ -1,6 +1,7 @@
 package x.tank.app.battle.map.elements
 {
 	import flash.display.DisplayObject;
+	import flash.geom.Point;
 	
 	import x.tank.core.cfg.model.BarrierConfigInfo;
 	
@@ -16,9 +17,9 @@ package x.tank.app.battle.map.elements
 			_barrierConfigInfo = barrierConfigInfo ;
 		}
 		
-		public function get barrierSkin():DisplayObject
+		public function get barrierConfigInfo():BarrierConfigInfo
 		{
-			return _skin ;
+			return _barrierConfigInfo ;
 		}
 		
 		override public function set mapx(value:uint):void
@@ -31,6 +32,11 @@ package x.tank.app.battle.map.elements
 		{
 			_mapy = value;
 			y = _mapy * GRID_HEIGHT + GRID_HEIGHT/2 + _barrierConfigInfo.reg.y;
+		}
+		
+		override public function get occpys():Vector.<Point> 
+		{
+			return _barrierConfigInfo.occpys ;
 		}
 	}
 }

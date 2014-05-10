@@ -5,7 +5,6 @@ package x.tank.core.cfg.model
 	public class BarrierConfigInfo
 	{
 		private var _id:uint;
-		private var _block:Boolean; //0 不可通过  1 可通过
 		private var _type:uint; // 0 不可击穿  1 可击穿
 		private var _regPoint:Point ;
 		private var _hp:uint = uint.MAX_VALUE ;
@@ -15,7 +14,6 @@ package x.tank.core.cfg.model
 		public function BarrierConfigInfo(xml:XML)
 		{
 			_id = xml.@id;
-			_block = (xml.@block == 0);
 			_type = xml.@type;
 			//
 			var reg:Array = String(xml.@reg).split(",") ;
@@ -43,11 +41,6 @@ package x.tank.core.cfg.model
 		public function get id():uint
 		{
 			return _id;
-		}
-
-		public function get block():Boolean
-		{
-			return _block;
 		}
 
 		public function get type():uint

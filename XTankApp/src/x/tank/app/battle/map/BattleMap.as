@@ -2,7 +2,6 @@ package x.tank.app.battle.map
 {
 	import flash.display.Sprite;
 	
-	import x.game.manager.UIManager;
 	import x.game.ui.XComponent;
 	import x.tank.app.battle.map.layer.BgLayer;
 	import x.tank.app.battle.map.layer.ElemLayer;
@@ -37,16 +36,16 @@ package x.tank.app.battle.map
 		{
 			super(new Sprite()) ;
 			_mapConfigInfo = DataProxyManager.mapData.getMapInfo(mapId) ;
-			// 背景层
-			_bgLayer = new BgLayer(UIManager.getBitmapData(_mapConfigInfo.bgLayer)) ;
-			mapSkin.addChild(_bgLayer.layerSkin) ;
 			// 寻路层
 			_pathLayer = new PathLayer(_mapConfigInfo) ;
+			// 背景层
+			_bgLayer = new BgLayer(_mapConfigInfo) ;
+			mapSkin.addChild(_bgLayer.layerSkin) ;
 			// 元素层
 			_elemLayer = new ElemLayer(this,_mapConfigInfo) ;
 			//
 			mapSkin.addChild(_elemLayer.layerSkin) ;
-			// mapSkin.addChild(_pathLayer.layerSkin) ;
+			mapSkin.addChild(_pathLayer.layerSkin) ;
 		}
 		
 		public function get mapSkin():Sprite

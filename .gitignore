@@ -1,0 +1,12 @@
+
+*.swc
+
+*.swc
+
+XTankApp/bin/XTankApp.swc
+
+XTankCore/bin/XTankCore.swc
+
+*.swf
+
+XTankPublish/dlls/XTankUI.swf

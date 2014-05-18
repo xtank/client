@@ -7,10 +7,11 @@ package path
 	
 	import de.polygonal.ds.HashMap;
 	
+	import editordata.MapData;
+	
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	import x.tank.app.battle.map.BattleMap;
-	import editordata.MapData;
 
 	public class PathLayer extends XComponent
 	{
@@ -28,36 +29,35 @@ package path
 //			
 			var targetX:int = Math.floor(event.localX / 10);
 			var targetY:int = Math.floor(event.localY / 10);
-			trace(targetX,targetY);
 			if (targetX >= 0 && targetX <= 95 && targetY >= 0 && targetY <= 55)
 			{
-				var ps:Vector.<Point> = _mapData.pathLayer ; 
-				var len:uint = ps.length ;
-				var p:Point ;
-				var remove:Boolean = false ;
-				for(var i:uint = 0;i<len;i++)
+				var ps:Vector.<Point> = _mapData.pathLayer;
+				var len:uint = ps.length;
+				var p:Point;
+				var remove:Boolean = false;
+				for (var i:uint = 0; i < len; i++)
 				{
-					p = ps[i] ;
+					p = ps[i];
 					//
-					if(p.x == targetX && p.y == targetY)
+					if (p.x == targetX && p.y == targetY)
 					{
-						var index:int = _mapData.pathLayer.indexOf(p) ;
-						if(index != -1)
+						var index:int = _mapData.pathLayer.indexOf(p);
+						if (index != -1)
 						{
-							remove = true ;
-							_mapData.pathLayer.splice(index,1) ;
-							removeOccpy(targetX + ',' + targetY) ;
-							refreshPathView() ;
+							remove = true;
+							_mapData.pathLayer.splice(index, 1);
+							removeOccpy(targetX + ',' + targetY);
 						}
+						refreshPathView();
 						break;
 					}
 				}
-				if(!remove)
+				if (!remove)
 				{
-					_mapData.pathLayer.push(new Point(targetX,targetY)) ;
-					addOccpy(targetX + ',' + targetY) ;
-					refreshPathView() ;
+					_mapData.pathLayer.push(new Point(targetX, targetY));
+					addOccpy(targetX + ',' + targetY);
 				}
+				refreshPathView();
 			}
 		}
 
@@ -95,11 +95,13 @@ package path
 				{
 					if (!canPath(j, i))
 					{
+//						trace(j, i,false) ;
 						skin.graphics.beginFill(0xFF0000, .5);
 						skin.graphics.drawRect(10 * j + 1, 10 * i + 1, 8, 8);
 					}
 					else
 					{
+//						trace(j, i,true) ;
 						skin.graphics.beginFill(0x00FF00, .2);
 						skin.graphics.drawRect(10 * j + 1, 10 * i + 1, 8, 8);
 					}
@@ -117,23 +119,22 @@ package path
 			refreshPathView();
 		}
 
-		public function canPath(mapx:uint, mapy:uint):Boolean
-		{
-			var key:String = mapx + "," + mapy;
-			return !_unPassData.hasKey(key);
-		}
-
 		public function addOccpy(key:String):void
 		{
+			var count:uint ;
 			if (_unPassData.hasKey(key))
 			{
-				var count:uint = uint(_unPassData.get(key));
-				_unPassData.set(key, ++count);
+				count = uint(_unPassData.get(key));
+				count += 1;
+				_unPassData.remap(key, count);
 			}
 			else
 			{
-				_unPassData.set(key, 1);
+				count = 1 ;
+				_unPassData.set(key, count);
 			}
+//			trace("addOccpy",key,_unPassData.get(key),canPath2(key.split(",")[0],key.split(",")[1]));
+			
 		}
 
 		public function removeOccpy(key:String):void
@@ -143,12 +144,49 @@ package path
 				var count:uint = uint(_unPassData.get(key));
 				if (count > 1)
 				{
-					_unPassData.set(key, --count);
+					count -= 1;
 				}
 				else
 				{
-					_unPassData.clr(key);
+					count = 0 ;
 				}
+				_unPassData.remap(key, count);
+				//
+//				trace("removeOccpy:", key, _unPassData.get(key),canPath2(key.split(",")[0],key.split(",")[1]));
+			}
+		}
+		
+		public function canPath2(mapx:uint, mapy:uint):Boolean
+		{
+			var key:String = mapx + "," + mapy;
+			if(_unPassData.hasKey(key) == false)
+			{
+				return true ;
+			}
+			else if(_unPassData.get(key) <= 0)
+			{
+				return true ;
+			}
+			else
+			{
+				return false ;
+			}
+		}
+		
+		public function canPath(mapx:uint, mapy:uint):Boolean
+		{
+			var key:String = mapx + "," + mapy;
+			if(_unPassData.hasKey(key) == false)
+			{
+				return true ;
+			}
+			else if(_unPassData.get(key) <= 0)
+			{
+				return true ;
+			}
+			else
+			{
+				return false ;
 			}
 		}
 

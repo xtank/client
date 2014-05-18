@@ -37,7 +37,7 @@ package
 		{
 			_urlLoader = new URLLoader();
 			_urlLoader.addEventListener(Event.COMPLETE, loadBARComplete);
-			_urlLoader.load(new URLRequest("../../proto/cfg/barriers.xml"));
+			_urlLoader.load(new URLRequest("../../../../proto/cfg/barriers.xml"));
 		}
 
 		private function loadBARComplete(event:Event):void
@@ -56,7 +56,7 @@ package
 			_uiLoader = new Loader();
 			_uiLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onUIComplete);
 			//
-			var req:URLRequest = new URLRequest("../../client/XTankPublish/dlls/XTankUI.swf");
+			var req:URLRequest = new URLRequest("../../../../client/XTankPublish/dlls/XTankUI.swf");
 			_uiLoader.load(req);
 		}
 
@@ -269,6 +269,7 @@ package
 			return content+"\n</barriers>" ;
 		}
 
+		//
 		private var fileRef:FileReference ;
 		
 		private function onSave(btn:IButton):void

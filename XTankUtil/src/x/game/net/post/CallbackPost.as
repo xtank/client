@@ -2,7 +2,7 @@ package x.game.net.post
 {
     import com.netease.protobuf.Message;
     
-    import x.game.log.core.Logger;
+    import x.game.locale.LocaleUtil;
     import x.game.manager.SurfaceManager;
     import x.game.net.response.XMessageEvent;
 
@@ -30,7 +30,7 @@ package x.game.net.post
                 _onError(event);
             }
             // 默认处理为弹出提示
-			SurfaceManager.addTextSurface("" + event.response.statusCode);
+			SurfaceManager.addTextSurface("" + LocaleUtil.getError("Key_"+event.response.statusCode));
 			//
             dispose();
         }

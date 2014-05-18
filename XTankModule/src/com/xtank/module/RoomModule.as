@@ -10,11 +10,13 @@ package com.xtank.module
 	import onlineproto.cs_leave_room;
 	import onlineproto.player_data_t;
 	import onlineproto.room_data_t;
+	import onlineproto.sc_inside_start;
 	
 	import x.game.manager.SurfaceManager;
 	import x.game.module.IModuleInitData;
 	import x.game.module.LifecycleType;
 	import x.game.module.Module;
+	import x.game.module.ModuleManager;
 	import x.game.net.Connection;
 	import x.game.net.post.CallbackPost;
 	import x.game.net.post.SimplePost;
@@ -22,6 +24,8 @@ package com.xtank.module
 	import x.game.ui.button.IButton;
 	import x.game.ui.button.XSimpleButton;
 	import x.tank.app.cfg.TankConfig;
+	import x.tank.app.module.BattleModuleData;
+	import x.tank.app.module.ModuleName;
 	import x.tank.app.module.RoomModuleData;
 	import x.tank.core.event.PlayerEvent;
 	import x.tank.core.event.RoomEvent;
@@ -40,8 +44,6 @@ package com.xtank.module
 		private var _mapInfo:MapInfoView;
 		private var _tankInfoView:TankSelectView;
 		private var _seats:Vector.<TeamSeatView> ;
-//		private var _playerTeam1Views:Vector.<TeamSeatView>;
-//		private var _playerTeam2Views:Vector.<TeamSeatView>;
 		//
 		private var _startBtn:XSimpleButton;
 		private var _readyBtn:XSimpleButton;
@@ -348,7 +350,10 @@ package com.xtank.module
 
 		private function onStartGameMessage(event:XMessageEvent):void
 		{
-			// todo [open battle module]
+			// [open battle module]
+			var msg:sc_inside_start = event.msg as sc_inside_start ; 
+			ModuleManager.toggleModule(ModuleName.BattleModule,new BattleModuleData(msg.battleData)) ;	
+			ModuleManager.closeModule(ModuleName.RoomModule) ;
 			//
 			close();
 		}

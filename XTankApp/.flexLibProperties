@@ -25,6 +25,7 @@
     <classEntry path="x.tank.app.battle.map.layer.ElemLayer"/>
     <classEntry path="x.tank.app.battle.map.layer.PathLayer"/>
     <classEntry path="x.tank.app.battle.map.model.MapGrid"/>
+    <classEntry path="x.tank.app.module.BattleModuleData"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -37,15 +37,16 @@ package x.tank.app.battle.map
 		{
 			super(new Sprite()) ;
 			_mapConfigInfo = DataProxyManager.mapData.getMapInfo(mapId) ;
-			//
+			// 背景层
 			_bgLayer = new BgLayer(UIManager.getBitmapData(_mapConfigInfo.bgLayer)) ;
 			mapSkin.addChild(_bgLayer.layerSkin) ;
-			//
+			// 寻路层
 			_pathLayer = new PathLayer(_mapConfigInfo) ;
+			// 元素层
 			_elemLayer = new ElemLayer(this,_mapConfigInfo) ;
 			//
 			mapSkin.addChild(_elemLayer.layerSkin) ;
-			mapSkin.addChild(_pathLayer.layerSkin) ;
+			// mapSkin.addChild(_pathLayer.layerSkin) ;
 		}
 		
 		public function get mapSkin():Sprite

@@ -9,6 +9,7 @@ package x.tank.core.cfg.model
 		private var _id:uint;
 		private var _count:uint;
 		private var _home:Point;
+		private var _homeDir:uint ; // 
 		private var _members:Vector.<MapDataTeamMemberInfo> = new Vector.<MapDataTeamMemberInfo>();
 
 		public function MapDataTeamInfo(xml:XML)

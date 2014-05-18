@@ -8,10 +8,12 @@ package
 	import flash.text.TextField;
 	
 	import events.BarrierEvent;
+	import events.TerrianEvent;
 	
 	import views.BarrierView;
 	import views.MapView;
 	import views.TeamView;
+	import views.TerrianView;
 	
 	import x.game.ui.button.IButton;
 	import x.game.ui.button.XSimpleButton;
@@ -23,7 +25,8 @@ package
 		private var _init:Init ;
 		private var _mapView:MapView ;
 		private var _barrierView:BarrierView ; // 障碍物
-		private var _teamView:TeamView ;
+		private var _teamView:TeamView ; //terrianList
+		private var _terrianView:TerrianView ;
 		private var _skin:Sprite ;
 		//
 		private var _mapIdTxt:TextField ;
@@ -41,7 +44,10 @@ package
 					_mapView = new MapView(_skin) ;
 					//
 					_barrierView = new BarrierView(_skin["barrierList"]) ;
-					_barrierView.addEventListener(BarrierEvent.UU,onUU) ;
+					_barrierView.addEventListener(BarrierEvent.UU,onBUU) ;
+					//
+					_terrianView = new TerrianView(_skin["terrianList"]) ;
+					_terrianView.addEventListener(TerrianEvent.UU,onTUU) ;
 					//
 					_teamView = new TeamView(_skin,_mapView) ;
 					//
@@ -60,7 +66,12 @@ package
 			//
 		}
 		
-		private function onUU(event:BarrierEvent):void
+		private function onTUU(event:TerrianEvent):void
+		{
+			_mapView.tBox.addTerrian(event) ;
+		}
+		
+		private function onBUU(event:BarrierEvent):void
 		{
 			_mapView.bBox.addBarrier(event) ;
 		}

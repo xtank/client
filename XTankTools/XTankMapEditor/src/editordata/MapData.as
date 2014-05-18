@@ -27,6 +27,20 @@ package editordata
 			lowLayer = new Vector.<TerrierData>() ;
 		}
 		
+		public function removeTerrier(terrier:TerrierData):void
+		{
+			var index:int = lowLayer.indexOf(terrier) ;
+			if(index != -1)
+			{
+				lowLayer.splice(index,1) ;
+			}
+		}
+		
+		public function addTerrier(terrier:TerrierData):void
+		{
+			lowLayer.push(terrier) ;
+		}
+		
 		public function addElem(elem:ElemeData):void
 		{
 			elemLayer.push(elem) ;

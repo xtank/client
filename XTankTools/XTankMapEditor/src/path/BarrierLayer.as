@@ -4,13 +4,15 @@ package path
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
+	import editordata.ElemeData;
+	import editordata.MapData;
+	
 	import events.BarrierEvent;
+	
+	import views.MapView;
 	
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
-	import views.MapView;
-	import editordata.ElemeData;
-	import editordata.MapData;
 	
 	public class BarrierLayer extends XComponent
 	{
@@ -83,7 +85,6 @@ package path
 				_mapView.pBox.addOccpy(key) ;
 			}
 		}
-		
 		
 		public function addBarrier(event:BarrierEvent):void
 		{

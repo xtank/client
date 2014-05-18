@@ -2,6 +2,8 @@ package views
 {
 	import flash.display.Sprite;
 	
+	import editordata.MapData;
+	
 	import path.BarrierLayer;
 	import path.PathLayer;
 	import path.TerrianLayer;
@@ -10,7 +12,6 @@ package views
 	import x.game.ui.button.XButton;
 	import x.game.ui.buttonbar.XButtonBar;
 	import x.game.util.DisplayObjectUtil;
-	import editordata.MapData;
 
 	public class MapView extends XComponent
 	{
@@ -34,6 +35,11 @@ package views
 		public function get bBox():BarrierLayer 
 		{
 			return _bBox ;
+		}
+		
+		public function get tBox():TerrianLayer
+		{
+			return _tBox ;
 		}
 
 		public function MapView(skin:Sprite)

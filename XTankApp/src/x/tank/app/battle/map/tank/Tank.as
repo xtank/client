@@ -10,6 +10,8 @@ package x.tank.app.battle.map.tank
 	import x.tank.app.battle.map.tank.action.ITankAction;
 	import x.tank.app.battle.map.tank.action.WaitingAction;
 	import x.tank.app.battle.map.tank.action.WalkingAction;
+	import x.tank.core.cfg.DataProxyManager;
+	import x.tank.core.cfg.model.TankConfigInfo;
 	
 	
 	/** 坦克 */
@@ -18,6 +20,14 @@ package x.tank.app.battle.map.tank
 		private var _currentAction:ITankAction ;
 		private var _actions:HashMap ;
 		private var _memberData:battle_member_data_t ;
+		//
+		private var _direction:uint ; // 0 up 1 down 2 left 3 right
+		private var _hp:uint ; // 血量
+		private var _speed:uint ; // 移动速度
+		private var _defense:uint ; // 防御力
+		private var _attack:uint ; // 攻击力
+		private var _attackSpeed:uint ; // 攻击速度
+		private var _attackScope:uint ; // 攻击射程
 		
 		public function Tank(memberData:battle_member_data_t)
 		{
@@ -26,6 +36,17 @@ package x.tank.app.battle.map.tank
 			_passable = false ;
 			_actions = new HashMap() ;
 			playAction(TankActionEnum.WAITING) ;
+			//
+			var tankConfig:TankConfigInfo = DataProxyManager.tankData.getTankInfo(memberData.tankid) ;
+			//
+			_direction = _memberData.dir ;
+			_hp = tankConfig.hp ;
+			_speed = tankConfig.speed ;
+			_defense = tankConfig.defense ;
+			_attack = tankConfig.attack ;
+			_attackSpeed = tankConfig.attackSpeed ;
+			_attackScope = tankConfig.attackScope ;
+			//
 		}
 		
 		override public function renderer():void

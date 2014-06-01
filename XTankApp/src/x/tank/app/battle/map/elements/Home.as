@@ -7,7 +7,6 @@ package x.tank.app.battle.map.elements
 	import x.game.manager.UIManager;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.model.BarrierConfigInfo;
-	import x.tank.core.cfg.model.MapConfigInfo;
 	import x.tank.core.cfg.model.MapDataTeamInfo;
 
 	//
@@ -15,15 +14,13 @@ package x.tank.app.battle.map.elements
 	{
 		public var teamData:battle_team_data_t ;
 		
-		public function Home(teamData:battle_team_data_t,mapConfig:MapConfigInfo)
+		public function Home(teamData:battle_team_data_t,teamInfo:MapDataTeamInfo)
 		{
 			this.teamData = teamData ;
 			//
-			var teamInfo:MapDataTeamInfo = mapConfig.getTeamInfo(teamData.teamid) ;
 			var configInfo:BarrierConfigInfo = DataProxyManager.barrierData.getHome(teamInfo.homeId) ;
-			var bitMap:Bitmap = new Bitmap(UIManager.getBitmapData(configInfo.cls)) ;
 			//
-			super(bitMap,configInfo);
+			super(new Bitmap(UIManager.getBitmapData(configInfo.cls)),configInfo);
 			//
 			mapx = teamInfo.home.x ;
 			mapy = teamInfo.home.y ;

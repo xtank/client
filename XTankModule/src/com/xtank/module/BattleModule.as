@@ -5,7 +5,6 @@ package com.xtank.module
 	import com.xtank.module.battle.netProcessor.MoveNotifyProcessor;
 	
 	import onlineproto.battle_data_t;
-	import onlineproto.battle_member_data_t;
 	import onlineproto.battle_team_data_t;
 	import onlineproto.cs_battle_ready;
 	import onlineproto.sc_tank_move;
@@ -23,6 +22,7 @@ package com.xtank.module
 	import x.tank.app.battle.map.tank.TankActionEnum;
 	import x.tank.app.cfg.TankConfig;
 	import x.tank.app.module.BattleModuleData;
+	import x.tank.core.cfg.model.MapDataTeamInfo;
 	import x.tank.net.CommandSet;
 	
 	/** 
@@ -42,6 +42,9 @@ package com.xtank.module
 		
 		override public function dispose():void
 		{
+			_map.dispose() ;
+			_map = null ;
+			//
 			for each (var handler:IMessageProcessor in _msgHandlerVec)
 			{
 				handler.dispose();
@@ -62,7 +65,6 @@ package com.xtank.module
 			super.init(data);
 			//
 			_battleData = (data as BattleModuleData).data ;
-			//
 			// init net handlers
 			_msgHandlerVec = new Vector.<IMessageProcessor>();
 			// 1. sc_battle_ready
@@ -94,43 +96,40 @@ package com.xtank.module
 			_map = new BattleMap(_battleData.mapid) ;
 			addChild(_map.mapSkin) ;
 			//
-			var tank:Tank ;
-			var member:battle_member_data_t ;
-			var teamData:battle_team_data_t = _battleData.team1 ;
-			//
-			_map.elemLayer.addHome(new Home(teamData,_map.mapConfigInfo)) ;
-			//
-			for each(member in teamData.memberList)
-			{
-				tank = new Tank(member) ;
-				_map.elemLayer.addTank(tank) ;
-				if(member.userid == TankConfig.userId)
-				{
-					KeyController.tank = tank ;
-				}
-			}
-			//
-			teamData = _battleData.team2 ;
-			_map.elemLayer.addHome(new Home(teamData,_map.mapConfigInfo)) ;
-			//
-			for each(member in teamData.memberList)
-			{
-				tank = new Tank(member) ;
-				_map.elemLayer.addTank(tank) ;
-				if(member.userid == TankConfig.userId)
-				{
-					KeyController.tank = tank ;
-				}
-			}
-			//
-			
+			createTeam(_battleData.team1) ;
+			createTeam(_battleData.team2) ;
 			//
 			new SimplePost(CommandSet.$301.id,new cs_battle_ready()).send() ;
+		}
+		
+		private function createTeam(teamData:battle_team_data_t):void
+		{
+			var teamInfo:MapDataTeamInfo = _map.mapConfigInfo.getTeamInfo(teamData.teamid) ; 
+			//
+			var tank:Tank ;
+			_map.elemLayer.addHome(new Home(teamData,teamInfo)) ;
+			//
+			var len:uint = teamData.memberList.length ;
+			for(var i:uint =0;i<len;i++)
+			{
+				
+				// _map.mapConfigInfo.teams[i].members
+				tank = new Tank(teamData.memberList[i]) ;
+				tank.mapx = teamInfo.members[i].born.x ;
+				tank.mapy = teamInfo.members[i].born.y ;
+				//
+				_map.elemLayer.addTank(tank) ;
+				if(teamData.memberList[i].userid == TankConfig.userId)
+				{
+					KeyController.tank = tank ;
+				}
+			}
 		}
 		
 		public function onStartBattleNotify():void
 		{
 			trace("正式开始战斗....") ;
+			KeyController.active() ;
 		}
 		
 		public function onTankMove(message:sc_tank_move):void

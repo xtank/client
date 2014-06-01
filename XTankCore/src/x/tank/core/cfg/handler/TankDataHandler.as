@@ -37,9 +37,9 @@ package x.tank.core.cfg.handler
 			return _datas.toArray() ;
 		}
 		
-		public function getTankInfo(mapId:uint):TankConfigInfo
+		public function getTankInfo(tankId:uint):TankConfigInfo
 		{
-			return _datas.get(mapId) as TankConfigInfo ;
+			return _datas.get(tankId) as TankConfigInfo ;
 		}
 	}
 }

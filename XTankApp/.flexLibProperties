@@ -19,13 +19,20 @@
     <classEntry path="x.tank.app.battle.map.elements.BaseMapElement"/>
     <classEntry path="x.tank.app.battle.map.BattleMap"/>
     <classEntry path="x.tank.app.battle.manager.BattleInfoManager"/>
-    <classEntry path="x.tank.app.battle.map.elements.Tank"/>
+    <classEntry path="x.tank.app.battle.map.tank.Tank"/>
     <classEntry path="x.tank.app.battle.map.elements.Barrier"/>
     <classEntry path="x.tank.app.battle.map.layer.BgLayer"/>
     <classEntry path="x.tank.app.battle.map.layer.ElemLayer"/>
     <classEntry path="x.tank.app.battle.map.layer.PathLayer"/>
     <classEntry path="x.tank.app.battle.map.model.MapGrid"/>
     <classEntry path="x.tank.app.module.BattleModuleData"/>
+    <classEntry path="x.tank.app.battle.controller.KeyController"/>
+    <classEntry path="x.tank.app.battle.map.tank.TankActionEnum"/>
+    <classEntry path="x.tank.app.battle.map.tank.action.ITankAction"/>
+    <classEntry path="x.tank.app.battle.map.tank.action.WaitingAction"/>
+    <classEntry path="x.tank.app.battle.map.tank.action.WalkingAction"/>
+    <classEntry path="x.tank.app.battle.map.elements.Home"/>
+    <classEntry path="x.tank.app.battle.map.tank.TankData"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

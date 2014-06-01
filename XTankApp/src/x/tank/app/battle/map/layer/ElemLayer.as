@@ -11,7 +11,8 @@
 	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.elements.Barrier;
 	import x.tank.app.battle.map.elements.BaseMapElement;
-	import x.tank.app.battle.map.elements.Tank;
+	import x.tank.app.battle.map.elements.Home;
+	import x.tank.app.battle.map.tank.Tank;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.model.BarrierConfigInfo;
 	import x.tank.core.cfg.model.MapConfigInfo;
@@ -21,9 +22,12 @@
 	{
 		private var _battleMap:BattleMap;
 		//
-		private var _intervalIndex:uint ;
+		private var _sortIntervalIndex:uint ;
+		private var _rendererIntervalIndex:uint ;
+		//
 		private var _elems:Vector.<BaseMapElement>;
 		private var _tanks:Vector.<Tank>;
+		private var _homes:Vector.<Home> ;
 
 		public function ElemLayer(battleMap:BattleMap,mapConfigInfo:MapConfigInfo)
 		{
@@ -34,10 +38,16 @@
 
 		override public function dispose():void
 		{
-			if(_intervalIndex != 0)
+			if(_sortIntervalIndex != 0)
 			{
-				TimeTicker.clear(_intervalIndex) ;
+				TimeTicker.clear(_sortIntervalIndex) ;
 			}
+			//
+			if(_rendererIntervalIndex != 0)
+			{
+				TimeTicker.clear(_rendererIntervalIndex) ;
+			}
+			//
 			DisplayObjectUtil.removeFromParent(layerSkin);
 			super.dispose();
 		}
@@ -70,10 +80,20 @@
 					layerSkin.addChild(barrier.elementSkin) ;
 				}
 			}
+			//
 			_battleMap.pathLayer.initElements(_elems) ;
 			_battleMap.pathLayer.refresh() ;
 			//
-			_intervalIndex = TimeTicker.setInterval(1000,onSortElements) ;
+			_sortIntervalIndex = TimeTicker.setInterval(1000,onSortElements) ;
+			_rendererIntervalIndex = TimeTicker.setInterval(200,onRendererElements) ;
+		}
+		
+		private function onRendererElements(dtime:Number):void
+		{
+			for each(var elem:BaseMapElement in _elems)
+			{
+				elem.renderer() ;
+			}
 		}
 		
 		// 定时排序
@@ -106,6 +126,32 @@
 				layerSkin.addChild(_elems[i].elementSkin) ;
 			}
 			//trace("sort...");
+		}
+		
+		public function addHome(home:Home):void
+		{
+			if(_homes == null)
+			{
+				_homes = new Vector.<Home>() ;
+			}
+			_homes.push(home) ;
+			_elems.push(home);
+			//
+			layerSkin.addChild(home.elementSkin);
+		}
+		
+		public function getHomeByTeamId(teamId:uint):Home
+		{
+			var result:Home ;
+			var len:uint = _homes.length;
+			for (var i:uint = 0; i < len; i++)
+			{
+				if(_homes[i].teamData.teamid == teamId)
+				{
+					result = _homes[i];break;
+				}
+			}
+			return result ;
 		}
 
 		public function addTank(tank:Tank):void

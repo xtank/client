@@ -21,7 +21,6 @@ package
 	import x.game.ui.flipbar.IFilpBarHost;
 	import x.game.ui.flipbar.XFlipBar;
 	import x.game.util.DisplayObjectUtil;
-	import x.tank.app.battle.map.BattleMap;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.handler.BarrierDataHandler;
 
@@ -31,7 +30,6 @@ package
 	{
 		private var _uiLoader:Loader;
 		private var _urlLoader:URLLoader;
-		private var _map:BattleMap;
 
 		public function XTankBarrierEditor()
 		{
@@ -69,10 +67,18 @@ package
 			UIManager.setup(_uiLoader.contentLoaderInfo.applicationDomain);
 			// <barrier id="1" reg="16,16" type="1" hp="" cls="Barrier_1" occpy=""/>
 			_barriers = [];
+			//
 			var index:uint = 1;
 			while (UIManager.getBitmapData("Barrier_" + index) != null)
 			{
-				_barriers.push(new BarrierInfo(index));
+				_barriers.push(new BarrierInfo(index,"Barrier_","barrier"));
+				index++;
+			}
+			//
+			index = 1 ;
+			while (UIManager.getBitmapData("Home_" + index) != null)
+			{
+				_barriers.push(new BarrierInfo(index,"Home_","home"));
 				index++;
 			}
 			//

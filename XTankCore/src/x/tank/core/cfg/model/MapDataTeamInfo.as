@@ -9,7 +9,7 @@ package x.tank.core.cfg.model
 		private var _id:uint;
 		private var _count:uint;
 		private var _home:Point;
-		private var _homeDir:uint ; // 0 up 1 down 2 left 3 right
+		private var _homeId:uint ;
 		private var _members:Vector.<MapDataTeamMemberInfo> = new Vector.<MapDataTeamMemberInfo>();
 
 		public function MapDataTeamInfo(xml:XML)
@@ -20,9 +20,9 @@ package x.tank.core.cfg.model
 			homeContent = StringUtil.isBlank(homeContent) ? "0,0" : homeContent;
 			
 			var homeData:Array = String(xml.@home).split("-");
-			_homeDir = uint(homeData[1]) ;
+			_homeId = uint(homeData[0]) ;
 			//
-			var home:Array = String(homeData[0]).split(",");
+			var home:Array = String(homeData[1]).split(",");
 			_home = new Point(home[0], home[1]);
 			//
 			var mems:XMLList = xml.member;
@@ -38,6 +38,16 @@ package x.tank.core.cfg.model
 		public function get id():uint
 		{
 			return _id;
+		}
+		
+		public function get homeId():uint
+		{
+			return _homeId;
+		}
+		
+		public function get home():Point
+		{
+			return _home;
 		}
 
 		public function get count():uint

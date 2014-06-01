@@ -17,13 +17,19 @@ package x.tank.app.battle.map.elements
 		//
 		protected var _mapx:uint;
 		protected var _mapy:uint;
-		protected var _passable:Boolean ;
+		protected var _passable:Boolean ; // 是否可通过
 
 		public function BaseMapElement(skin:DisplayObject)
 		{
 			super(skin);
 		}
 		
+		public function renderer():void
+		{
+			
+		}
+		
+		// 占用的格子
 		public function get occpys():Vector.<Point> 
 		{
 			return null ;

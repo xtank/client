@@ -1,6 +1,5 @@
 package editordata
 {
-	import flash.display.Sprite;
 	import flash.geom.Point;
 
 	public class TeamData
@@ -9,14 +8,13 @@ package editordata
 		public var home:Point = new Point(0,0);
 		public var members:Vector.<Point> ;
 		//
-		public var homeRes:Sprite ;
+		public var homeResId:uint = 1 ;
 		
 
 		public function TeamData(id:uint)
 		{
 			this.id = id;
 			members = new Vector.<Point>();
-			homeRes = new Sprite
 		}
 
 		public function get description():String
@@ -25,8 +23,8 @@ package editordata
 			for(var i:uint = 0;i<members.length;i++)
 			{
 				mm.push("<member id='" + i+"' born='" +members[i].x +"," + members[i].y+"'/>") ;
-			}
-			return '<team id="' + id + '" home="' + home.x + "," + home.y + '">\n' +
+			} // 1-0,0
+			return '<team id="' + id + '" home="' + homeResId + "-" + home.x + "," + home.y + '">\n' +
 				mm.join("\n") + 
 				'</team>';
 		}

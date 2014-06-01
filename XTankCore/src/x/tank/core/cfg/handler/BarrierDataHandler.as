@@ -9,11 +9,13 @@ package x.tank.core.cfg.handler
 	{
 		public static const FILE_NAME:String = "barriers.xml";
 		
-		private var _datas:HashMap;
+		private var _barrierDatas:HashMap;
+		private var _homeDatas:HashMap ;
 		
 		public function BarrierDataHandler()
 		{
-			_datas = new HashMap() ;
+			_barrierDatas = new HashMap() ;
+			_homeDatas = new HashMap() ;
 		}
 		
 		public function get fileName():String
@@ -23,18 +25,33 @@ package x.tank.core.cfg.handler
 		
 		public function parser(xml:XML):void
 		{
+			var info:BarrierConfigInfo ;
+			//
 			var tp:XMLList = xml.barrier;
 			var len:uint = tp.length();
 			for (var i:uint = 0; i < len; i++)
 			{
-				var info:BarrierConfigInfo = new BarrierConfigInfo(tp[i]);
-				_datas.set(info.id, info);
+				info = new BarrierConfigInfo(tp[i]);
+				_barrierDatas.set(info.id, info);
+			}
+			//
+			tp = xml.home;
+			len = tp.length();
+			for (var j:uint = 0; j < len; j++)
+			{
+				info = new BarrierConfigInfo(tp[j]);
+				_homeDatas.set(info.id, info);
 			}
 		}
 		
 		public function getBarrier(id:uint):BarrierConfigInfo
 		{
-			return _datas.get(id) as BarrierConfigInfo ;
+			return _barrierDatas.get(id) as BarrierConfigInfo ;
+		}
+		
+		public function getHome(id:uint):BarrierConfigInfo
+		{
+			return _homeDatas.get(id) as BarrierConfigInfo ;
 		}
 	}
 }

@@ -141,7 +141,10 @@ package editordata
 				//
 				if(!StringUtil.isBlank(String(teamInfo.@home)))
 				{
-					team.home = new Point(String(teamInfo.@home).split(",")[0],String(teamInfo.@home).split(",")[1]) ;
+					var home:String = teamInfo.@home ; // 1-0,0
+					team.homeResId = uint(home.split("-")[0]) ;
+					var homePos:String = home.split("-")[1];
+					team.home = new Point(homePos.split(",")[0],homePos.split(",")[1]) ;
 				}
 				
 				var mm:XMLList = teamInfo.member ;

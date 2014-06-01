@@ -1,6 +1,7 @@
 package views
 {
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	
@@ -12,6 +13,7 @@ package views
 	import x.game.ui.button.XButton;
 	import x.game.ui.button.XSimpleButton;
 	import x.game.ui.buttonbar.XButtonBar;
+	import x.game.util.DisplayObjectUtil;
 
 	public class TeamView extends XComponent
 	{
@@ -24,6 +26,9 @@ package views
 		private var _homeXTxt:TextField ;
 		private var _homeYTxt:TextField ;
 		//
+		private var _members:Vector.<XTankMapEditorMemberView> ;
+		private var _memberList:MovieClip ;
+		//
 		private var _currentTeam:TeamData ;
 
 		public function TeamView(skin:DisplayObject,mapView:MapView)
@@ -34,6 +39,8 @@ package views
 			_homeXTxt = skin["homeXTxt"] ;
 			_homeYTxt = skin["homeYTxt"] ;
 			_teamTxt = skin["teamTxt"] ;
+			_memberList = skin["memberList"];
+			_members = new Vector.<XTankMapEditorMemberView>() ;
 			//
 			_bar = new XButtonBar(skin["teamBar"]);
 			_bar.addButton(new XButton(_bar.skin['btn1'], 1), true);
@@ -59,21 +66,70 @@ package views
 			_addBtn.addClick(onAddMember) ;
 		}
 		
+		public function clear():void
+		{
+			while(_members.length > 0)
+			{
+				_members.pop().dispose() ;
+			}
+		}
+		
 		public function updateCurrentTeam(teamInfo:TeamData):void
 		{
+			//
+			clear() ;
+			//
 			_currentTeam = teamInfo ;
 			_homeXTxt.text = "" + _currentTeam.home.x ;
 			_homeYTxt.text = "" + _currentTeam.home.y ;
 			_teamTxt.text = "队伍:" + _currentTeam.id ; 
+			//
+			var len:uint = _currentTeam.members.length ;
+			var view:XTankMapEditorMemberView ;
+			for(var i:uint = 0;i<len;i++)
+			{
+				view = new XTankMapEditorMemberView(onRemoveMember) ;
+				view.updateMember(_currentTeam.members[i]) ;
+				_members.push(view) ;
+			}
+			layoutMembers() ;
+		}
+		
+		private function layoutMembers():void
+		{
+			DisplayObjectUtil.removeAllChildren(_memberList) ;
+			//v
+			var startx:uint = 2 ;
+			var len:uint = _members.length ;
+			for(var i:uint = 0;i<len;i++)
+			{
+				_members[i].y = startx ;
+				_memberList.addChild(_members[i].skin) ;
+				startx += (_members[i].height + 2) ;
+			}
+		}
+		
+		private function onRemoveMember(view:XTankMapEditorMemberView):void
+		{
+			_currentTeam.removeMember(view.point) ;
+			_members.splice(_members.indexOf(view),1) ;
+			layoutMembers() ;
 		}
 		
 		private function onAddMember(btn:IButton):void
 		{
 			if(_currentTeam)
 			{
-				_currentTeam.addMember(new Point(0,0));
+				var p:Point = new Point(0,0) ;
+				_currentTeam.addMember(p);
+				//
+				var view:XTankMapEditorMemberView = new XTankMapEditorMemberView(onRemoveMember) ;
+				view.updateMember(p) ;
+				_members.push(view) ;
 			}
+			layoutMembers() ;
 		}
+		
 
 		public function updateMapId(mapId:uint):void
 		{

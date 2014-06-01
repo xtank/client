@@ -289,15 +289,39 @@ package com.xtank.module
 			//
 			if (TankConfig.userId == roomData.ownerid)
 			{
-				btn.enable = false;
-				// $155
-				new SimplePost(CommandSet.$155.id, new cs_inside_start()).send();
+				if(isAllReady())
+				{
+					btn.enable = false;
+					// $155
+					new SimplePost(CommandSet.$155.id, new cs_inside_start()).send();
+				}
+				else
+				{
+					SurfaceManager.addTextSurface("有玩家还未准备 无法开始游戏!");
+				}
 			}
 			else
 			{
 				// 没有满足条件  [提示]
 				SurfaceManager.addTextSurface("您不是房主 无法开始游戏!");
 			}
+		}
+		
+		private function isAllReady():Boolean
+		{
+			var rs:Boolean = true ;
+			var initData:RoomModuleData = _initData as RoomModuleData;
+			var roomData:room_data_t = RoomManager.getRoom(initData.roomId);
+			var player:player_data_t;
+			for each(player in roomData.playlist)
+			{
+				if(player.userid != TankConfig.userId && 
+					player.status != PlayerStatus.INSIDE_READY)
+				{
+					rs = false ; break;
+				}
+			}
+			return rs ;
 		}
 
 		private function onReadyClick(btn:IButton):void

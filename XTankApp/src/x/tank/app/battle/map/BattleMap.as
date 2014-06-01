@@ -48,6 +48,11 @@ package x.tank.app.battle.map
 			mapSkin.addChild(_pathLayer.layerSkin) ;
 		}
 		
+		public function get mapConfigInfo():MapConfigInfo
+		{
+			return _mapConfigInfo ;
+		}
+		
 		public function get mapSkin():Sprite
 		{
 			return _skin as Sprite ;
@@ -65,6 +70,11 @@ package x.tank.app.battle.map
 		public function get pathLayer():PathLayer
 		{
 			return _pathLayer ;
+		}
+		
+		public function get elemLayer():ElemLayer
+		{
+			return _elemLayer ;
 		}
 	}
 }

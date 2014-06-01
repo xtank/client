@@ -16,16 +16,26 @@ package
 		public var cls:String;
 		public var occpys:Vector.<Point> ;
 		public var res:BitmapData ;
+		public var startTag:String ;
 		//
 		private var _configInfo:BarrierConfigInfo ;
 
-		public function BarrierInfo(id:uint)
+		public function BarrierInfo(id:uint,clsPrefix:String,startTag:String)
 		{
 			this.id = id;
-			cls = "Barrier_" + id ;
+			this.startTag = startTag ;
+			cls = clsPrefix + id ;
 			res = UIManager.getBitmapData(cls) ;
 			//
-			_configInfo = DataProxyManager.barrierData.getBarrier(id) ;
+			if(startTag == "barrier")
+			{
+				_configInfo = DataProxyManager.barrierData.getBarrier(id) ;
+			}
+			else 
+			{
+				_configInfo = DataProxyManager.barrierData.getHome(id) ;
+			}
+					
 			if(_configInfo != null)
 			{
 				reg = _configInfo.reg ;
@@ -44,7 +54,7 @@ package
 
 		public function description():String
 		{
-			return '<barrier id="' + id + '" reg="' + reg.x + ',' + reg.y + '" type="' + type + '" hp="' + hp + '" cls="' + cls + '" occpy="' + occpyDes + '"/>'
+			return '<' + startTag + ' id="' + id + '" reg="' + reg.x + ',' + reg.y + '" type="' + type + '" hp="' + hp + '" cls="' + cls + '" occpy="' + occpyDes + '"/>'
 		}
 		
 		public function addOccpy(mapx:int,mapy:int):void

@@ -31,6 +31,20 @@ package x.tank.core.cfg.model
 			_elemLayer = (xml.elemLayer[0] as XML).toString() ;
 			_pathLayer = (xml.pathLyaer[0] as XML).toString() ;
 		}
+		
+		public function getTeamInfo(teamId:uint):MapDataTeamInfo
+		{
+			var rs:MapDataTeamInfo ;
+			var len:uint = teams.length ;
+			for(var i:uint = 0;i<len;i++)
+			{
+				if(teams[i].id == teamId)
+				{
+					rs = teams[id] ;break;
+				}
+			}
+				return rs ;
+		}
 
 		public function get id():uint
 		{

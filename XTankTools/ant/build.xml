@@ -19,18 +19,6 @@
 		ant app
 		// 编译壳程序
 		ant client
-		//
-		编译所有modules : ant ms
-		编译单个module : ant -Dpanel=XX m  [注:XX为模块的类名]
-		//
-		编译所有activitys:  ant acts
-		编译单个activity:   ant -Dpanel=XX act  [注:XX为模块的类名]
-		//
-		编译所有maps:     ant maps
-		编译单个map:        ant -Dpanel=XX map  [注:XX为模块的类名]
-		//
-		复制配置文件： design/script  ====> publish/resource/data
-		ant cpfiles
 	////////////////////////////////////////////////////////
 	-->
 

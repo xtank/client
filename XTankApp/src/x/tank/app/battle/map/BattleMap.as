@@ -45,7 +45,7 @@ package x.tank.app.battle.map
 			_elemLayer = new ElemLayer(this,_mapConfigInfo) ;
 			//
 			mapSkin.addChild(_elemLayer.layerSkin) ;
-			mapSkin.addChild(_pathLayer.layerSkin) ;
+			//mapSkin.addChild(_pathLayer.layerSkin) ;
 		}
 		
 		public function get mapConfigInfo():MapConfigInfo

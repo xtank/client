@@ -6,6 +6,7 @@ package x.tank.app.battle.map.tank.action
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	import x.tank.app.battle.map.tank.Tank;
+	import x.tank.app.battle.map.tank.TankActionEnum;
 	
 	// 待机动作
 	public class WaitingAction extends XComponent implements ITankAction
@@ -17,6 +18,11 @@ package x.tank.app.battle.map.tank.action
 			_tank = tank ;
 			super(UIManager.getMovieClip("Tank_UI_" + tank.memberData.tankid + "_Wait"));
 			skin.gotoAndStop(1) ;
+		}
+		
+		public function get actionName():String 
+		{
+			return TankActionEnum.WAITING ;
 		}
 		
 		public function get skin():MovieClip

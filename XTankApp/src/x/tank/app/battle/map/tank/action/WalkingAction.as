@@ -6,15 +6,22 @@ package x.tank.app.battle.map.tank.action
 	import x.game.ui.XComponent;
 	import x.game.util.DisplayObjectUtil;
 	import x.tank.app.battle.map.tank.Tank;
+	import x.tank.app.battle.map.tank.TankActionEnum;
 	
 	public class WalkingAction extends XComponent implements ITankAction
 	{
 		private var _tank:Tank ;
+		
 		public function WalkingAction(tank:Tank)
 		{
 			_tank = tank ;
 			super(UIManager.getMovieClip("Tank_UI_" + tank.memberData.tankid + "_Walk"));
 			skin.gotoAndStop(1) ;
+		}
+		
+		public function get actionName():String 
+		{
+			return TankActionEnum.WALKING ;
 		}
 		
 		public function get skin():MovieClip

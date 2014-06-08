@@ -13,7 +13,6 @@ package
 	import x.game.tooltip.node.KeyValueTextNode;
 	import x.game.ui.button.IButton;
 	import x.game.ui.button.XSimpleButton;
-	import x.game.util.ArrayUtilities;
 	import x.game.util.Random;
 	import x.tank.login.CheckBox;
 	import x.tank.login.LoginUtil;
@@ -74,13 +73,12 @@ package
 		/** 记录密码按钮  */
 		private var _rememberPwd:CheckBox;
 		
-		private var _testAccounts:Array = [440000,450000,460000,470000,480000] ;
-
 		private function initComponent():void
 		{
 			_accountInputTxt = _skin["txtIdInput"];
 			_accountInputTxt.restrict = "0-9";
-			_accountInputTxt.text = String(ArrayUtilities.getRandomElement(_testAccounts));
+			_accountInputTxt.text = String(Random.random(10,99) * 10000) ;
+				//String(ArrayUtilities.getRandomElement(_testAccounts));
 			//
 			_passwordInputTxt = _skin["txtPwdInput"];
 			_passwordInputTxt.displayAsPassword = true;
@@ -130,7 +128,7 @@ package
 				}, function():void
 				{
 					_loginBtn.enable = true;
-					_accountInputTxt.text = String(ArrayUtilities.getRandomElement(_testAccounts));
+					_accountInputTxt.text = String(Random.random(10,99) * 10000) ;
 					SurfaceManager.addTextSurface("登陆失败！");
 				});
 			}

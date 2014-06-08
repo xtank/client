@@ -6,6 +6,7 @@ package x.tank.app.battle.map.tank.action
 
 	public interface ITankAction
 	{
+		function get actionName():String ;
 		function get tank():Tank ;
 		function get skin():MovieClip;
 		function playAction():void ;

@@ -33,6 +33,7 @@
     <classEntry path="x.tank.app.battle.map.tank.action.WalkingAction"/>
     <classEntry path="x.tank.app.battle.map.elements.Home"/>
     <classEntry path="x.tank.app.battle.map.tank.TankData"/>
+    <classEntry path="x.tank.app.battle.utils.Direction"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

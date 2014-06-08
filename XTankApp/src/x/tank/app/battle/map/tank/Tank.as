@@ -10,6 +10,7 @@ package x.tank.app.battle.map.tank
 	import x.tank.app.battle.map.tank.action.ITankAction;
 	import x.tank.app.battle.map.tank.action.WaitingAction;
 	import x.tank.app.battle.map.tank.action.WalkingAction;
+	import x.tank.app.battle.utils.Direction;
 	import x.tank.core.cfg.DataProxyManager;
 	import x.tank.core.cfg.model.TankConfigInfo;
 	
@@ -35,7 +36,7 @@ package x.tank.app.battle.map.tank
 			_memberData = memberData ;
 			_passable = false ;
 			_actions = new HashMap() ;
-			playAction(TankActionEnum.WAITING) ;
+			wait(memberData.dir) ;// 默认为待机动画
 			//
 			var tankConfig:TankConfigInfo = DataProxyManager.tankData.getTankInfo(memberData.tankid) ;
 			//
@@ -55,10 +56,73 @@ package x.tank.app.battle.map.tank
 			{
 				_currentAction.updateAction() ;
 			}
+			//
+			trace("tank renderer!") ;
+		}
+		
+		public function get direction():uint
+		{
+			return _direction ;
+		}
+		
+		public function set direction(value:uint):void
+		{
+			if(_direction == value)
+			{
+				return ;
+			}
+			//
+			_direction = value ;
+			switch(_direction)
+			{
+				case Direction.UP:
+				{
+					tankSkin.rotation = 0 ;
+					tankSkin.scaleY = 1 ;
+					break;
+				}
+				case Direction.DOWN:
+				{
+					tankSkin.rotation = 0 ;
+					tankSkin.scaleY = -1 ;
+					break;
+				}
+				case Direction.LEFT:
+				{
+					tankSkin.rotation = -90 ;
+					tankSkin.scaleY = 1 ;
+					break;
+				}
+				case Direction.RIGHT:
+				{
+					tankSkin.rotation = 90 ;
+					tankSkin.scaleY = 1 ;
+					break;
+				}
+			}
+		}
+		
+		/** @see x.tank.app.battle.utils.Direction */
+		public function walk(dir:uint):void
+		{
+			direction = dir ;
+			playAction(TankActionEnum.WALKING) ; 
+		}
+		
+		public function wait(dir:uint):void
+		{
+			direction = dir ;
+			playAction(TankActionEnum.WAITING) ; 
 		}
 		
 		public function playAction(actionName:String):void
 		{
+			if(_currentAction != null && _currentAction.actionName == actionName)
+			{
+				return ; //保持现有动作
+			}
+			
+			//
 			if(_currentAction != null)
 			{
 				_currentAction.stopAction() ;

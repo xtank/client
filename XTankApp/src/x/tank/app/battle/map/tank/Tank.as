@@ -108,7 +108,7 @@ package x.tank.app.battle.map.tank
 		/** @see x.tank.app.battle.utils.Direction */
 		public function walk(dir:uint,startPoint:Point):void
 		{
-			trace("walk",startPoint.x,startPoint.y);
+			//trace("walk",startPoint.x,startPoint.y);
 			moveTo(startPoint.x,startPoint.y) ;
 			//
 			direction = dir ;
@@ -117,7 +117,7 @@ package x.tank.app.battle.map.tank
 		
 		public function wait(dir:uint,stopPoint:Point):void
 		{
-			trace("wait",stopPoint.x,stopPoint.y);
+			//trace("wait",stopPoint.x,stopPoint.y);
 			moveTo(stopPoint.x,stopPoint.y) ;
 			//
 			direction = dir ;

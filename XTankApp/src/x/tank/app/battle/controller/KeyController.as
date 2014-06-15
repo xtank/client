@@ -60,6 +60,8 @@ package x.tank.app.battle.controller
 				{
 					if(_keyPressList[event.keyCode] != true)
 					{
+						_keyPressList[event.keyCode] = true ;
+						_tank.walk(_keyDirMapping[String(event.keyCode)],new Point(_tank.x,_tank.y)) ;
 						//
 						var msg:cs_tank_move = new cs_tank_move() ;
 						msg.dir = _tank.direction ;
@@ -68,9 +70,6 @@ package x.tank.app.battle.controller
 						msg.startTime = TimeManager.serverTime ;
 						//
 						new SimplePost(CommandSet.$304.id,msg).send() ; 
-						//
-						_keyPressList[event.keyCode] = true ;
-						_tank.walk(_keyDirMapping[String(event.keyCode)],new Point(_tank.x,_tank.y)) ;
 					}
 					break;
 				}
@@ -95,16 +94,15 @@ package x.tank.app.battle.controller
 				case Keyboard.D:
 				{
 					if(_keyPressList[event.keyCode] == true)
-					{
+					{ 
+						_keyPressList[event.keyCode] = false ;
+						_tank.wait(_tank.direction,new Point(_tank.x,_tank.y)) ;
 						//
 						var msg:cs_tank_move_stop = new cs_tank_move_stop() ;
 						msg.stopX = uint(_tank.x) ;
 						msg.stopY = uint(_tank.y) ;
 						//
-						new SimplePost(CommandSet.$305.id,msg).send() ; 
-						//
-						_keyPressList[event.keyCode] = false ;
-						_tank.wait(_tank.direction,new Point(_tank.x,_tank.y)) ;
+						new SimplePost(CommandSet.$305.id,msg).send() ;
 					}
 					break;
 				}

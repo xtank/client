@@ -27,10 +27,10 @@ package x.tank.app.battle.map.elements
 			
 		}
 		
-		public function moveTo($mapx:uint,$mapy:uint):void
+		public function moveTo($x:uint,$y:uint):void
 		{
-			mapx = $mapx ;
-			mapy = $mapy ;
+			x = $x ;
+			y = $y ;
 		}
 		
 		// 占用的格子

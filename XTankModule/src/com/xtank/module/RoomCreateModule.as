@@ -101,6 +101,7 @@ package com.xtank.module
 			_playerLimitMC = new DigitalNumber(_mainUI,Vector.<MovieClip>([_mainUI["shiwei"],_mainUI["gewei"]])) ;
 			//
 			_roomNameTxt = _mainUI["roomNameTxt"] ;
+			_roomNameTxt.text = "测试房间" ;
 			_pwdTxt = _mainUI["pwdTxt"] ;
 			_pwdTxt.displayAsPassword = true ;
 			_pwdTxt.restrict = "0-9" ;

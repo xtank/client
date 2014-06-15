@@ -92,7 +92,7 @@ package x.tank.app.battle.map.tank.action
 		
 		private function move(distance:Number):void
 		{
-			trace("moveDistance:" + distance);
+			// trace("moveDistance:" + distance);
 			//
 			if(_tank.direction == Direction.DOWN)
 			{

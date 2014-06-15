@@ -39,12 +39,15 @@ package x.game.net.core
 				{
 					var dataLength:uint = _length - 20 ;
 					var bodyData:LittleEndianByteArray = new LittleEndianByteArray();
-					_data.readBytes(bodyData,0,dataLength) ;
-					bodyData.position = 0;
+					if(dataLength != 0)
+					{
+						_data.readBytes(bodyData,0,dataLength) ;
+						bodyData.position = 0;
+					}
 					//
-					trace("total length:" + _length);
-					trace("data length:" + dataLength);
-					trace("bodyData lenth:" + bodyData.length);
+//					trace("total length:" + _length);
+//					trace("data length:" + dataLength);
+//					trace("bodyData lenth:" + bodyData.length);
 					//
 					_msg = new cmd.decodeCls();
 					_msg.mergeFrom(bodyData);

@@ -105,6 +105,7 @@ package com.xtank.module
 		
 		private function createTeam(teamData:battle_team_data_t):void
 		{
+			trace("teamData.teamid:" + teamData.teamid);
 			var teamInfo:MapDataTeamInfo = _map.mapConfigInfo.getTeamInfo(teamData.teamid) ; 
 			//
 			var tank:Tank ;
@@ -116,6 +117,7 @@ package com.xtank.module
 				
 				// _map.mapConfigInfo.teams[i].members
 				tank = new Tank(teamData.memberList[i]) ;
+				//
 				tank.mapx = teamInfo.members[i].born.x ;
 				tank.mapy = teamInfo.members[i].born.y ;
 				//
@@ -135,14 +137,20 @@ package com.xtank.module
 		
 		public function onTankMove(message:sc_tank_move):void
 		{
-			var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
-			tank.walk(message.dir,new Point(message.startX,message.startY)) ;
+			if(message.userid != TankConfig.userId)
+			{
+				var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
+				tank.walk(message.dir,new Point(message.startX,message.startY)) ;
+			}
 		}
 		
 		public function onTankMoveStop(message:sc_tank_move_stop):void
 		{
-			var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
-			tank.wait(tank.direction,new Point(message.stopX,message.stopY)) ;
+			if(message.userid != TankConfig.userId)
+			{
+				var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
+				tank.wait(tank.direction,new Point(message.stopX,message.stopY)) ;
+			}
 		}
 	}
 }

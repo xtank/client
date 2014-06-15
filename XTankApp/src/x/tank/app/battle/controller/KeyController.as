@@ -4,9 +4,15 @@ package x.tank.app.battle.controller
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	
+	import onlineproto.cs_tank_move;
+	import onlineproto.cs_tank_move_stop;
+	
 	import x.game.manager.StageManager;
+	import x.game.manager.TimeManager;
+	import x.game.net.post.SimplePost;
 	import x.tank.app.battle.map.tank.Tank;
 	import x.tank.app.battle.utils.Direction;
+	import x.tank.net.CommandSet;
 
 	public class KeyController
 	{
@@ -54,8 +60,17 @@ package x.tank.app.battle.controller
 				{
 					if(_keyPressList[event.keyCode] != true)
 					{
+						//
+						var msg:cs_tank_move = new cs_tank_move() ;
+						msg.dir = _tank.direction ;
+						msg.startX = uint(_tank.x) ;
+						msg.startY = uint(_tank.y) ;
+						msg.startTime = TimeManager.serverTime ;
+						//
+						new SimplePost(CommandSet.$304.id,msg).send() ; 
+						//
 						_keyPressList[event.keyCode] = true ;
-						_tank.walk(_keyDirMapping[String(event.keyCode)],new Point(_tank.mapx,_tank.mapy)) ;
+						_tank.walk(_keyDirMapping[String(event.keyCode)],new Point(_tank.x,_tank.y)) ;
 					}
 					break;
 				}
@@ -81,8 +96,15 @@ package x.tank.app.battle.controller
 				{
 					if(_keyPressList[event.keyCode] == true)
 					{
+						//
+						var msg:cs_tank_move_stop = new cs_tank_move_stop() ;
+						msg.stopX = uint(_tank.x) ;
+						msg.stopY = uint(_tank.y) ;
+						//
+						new SimplePost(CommandSet.$305.id,msg).send() ; 
+						//
 						_keyPressList[event.keyCode] = false ;
-						_tank.wait(_tank.direction,new Point(_tank.mapx,_tank.mapy)) ;
+						_tank.wait(_tank.direction,new Point(_tank.x,_tank.y)) ;
 					}
 					break;
 				}

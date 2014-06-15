@@ -4,6 +4,7 @@ package x.tank.app.battle.map.elements
 	import flash.geom.Point;
 	
 	import x.game.ui.XComponent;
+	import x.tank.app.battle.map.model.MapGrid;
 
 	/**
 	 * 基础地图元素
@@ -12,9 +13,6 @@ package x.tank.app.battle.map.elements
 	 */
 	public class BaseMapElement extends XComponent
 	{
-		public static const GRID_WIDTH:uint = 10;
-		public static const GRID_HEIGHT:uint = 10;
-		//
 		protected var _mapx:uint;
 		protected var _mapy:uint;
 		protected var _passable:Boolean ; // 是否可通过
@@ -27,6 +25,12 @@ package x.tank.app.battle.map.elements
 		public function renderer():void
 		{
 			
+		}
+		
+		public function moveTo($mapx:uint,$mapy:uint):void
+		{
+			mapx = $mapx ;
+			mapy = $mapy ;
 		}
 		
 		// 占用的格子
@@ -58,7 +62,7 @@ package x.tank.app.battle.map.elements
 		public function set mapx(value:uint):void
 		{
 			_mapx = value;
-			x = _mapx * GRID_WIDTH;
+			_skin.x = _mapx * MapGrid.GRID_WIDTH;
 		}
 
 		public function get mapy():uint
@@ -69,7 +73,21 @@ package x.tank.app.battle.map.elements
 		public function set mapy(value:uint):void
 		{
 			_mapy = value;
-			y = _mapy * GRID_HEIGHT ;
+			_skin.y = _mapy * MapGrid.GRID_HEITH ;
+		}
+		
+		//
+		override public function set x(value:Number):void
+		{
+			super.x = value ;
+			_mapx = MapGrid.converMapx(value) ;
+		}
+		
+		//
+		override public function set y(value:Number):void
+		{
+			super.y = value ;
+			_mapy = MapGrid.converMapx(value) ;
 		}
 	}
 }

@@ -4,6 +4,8 @@ package com.xtank.module
 	import com.xtank.module.battle.netProcessor.BattleStartNotifyProcessor;
 	import com.xtank.module.battle.netProcessor.MoveNotifyProcessor;
 	
+	import flash.geom.Point;
+	
 	import onlineproto.battle_data_t;
 	import onlineproto.battle_team_data_t;
 	import onlineproto.cs_battle_ready;
@@ -19,7 +21,6 @@ package com.xtank.module
 	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.elements.Home;
 	import x.tank.app.battle.map.tank.Tank;
-	import x.tank.app.battle.map.tank.TankActionEnum;
 	import x.tank.app.cfg.TankConfig;
 	import x.tank.app.module.BattleModuleData;
 	import x.tank.core.cfg.model.MapDataTeamInfo;
@@ -135,12 +136,13 @@ package com.xtank.module
 		public function onTankMove(message:sc_tank_move):void
 		{
 			var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
+			tank.walk(message.dir,new Point(message.startX,message.startY)) ;
 		}
 		
 		public function onTankMoveStop(message:sc_tank_move_stop):void
 		{
 			var tank:Tank = _map.elemLayer.getTankByUserId(message.userid) ;
-			tank.playAction(TankActionEnum.WAITING) ;
+			tank.wait(tank.direction,new Point(message.stopX,message.stopY)) ;
 		}
 	}
 }

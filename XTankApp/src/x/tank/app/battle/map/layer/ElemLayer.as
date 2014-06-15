@@ -85,7 +85,7 @@
 			_battleMap.pathLayer.refresh() ;
 			//
 			_sortIntervalIndex = TimeTicker.setInterval(1000,onSortElements) ;
-			_rendererIntervalIndex = TimeTicker.setInterval(200,onRendererElements) ;
+			_rendererIntervalIndex = TimeTicker.setInterval(100,onRendererElements) ;
 		}
 		
 		private function onRendererElements(dtime:Number):void

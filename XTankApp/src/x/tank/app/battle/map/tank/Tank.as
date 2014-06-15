@@ -1,6 +1,7 @@
 package x.tank.app.battle.map.tank
 {
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	
 	import de.polygonal.ds.HashMap;
 	
@@ -29,6 +30,8 @@ package x.tank.app.battle.map.tank
 		private var _attack:uint ; // 攻击力
 		private var _attackSpeed:uint ; // 攻击速度
 		private var _attackScope:uint ; // 攻击射程
+		//
+		public var tankConfig:TankConfigInfo ;
 		
 		public function Tank(memberData:battle_member_data_t)
 		{
@@ -36,9 +39,9 @@ package x.tank.app.battle.map.tank
 			_memberData = memberData ;
 			_passable = false ;
 			_actions = new HashMap() ;
-			wait(memberData.dir) ;// 默认为待机动画
+			wait(memberData.dir,new Point(memberData.x,memberData.y)) ;// 默认为待机动画
 			//
-			var tankConfig:TankConfigInfo = DataProxyManager.tankData.getTankInfo(memberData.tankid) ;
+			tankConfig = DataProxyManager.tankData.getTankInfo(memberData.tankid) ;
 			//
 			_direction = _memberData.dir ;
 			_hp = tankConfig.hp ;
@@ -57,7 +60,7 @@ package x.tank.app.battle.map.tank
 				_currentAction.updateAction() ;
 			}
 			//
-			trace("tank renderer!") ;
+			//trace("tank renderer!") ;
 		}
 		
 		public function get direction():uint
@@ -103,14 +106,18 @@ package x.tank.app.battle.map.tank
 		}
 		
 		/** @see x.tank.app.battle.utils.Direction */
-		public function walk(dir:uint):void
+		public function walk(dir:uint,startPoint:Point):void
 		{
+			moveTo(startPoint.x,startPoint.y) ;
+			//
 			direction = dir ;
 			playAction(TankActionEnum.WALKING) ; 
 		}
 		
-		public function wait(dir:uint):void
+		public function wait(dir:uint,stopPoint:Point):void
 		{
+			moveTo(stopPoint.x,stopPoint.y) ;
+			//
 			direction = dir ;
 			playAction(TankActionEnum.WAITING) ; 
 		}

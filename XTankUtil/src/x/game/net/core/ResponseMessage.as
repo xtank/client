@@ -42,9 +42,12 @@ package x.game.net.core
 					_data.readBytes(bodyData,0,dataLength) ;
 					bodyData.position = 0;
 					//
+					trace("total length:" + _length);
+					trace("data length:" + dataLength);
+					trace("bodyData lenth:" + bodyData.length);
+					//
 					_msg = new cmd.decodeCls();
 					_msg.mergeFrom(bodyData);
-					//
 				}
 				else
 				{

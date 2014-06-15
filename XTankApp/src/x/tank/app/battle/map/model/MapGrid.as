@@ -4,6 +4,19 @@ package x.tank.app.battle.map.model
 
 	public class MapGrid
 	{
+		public static const GRID_WIDTH:uint = 10 ;
+		public static const GRID_HEITH:uint = 10 ;
+		//
+		public static function converMapx(x:Number):uint
+		{
+			return Math.ceil(x/GRID_WIDTH) ;	
+		}
+		
+		public static function converMapy(y:Number):uint
+		{
+			return Math.ceil(y/GRID_HEITH) ;	
+		}
+		//
 		private var _mapx:uint ;
 		private var _mapy:uint ;
 		private var _passable:Boolean ;

@@ -3,6 +3,7 @@ package x.tank.app.battle.map.elements
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
+	import x.tank.app.battle.map.model.MapGrid;
 	import x.tank.core.cfg.model.BarrierConfigInfo;
 	
 	
@@ -25,13 +26,13 @@ package x.tank.app.battle.map.elements
 		override public function set mapx(value:uint):void
 		{
 			_mapx = value;
-			x = _mapx * BaseMapElement.GRID_WIDTH + BaseMapElement.GRID_WIDTH/2 + _barrierConfigInfo.reg.x;
+			x = _mapx * MapGrid.GRID_WIDTH + MapGrid.GRID_WIDTH/2 + _barrierConfigInfo.reg.x;
 		}
 		
 		override public function set mapy(value:uint):void
 		{
 			_mapy = value;
-			y = _mapy * BaseMapElement.GRID_HEIGHT + BaseMapElement.GRID_HEIGHT/2 + _barrierConfigInfo.reg.y;
+			y = _mapy * MapGrid.GRID_HEITH + MapGrid.GRID_HEITH/2 + _barrierConfigInfo.reg.y;
 		}
 		
 		override public function get occpys():Vector.<Point> 

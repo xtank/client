@@ -1,6 +1,7 @@
 package x.tank.app.battle.controller
 {
 	import flash.events.KeyboardEvent;
+	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	
 	import x.game.manager.StageManager;
@@ -54,7 +55,7 @@ package x.tank.app.battle.controller
 					if(_keyPressList[event.keyCode] != true)
 					{
 						_keyPressList[event.keyCode] = true ;
-						_tank.walk(_keyDirMapping[String(event.keyCode)]) ;
+						_tank.walk(_keyDirMapping[String(event.keyCode)],new Point(_tank.mapx,_tank.mapy)) ;
 					}
 					break;
 				}
@@ -69,7 +70,7 @@ package x.tank.app.battle.controller
 			{
 				return ;
 			}
-			
+			//
 			//
 			switch(event.keyCode)
 			{
@@ -81,7 +82,7 @@ package x.tank.app.battle.controller
 					if(_keyPressList[event.keyCode] == true)
 					{
 						_keyPressList[event.keyCode] = false ;
-						_tank.wait(_tank.direction) ;
+						_tank.wait(_tank.direction,new Point(_tank.mapx,_tank.mapy)) ;
 					}
 					break;
 				}

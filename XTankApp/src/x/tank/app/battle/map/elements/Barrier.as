@@ -3,6 +3,7 @@ package x.tank.app.battle.map.elements
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	
+	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.model.MapGrid;
 	import x.tank.core.cfg.model.BarrierConfigInfo;
 	
@@ -12,9 +13,9 @@ package x.tank.app.battle.map.elements
 	{
 		private var _barrierConfigInfo:BarrierConfigInfo ;
 		
-		public function Barrier(skin:DisplayObject,barrierConfigInfo:BarrierConfigInfo)
+		public function Barrier(skin:DisplayObject,barrierConfigInfo:BarrierConfigInfo,$map:BattleMap)
 		{
-			super(skin);
+			super(skin,$map);
 			_barrierConfigInfo = barrierConfigInfo ;
 		}
 		

@@ -109,14 +109,14 @@ package com.xtank.module
 			var teamInfo:MapDataTeamInfo = _map.mapConfigInfo.getTeamInfo(teamData.teamid) ; 
 			//
 			var tank:Tank ;
-			_map.elemLayer.addHome(new Home(teamData,teamInfo)) ;
+			_map.elemLayer.addHome(new Home(teamData,teamInfo,_map)) ;
 			//
 			var len:uint = teamData.memberList.length ;
 			for(var i:uint =0;i<len;i++)
 			{
 				
 				// _map.mapConfigInfo.teams[i].members
-				tank = new Tank(teamData.memberList[i]) ;
+				tank = new Tank(teamData.memberList[i],_map) ;
 				//
 				tank.mapx = teamInfo.members[i].born.x ;
 				tank.mapy = teamInfo.members[i].born.y ;

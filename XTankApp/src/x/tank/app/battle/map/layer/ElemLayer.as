@@ -72,7 +72,7 @@
 					var bitMap:Bitmap = new Bitmap(UIManager.getBitmapData("Barrier_" + infos[0])) ;
 					var configInfo:BarrierConfigInfo = DataProxyManager.barrierData.getBarrier(infos[0]) ;
 					//
-					barrier = new Barrier(bitMap,configInfo) ;
+					barrier = new Barrier(bitMap,configInfo,_battleMap) ;
 					barrier.mapx = String(infos[1]).split(",")[0] ; // 96 * 56
 					barrier.mapy = String(infos[1]).split(",")[1] ; // 96 * 56
 					_elems.push(barrier) ;

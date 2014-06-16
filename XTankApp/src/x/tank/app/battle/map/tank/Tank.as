@@ -7,6 +7,7 @@ package x.tank.app.battle.map.tank
 	
 	import onlineproto.battle_member_data_t;
 	
+	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.elements.BaseMapElement;
 	import x.tank.app.battle.map.tank.action.ITankAction;
 	import x.tank.app.battle.map.tank.action.WaitingAction;
@@ -33,9 +34,9 @@ package x.tank.app.battle.map.tank
 		//
 		public var tankConfig:TankConfigInfo ;
 		
-		public function Tank(memberData:battle_member_data_t)
+		public function Tank(memberData:battle_member_data_t,$map:BattleMap)
 		{
-			super(new Sprite());
+			super(new Sprite(),$map);
 			_memberData = memberData ;
 			_passable = false ;
 			_actions = new HashMap() ;
@@ -62,6 +63,8 @@ package x.tank.app.battle.map.tank
 			//
 			//trace("tank renderer!") ;
 		}
+		
+		public function 
 		
 		public function get direction():uint
 		{

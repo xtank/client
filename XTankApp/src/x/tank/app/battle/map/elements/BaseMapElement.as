@@ -4,6 +4,7 @@ package x.tank.app.battle.map.elements
 	import flash.geom.Point;
 	
 	import x.game.ui.XComponent;
+	import x.tank.app.battle.map.BattleMap;
 	import x.tank.app.battle.map.model.MapGrid;
 
 	/**
@@ -16,10 +17,13 @@ package x.tank.app.battle.map.elements
 		protected var _mapx:uint;
 		protected var _mapy:uint;
 		protected var _passable:Boolean ; // 是否可通过
+		//
+		public  var map:BattleMap ;
 
-		public function BaseMapElement(skin:DisplayObject)
+		public function BaseMapElement(skin:DisplayObject,$map:BattleMap)
 		{
 			super(skin);
+			map = $map ;
 		}
 		
 		public function renderer():void
